@@ -21,7 +21,7 @@ namespace WeddingPlanner.Models
         [Display(Name = "Celebrant Phone")]
         public int CelebrantPhone { get; set; }
 
-        [Display(Name = "Ready to travel")]
+        [Display(Name = "Ready To Travel")]
         public bool DoesTravel { get; set; }
 
         [Display(Name = "Religious services offered")]
