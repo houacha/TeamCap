@@ -10,6 +10,8 @@ namespace WeddingPlanner.Models
     {
         [Key]
 
+        public int VendorId { get; set; }
+
         [Display(Name = "Venue Name")]
         public string Name { get; set; }
 
@@ -34,7 +36,7 @@ namespace WeddingPlanner.Models
         [Display(Name = "Religions served")]
         public string ReligionsServed { get; set; }
 
-        [Display(Name = "Does it serve CoHabitants")]
+        [Display(Name = "Does it serve Cohabitants")]
         public bool ServesCohabitants { get; set; }
 
         [Display(Name = "Services Offered")]
