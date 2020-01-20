@@ -24,7 +24,7 @@ namespace WeddingPlanner.Models
         public bool LGBTQfriendly { get; set; }
 
         [Display(Name = "Cuisine types offered")]
-        public string CuisineTypes { get; set; }
+        public Dictionary<string,bool> CuisineTypes { get; set; }
 
         [Display(Name = "Vegan Friendly")]
         public bool ServesVegan { get; set; }

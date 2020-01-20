@@ -19,7 +19,7 @@ namespace WeddingPlanner.Models
         public string DJPhone { get; set; }
 
         [Display(Name = "Music Genres Offered")]
-        public bool MusicGenresOffered { get; set; }
+        public Dictionary<string,bool> MusicGenresOffered { get; set; }
 
         [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }

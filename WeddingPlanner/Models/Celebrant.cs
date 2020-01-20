@@ -25,7 +25,7 @@ namespace WeddingPlanner.Models
         public bool DoesTravel { get; set; }
 
         [Display(Name = "Religious services offered")]
-        public string ReligionsServed { get; set; }
+        public Dictionary<string,bool> ReligionsServed { get; set; }
         
         [Display(Name = "Sevices Co-habitants")]
         public bool ServicesCohabitants { get; set; }
