@@ -9,34 +9,33 @@ namespace WeddingPlanner.Models
     public class Caterer
     {
         [Key]
-
         public int Id { get; set; }
 
-        [Display(Name = "Caterer Name")]
+        [Display(Name = "Caterer's Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Caterer Email")]
+        [Display(Name = "Caterer's Email")]
         public string CatererEmail { get; set; }
 
-        [Display(Name = "Caterer Phone")]
+        [Display(Name = "Caterer's Phone")]
         public string CatererPhone { get; set; }
 
-        [Display(Name = "LGBTQFriendly")]
+        [Display(Name = "LGBTQ Friendly")]
         public bool LGBTQfriendly { get; set; }
 
         [Display(Name = "Cuisine types offered")]
         public string CuisineTypes { get; set; }
 
-        [Display(Name = "VeganFriendly")]
+        [Display(Name = "Vegan Friendly")]
         public bool ServesVegan { get; set; }
 
-        [Display(Name = "Food Allergy Options catered")]
+        [Display(Name = "Food Allergy Options")]
         public string FoodAllergyOptions { get; set; }
 
-        [Display(Name = "Per Guest Estimate Low")]
+        [Display(Name = "Estimate Low Per Guest")]
         public double PerGuestEstimateLow { get; set; }
 
-        [Display(Name = "Per Guest Estimated High")]
+        [Display(Name = "Estimated High Per Guest")]
         public double PerGuestEstimateHigh { get; set; }
 
     }

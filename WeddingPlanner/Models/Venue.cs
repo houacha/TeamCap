@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,13 +12,13 @@ namespace WeddingPlanner.Models
         [Key]
         public int VendorId { get; set; }
 
-        [Display(Name = "Venue Name")]
+        [Display(Name = "Venue's Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Venue Email")]
+        [Display(Name = "Venue's Email")]
         public string VenueEmail { get; set; }
 
-        [Display(Name = "Venue Phone")]
+        [Display(Name = "Venue's Phone")]
         public string VenuePhone { get; set; }
 
         [Display(Name = "LGBTQ friendly")]
@@ -35,23 +36,33 @@ namespace WeddingPlanner.Models
         [Display(Name = "Religions served")]
         public string ReligionsServed { get; set; }
 
-        [Display(Name = "Does it serve Cohabitants")]
+        [Display(Name = "Serve Cohabitants")]
         public bool ServesCohabitants { get; set; }
 
         [Display(Name = "Does it provide Lodging")]
+
+        [Display(Name = "Does Ceremony")]
+        public bool Ceremony { get; set; }
+        [Display(Name = "Does Reception")]
+        public bool Reception { get; set; }
+
+        [Display(Name = "Provides Lodging")]
         public bool ProvidesLodging { get; set; }
 
-        [Display(Name = "Does it allow third-party decor")]
+        [Display(Name = "Allow third-party decor")]
         public bool AllowsDecor { get; set; }
 
-        [Display(Name = "Does it allow third-party Celebrant")]
+        [Display(Name = "Allow third-party Celebrant")]
         public bool ThirdPartyCelebrant { get; set; }
 
-        [Display(Name = "Does it allow third-party Catering")]
+        [Display(Name = "Allow third-party Catering")]
         public bool ThirdPartyCatering { get; set; }
 
-        [Display(Name = "Does it allow third-party DJ")]
+        [Display(Name = "Allow third-party DJ")]
         public bool ThirdPartyDJ { get; set; }
+        [ForeignKey("Catering")]
+        public int CatererId { get; set; }
+        public Caterer Caterer { get; set; }
 
     }
 }

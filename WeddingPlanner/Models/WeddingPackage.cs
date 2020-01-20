@@ -32,8 +32,8 @@ namespace WeddingPlanner.Models
         [Display(Name = "Food Allergy Options")]
         public bool FoodAllergyOptions { get; set; }
 
-        [Display(Name = "VeganFriendly")]
-        public bool VeganFriendly { get; set; }
+        [Display(Name = "Vegan")]
+        public bool Vegan { get; set; }
 
         [Display(Name = "Cuisine Type Requirements")]
         public string CuisineTypes { get; set; }

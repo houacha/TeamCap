@@ -12,19 +12,19 @@ namespace WeddingPlanner.Models
 
         public int Id { get; set; }
 
-        [Display(Name = "DJ Email")]
+        [Display(Name = "DJ's Email")]
         public string DJEmail { get; set; }
 
-        [Display(Name = "DJ Phone")]
+        [Display(Name = "DJ's Phone")]
         public string DJPhone { get; set; }
 
         [Display(Name = "Music Genres Offered")]
         public bool MusicGenresOffered { get; set; }
 
-        [Display(Name = "Ready To Travel")]
+        [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
 
-        [Display(Name = "LGBTQFriendly")]
+        [Display(Name = "LGBTQ Friendly")]
         public bool LGBTQFriendly { get; set; }
 
       
