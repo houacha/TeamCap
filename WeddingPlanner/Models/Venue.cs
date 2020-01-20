@@ -34,7 +34,7 @@ namespace WeddingPlanner.Models
         public bool HandicapAccessible { get; set; }
 
         [Display(Name = "Religions served")]
-        public string ReligionsServed { get; set; }
+        public Dictionary<string,bool> ReligionsServed { get; set; }
 
         [Display(Name = "Serve Cohabitants")]
         public bool ServesCohabitants { get; set; }
