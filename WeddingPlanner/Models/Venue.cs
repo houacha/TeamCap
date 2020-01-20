@@ -9,7 +9,6 @@ namespace WeddingPlanner.Models
     public class Venue
     {
         [Key]
-
         public int VendorId { get; set; }
 
         [Display(Name = "Venue Name")]
@@ -38,10 +37,6 @@ namespace WeddingPlanner.Models
 
         [Display(Name = "Does it serve Cohabitants")]
         public bool ServesCohabitants { get; set; }
-
-        [Display(Name = "Services Offered")]
-        public string serviceOffered { get; set; }
-        /*ceremony, reception, both*/
 
         [Display(Name = "Does it provide Lodging")]
         public bool ProvidesLodging { get; set; }

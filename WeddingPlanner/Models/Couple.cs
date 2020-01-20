@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,21 +9,19 @@ namespace WeddingPlanner.Models
 {
     public class Couple
     {
-
         [Key]
-
         public int Id { get; set; }
 
-        [Display(Name = "Partner First Name")]
+        [Display(Name = "Partner One First Name")]
         public string Partner1FirstName { get; set; }
 
-        [Display(Name = "Partner Last Name")]
+        [Display(Name = "Partner One Last Name")]
         public string Partner1LastName { get; set; }
 
-        [Display(Name = "Partner First Name")]
+        [Display(Name = "Partner TWo First Name")]
         public string Partner2FirstName { get; set; }
 
-        [Display(Name = "Partner Last Name")]
+        [Display(Name = "Partner Two Last Name")]
         public string Partner2LastName { get; set; }
 
         [Display(Name = "Street Address")]
@@ -45,6 +44,12 @@ namespace WeddingPlanner.Models
 
         [Display(Name = "Phone")]
         public string CouplePhone { get; set; }
+
+        [ForeignKey ("WeddingPackage")]
+        public int WeddingId { get; set; }
+        public WeddingPackage WeddingPackage{ get; set; }
+
+
 
     }
 }
