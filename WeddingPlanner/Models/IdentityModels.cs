@@ -29,5 +29,19 @@ namespace WeddingPlanner.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.Couple> Couples { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.WeddingPackage> WeddingPackages { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.DJ> DJs { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.Photographer> Photographers { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.Caterer> Caterers { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.Celebrant> Celebrants { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.Venue> Venues { get; set; }
     }
 }

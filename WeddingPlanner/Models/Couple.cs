@@ -49,7 +49,5 @@ namespace WeddingPlanner.Models
         public int WeddingId { get; set; }
         public WeddingPackage WeddingPackage{ get; set; }
 
-
-
     }
 }

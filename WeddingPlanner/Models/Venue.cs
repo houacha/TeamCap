@@ -39,8 +39,6 @@ namespace WeddingPlanner.Models
         [Display(Name = "Serve Cohabitants")]
         public bool ServesCohabitants { get; set; }
 
-        [Display(Name = "Does it provide Lodging")]
-
         [Display(Name = "Does Ceremony")]
         public bool Ceremony { get; set; }
         [Display(Name = "Does Reception")]
@@ -60,7 +58,9 @@ namespace WeddingPlanner.Models
 
         [Display(Name = "Allow third-party DJ")]
         public bool ThirdPartyDJ { get; set; }
-        [ForeignKey("Catering")]
+        [Display(Name = "Does Cater")]
+        public bool Caters { get; set; }
+        [ForeignKey("Caterer")]
         public int CatererId { get; set; }
         public Caterer Caterer { get; set; }
 
