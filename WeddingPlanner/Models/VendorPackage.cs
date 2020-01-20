@@ -11,7 +11,7 @@ namespace WeddingPlanner.Models
         [Key]
         public int PackageID { get; set; }
 
-        [Display(Name = "VEndor Package Description")]
+        [Display(Name = "Description")]
         public string PackageDescription { get; set; }
 
         [Display(Name = "Package Price")]

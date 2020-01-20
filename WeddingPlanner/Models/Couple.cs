@@ -13,16 +13,16 @@ namespace WeddingPlanner.Models
 
         public int Id { get; set; }
 
-        [Display(Name = "Partner First Name")]
+        [Display(Name = "Partner One's First Name")]
         public string Partner1FirstName { get; set; }
 
-        [Display(Name = "Partner Last Name")]
+        [Display(Name = "Partner One's Last Name")]
         public string Partner1LastName { get; set; }
 
-        [Display(Name = "Partner First Name")]
+        [Display(Name = "Partner Two's First Name")]
         public string Partner2FirstName { get; set; }
 
-        [Display(Name = "Partner Last Name")]
+        [Display(Name = "Partner Two's Last Name")]
         public string Partner2LastName { get; set; }
 
         [Display(Name = "Street Address")]

@@ -15,22 +15,22 @@ namespace WeddingPlanner.Models
         [Display(Name = "Celebrant's Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Celebrant Email")]
+        [Display(Name = "Celebrant's Email")]
         public string CelebrantEmail { get; set; }
 
-        [Display(Name = "Celebrant Phone")]
+        [Display(Name = "Celebrant's Phone")]
         public int CelebrantPhone { get; set; }
 
-        [Display(Name = "Ready To Travel")]
+        [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
 
         [Display(Name = "Religious services offered")]
         public string ReligionsServed { get; set; }
-
-        [Display(Name = "Do they sevice Co-habitants")]
+        
+        [Display(Name = "Sevices Co-habitants")]
         public bool ServicesCohabitants { get; set; }
 
-        [Display(Name = "LGBTQFriendly")]
+        [Display(Name = "LGBTQ Friendly")]
         public bool LGBTQFriendly { get; set; }
 
        

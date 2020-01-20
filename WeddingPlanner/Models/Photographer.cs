@@ -11,7 +11,7 @@ namespace WeddingPlanner.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Photographer Name")]
+        [Display(Name = "Photographer's Name")]
         public string Name { get; set; }
 
         [Display(Name = "Photographer's Email")]
@@ -20,16 +20,16 @@ namespace WeddingPlanner.Models
         [Display(Name = "Photographer's Phone")]
         public int PhotographerPhone { get; set; }
 
-        [Display(Name = "Is Video service offered")]
+        [Display(Name = "Does Video")]
         public bool DoesVideo { get; set; }
 
-        [Display(Name = "Is Editing service offered")]
+        [Display(Name = "Does Editing")]
         public bool DoesEditing { get; set; }
 
-        [Display(Name = "LGBTQFriendly")]
+        [Display(Name = "LGBTQ Friendly")]
         public bool ServesLGBTQ { get; set; }
 
-        [Display(Name = "Ready To Travel")]
+        [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
 
        
