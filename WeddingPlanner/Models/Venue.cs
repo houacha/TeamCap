@@ -12,6 +12,9 @@ namespace WeddingPlanner.Models
         [Key]
         public int VendorId { get; set; }
 
+        [Display(Name = "Vendor Type")]
+        public string VendorType { get; set; }
+
         [Display(Name = "Venue's Name")]
         public string Name { get; set; }
 
