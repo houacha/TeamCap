@@ -12,8 +12,21 @@ namespace WeddingPlanner.Models
         [Key]
         public int VendorId { get; set; }
 
+        [Display(Name = "Vendor Type")]
+        public string VendorType { get; set; }
+
         [Display(Name = "Venue's Name")]
         public string Name { get; set; }
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "ZipCode")]
+        public string Zip { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
+        [Display(Name = "Country")]
+        public string Country { get; set; }
 
         [Display(Name = "Venue's Email")]
         public string VenueEmail { get; set; }
@@ -34,7 +47,7 @@ namespace WeddingPlanner.Models
         public bool HandicapAccessible { get; set; }
 
         [Display(Name = "Religions served")]
-        public string ReligionsServed { get; set; }
+        public Dictionary<string,bool> ReligionsServed { get; set; }
 
         [Display(Name = "Serve Cohabitants")]
         public bool ServesCohabitants { get; set; }

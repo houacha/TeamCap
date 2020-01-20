@@ -10,10 +10,20 @@ namespace WeddingPlanner.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Display(Name= "Vendor Type")]
+        public string VendorType { get; set; }
         [Display(Name = "Caterer's Name")]
         public string Name { get; set; }
-
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "ZipCode")]
+        public string Zip { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
+        [Display(Name = "Country")]
+        public string Country { get; set; }
         [Display(Name = "Caterer's Email")]
         public string CatererEmail { get; set; }
 
@@ -24,13 +34,13 @@ namespace WeddingPlanner.Models
         public bool LGBTQfriendly { get; set; }
 
         [Display(Name = "Cuisine types offered")]
-        public string CuisineTypes { get; set; }
+        public Dictionary<string,bool> CuisineTypes { get; set; }
 
         [Display(Name = "Vegan Friendly")]
         public bool ServesVegan { get; set; }
 
         [Display(Name = "Food Allergy Options")]
-        public string FoodAllergyOptions { get; set; }
+        public bool FoodAllergyOptions { get; set; }
 
         [Display(Name = "Estimate Low Per Guest")]
         public double PerGuestEstimateLow { get; set; }

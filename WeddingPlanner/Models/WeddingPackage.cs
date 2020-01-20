@@ -36,13 +36,13 @@ namespace WeddingPlanner.Models
         public bool Vegan { get; set; }
 
         [Display(Name = "Cuisine Type Requirements")]
-        public string CuisineTypes { get; set; }
+        public Dictionary<string,bool> CuisineTypes { get; set; }
 
         [Display(Name = "Music Genres Requirements")]
-        public bool MusicGenres { get; set; }
+        public Dictionary<string,bool> MusicGenres { get; set; }
 
         [Display(Name = "Religious service Requirement")]
-        public string ReligiousService { get; set; }
+        public Dictionary<string,bool> ReligiousService { get; set; }
 
 
 

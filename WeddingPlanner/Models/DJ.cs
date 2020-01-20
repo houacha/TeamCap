@@ -12,6 +12,18 @@ namespace WeddingPlanner.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "Vendor Type")]
+        public string VendorType { get; set; }
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "ZipCode")]
+        public string Zip { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
+        [Display(Name = "Country")]
+        public string Country { get; set; }
         [Display(Name = "DJ's Email")]
         public string DJEmail { get; set; }
 
@@ -19,7 +31,7 @@ namespace WeddingPlanner.Models
         public string DJPhone { get; set; }
 
         [Display(Name = "Music Genres Offered")]
-        public bool MusicGenresOffered { get; set; }
+        public Dictionary<string,bool> MusicGenresOffered { get; set; }
 
         [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
