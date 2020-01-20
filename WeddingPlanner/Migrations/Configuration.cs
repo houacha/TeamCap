@@ -69,7 +69,7 @@ namespace WeddingPlanner.Migrations
             Cuisines.Add("French", false);
             Cuisines.Add("American", false);
             Cuisines.Add("Other", false);
-            Models.Caterer Best = new Models.Caterer { VendorType = "Caterer", Name = "Best Caterer", CatererEmail = "bestcaterer@gmail.com", CatererPhone = "414-111-0011", LGBTQfriendly = true, ServesVegan = true, FoodAllergyOptions = true, PerGuestEstimateLow = 50, PerGuestEstimateHigh = 100, CuisineTypes = Cuisines, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" };
+            Models.Caterer Best = new Models.Caterer { VendorType = "Caterer", Name = "Best Caterer", CatererEmail = "bestcaterer@gmail.com", CatererPhone = "414-111-0011", LGBTQfriendly = true, ServesVegan = true, FoodAllergyOptions = true, PerGuestEstimateLow = 50, PerGuestEstimateHigh = 100, CuisineTypes = Cuisines,Street="111 Weatherbeak",City="Vernon Hills",State="WI",Zip="53220",Country="United States"};
             Best.CuisineTypes["Indian"] = true;
             Best.CuisineTypes["Chinese"] = true;
             Best.CuisineTypes["Mediterranean"] = true;
@@ -109,7 +109,7 @@ namespace WeddingPlanner.Migrations
             Religions.Add("Lutheranism", false);
             Religions.Add("Buddhism", false);
             Religions.Add("Other", false);
-            Models.Celebrant Dude1 = new Models.Celebrant { VendorType = "Celebrant", Name = "Henry Zabrowski", CelebrantEmail = "lastOnLeft@gmail.com", CelebrantPhone = "666-111-4567", LGBTQFriendly = true, DoesTravel = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" };
+            Models.Celebrant Dude1  =new Models.Celebrant { VendorType = "Celebrant", Name = "Henry Zabrowski", CelebrantEmail = "lastOnLeft@gmail.com", CelebrantPhone = "666-111-4567", LGBTQFriendly = true, DoesTravel = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" };
             Dude1.ReligionsServed["Judaism"] = true;
             Dude1.ReligionsServed["Sikhism"] = true;
             Dude1.ReligionsServed["Hinduism"] = true;
@@ -184,6 +184,8 @@ namespace WeddingPlanner.Migrations
             Hilton.ReligionsServed["Other"] = true;
             //Couple
             Models.Couple JeffNikki = new Models.Couple { Partner1FirstName = "Jeff", Partner1LastName = "Smith", Partner2FirstName = "Nikki", Partner2LastName = "Anderson", CoupleStreetAddress = "111 Brady St.", City = "Milwaukee", Zipcode = 53202, WeddingBudget = 50000, EstimatedTotal = 0, CoupleEmail = "jeffnikki@gmail.com", CouplePhone = "309 111 2222" };
+
+
         }
     }
 }

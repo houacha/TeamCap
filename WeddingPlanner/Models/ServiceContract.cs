@@ -11,10 +11,10 @@ namespace WeddingPlanner.Models
     {
         [Key]
         public int ContractId { get; set; }
-
+        [Display(Name = "Vendor Type")]
+        public string VendorType { get; set; }
         [Display(Name = "Contract Description")]
         public string ContractDescription { get; set; }
-
         [Display(Name = "Contract Price")]
         public double Price { get; set; }
         public Dictionary<int,double> PricePhase { get; set; }
