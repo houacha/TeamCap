@@ -30,7 +30,7 @@ namespace WeddingPlanner.Models
         public bool ServesVegan { get; set; }
 
         [Display(Name = "Food Allergy Options")]
-        public string FoodAllergyOptions { get; set; }
+        public bool FoodAllergyOptions { get; set; }
 
         [Display(Name = "Estimate Low Per Guest")]
         public double PerGuestEstimateLow { get; set; }
