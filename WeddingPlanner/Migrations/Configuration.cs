@@ -98,6 +98,51 @@ namespace WeddingPlanner.Migrations
             YourFavoriteCaterer.CuisineTypes["Mexican"] = true;
             YourFavoriteCaterer.CuisineTypes["French"] = true;
             YourFavoriteCaterer.CuisineTypes["Italian"] = true;
+            //Venue
+            Dictionary<string, bool> Religions = new Dictionary<string, bool>();
+            Religions.Add("Judaism", false);
+            Religions.Add("Sikhism", false);
+            Religions.Add("Hinduism", false);
+            Religions.Add("Islamic", false);
+            Religions.Add("Non-denominational", false);
+            Religions.Add("Catholicism", false);
+            Religions.Add("Lutheranism", false);
+            Religions.Add("Buddhism", false);
+            Religions.Add("Others", false);
+            Models.Venue Paradiso = new Models.Venue { VendorType = "Venue", Name = "Paradiso", VenueEmail = "paradiso@gmail.com", VenuePhone = "414 222 1111", LGBTQFriendly = true, KidFriendly = true, PetFriendly = false, HandicapAccessible = true, ReligionsServed = Religions, ServesCohabitants = true, Ceremony = true, Reception = true, ProvidesLodging = false, AllowsDecor = true, ThirdPartyCelebrant = true, ThirdPartyCatering = true, ThirdPartyDJ = true, Caters = false };
+            Paradiso.ReligionsServed["Judaism"] = true;
+            Paradiso.ReligionsServed["Sikhism"] = true;
+            Paradiso.ReligionsServed["Hinduism"] = true;
+            Paradiso.ReligionsServed["Islamic"] = true;
+            Paradiso.ReligionsServed["Non-denominational"] = true;
+            Paradiso.ReligionsServed["Catholism"] = true;
+            Paradiso.ReligionsServed["Lutheranism"] = true;
+            Paradiso.ReligionsServed["Buddism"] = true;
+            Paradiso.ReligionsServed["Others"] = true;
+            Models.Venue TajMahal = new Models.Venue { VendorType = "Venue", Name = "TajMahal", VenueEmail = "tajmahal@gmail.com", VenuePhone = "414 222 2222", LGBTQFriendly = true, KidFriendly = true, PetFriendly = true, HandicapAccessible = true, ReligionsServed = Religions, ServesCohabitants = true, Ceremony = false, Reception = true, ProvidesLodging = false, AllowsDecor = true, ThirdPartyCelebrant = true, ThirdPartyCatering = false, ThirdPartyDJ = true, Caters = true };
+            TajMahal.ReligionsServed["Non-denominational"] = true;
+            TajMahal.ReligionsServed["Catholism"] = true;
+            TajMahal.ReligionsServed["Lutheranism"] = true;
+            Models.Venue Hyatt = new Models.Venue { VendorType = "Venue", Name = "Hyatt", VenueEmail = "hyatt@gmail.com", VenuePhone = "414 222 3333", LGBTQFriendly = false, KidFriendly = false, PetFriendly = false, HandicapAccessible = true, ReligionsServed = Religions, ServesCohabitants = true, Ceremony = true, Reception = true, ProvidesLodging = false, AllowsDecor = true, ThirdPartyCelebrant = true, ThirdPartyCatering = true, ThirdPartyDJ = true, Caters = false };
+            Hyatt.ReligionsServed["Judaism"] = true;
+            Hyatt.ReligionsServed["Sikhism"] = true;
+            Hyatt.ReligionsServed["Hinduism"] = true;
+            Hyatt.ReligionsServed["Buddism"] = true;
+            Hyatt.ReligionsServed["Others"] = true;
+            Models.Venue Sofitel = new Models.Venue { VendorType = "Venue", Name = "Sofitel", VenueEmail = "sofitel@gmail.com", VenuePhone = "414 222 4444", LGBTQFriendly = true, KidFriendly = true, PetFriendly = false, HandicapAccessible = false, ReligionsServed = Religions, ServesCohabitants = false, Ceremony = true, Reception = true, ProvidesLodging = true, AllowsDecor = false, ThirdPartyCelebrant = false, ThirdPartyCatering = false, ThirdPartyDJ = false, Caters = true };
+            Sofitel.ReligionsServed["Sikhism"] = true;
+            Sofitel.ReligionsServed["Hinduism"] = true;
+            Sofitel.ReligionsServed["Islamic"] = true;
+            Sofitel.ReligionsServed["Catholism"] = true;
+            Sofitel.ReligionsServed["Lutheranism"] = true;
+            Sofitel.ReligionsServed["Buddism"] = true;
+            Models.Venue Hilton = new Models.Venue { VendorType = "Venue", Name = "Hilton", VenueEmail = "hilton@gmail.com", VenuePhone = "414 222 5555", LGBTQFriendly = true, KidFriendly = false, PetFriendly = false, HandicapAccessible = true, ReligionsServed = Religions, ServesCohabitants = true, Ceremony = true, Reception = true, ProvidesLodging = false, AllowsDecor = true, ThirdPartyCelebrant = true, ThirdPartyCatering = true, ThirdPartyDJ = true, Caters = false };
+            Hilton.ReligionsServed["Hinduism"] = true;
+            Hilton.ReligionsServed["Islamic"] = true;
+            Hilton.ReligionsServed["Catholism"] = true;
+            Hilton.ReligionsServed["Lutheranism"] = true;
+            Hilton.ReligionsServed["Buddism"] = true;
+            Hilton.ReligionsServed["Others"] = true;
 
         }
     }

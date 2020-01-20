@@ -12,6 +12,9 @@ namespace WeddingPlanner.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "Vendor Type")]
+        public string VendorType { get; set; }
+
         [Display(Name = "DJ's Email")]
         public string DJEmail { get; set; }
 
