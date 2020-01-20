@@ -11,18 +11,26 @@ namespace WeddingPlanner.Models
         [Key]
 
         public int Id { get; set; }
-
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
-
         [Display(Name = "Celebrant's Name")]
         public string Name { get; set; }
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "ZipCode")]
+        public string Zip { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
+        [Display(Name = "Country")]
+        public string Country { get; set; }
 
         [Display(Name = "Celebrant's Email")]
         public string CelebrantEmail { get; set; }
 
         [Display(Name = "Celebrant's Phone")]
-        public int CelebrantPhone { get; set; }
+        public string CelebrantPhone { get; set; }
 
         [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
