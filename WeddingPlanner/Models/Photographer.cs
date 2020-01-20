@@ -17,6 +17,17 @@ namespace WeddingPlanner.Models
         [Display(Name = "Photographer's Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "ZipCode")]
+        public string Zip { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
         [Display(Name = "Photographer's Email")]
         public string PhotographerEmail { get; set; }
 
