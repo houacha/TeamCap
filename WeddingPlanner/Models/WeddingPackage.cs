@@ -45,7 +45,5 @@ namespace WeddingPlanner.Models
         public Dictionary<string,bool> ReligiousService { get; set; }
 
 
-
-
     }
 }

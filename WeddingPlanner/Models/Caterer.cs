@@ -33,8 +33,22 @@ namespace WeddingPlanner.Models
         [Display(Name = "LGBTQ Friendly")]
         public bool LGBTQfriendly { get; set; }
 
-        [Display(Name = "Cuisine types offered")]
-        public Dictionary<string,bool> CuisineTypes { get; set; }
+        [Display(Name = "Indian")]
+        public bool FoodIndian { get; set; }
+        [Display(Name = "Italian")]
+        public bool FoodItalian { get; set; }
+        [Display(Name = "Chinese")]
+        public bool FoodChinese { get; set; }
+        [Display(Name = "Mediterranean")]
+        public bool FoodMediterranean { get; set; }
+        [Display(Name = "Mexican")]
+        public bool FoodMexican { get; set; }
+        [Display(Name = "French")]
+        public bool FoodFrench { get; set; }
+        [Display(Name = "American")]
+        public bool FoodAmerican { get; set; }
+        [Display(Name = "Other")]
+        public bool FoodOther { get; set; }
 
         [Display(Name = "Vegan Friendly")]
         public bool ServesVegan { get; set; }

@@ -7,13 +7,13 @@ namespace WeddingPlanner.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addvenuetotable : IMigrationMetadata
+    public sealed partial class venue : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addvenuetotable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(venue));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001201514528_add venue to table"; }
+            get { return "202001202201571_venue"; }
         }
         
         string IMigrationMetadata.Source

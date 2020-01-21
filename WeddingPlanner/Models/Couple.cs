@@ -45,9 +45,9 @@ namespace WeddingPlanner.Models
         [Display(Name = "Phone")]
         public string CouplePhone { get; set; }
 
-        [ForeignKey ("WeddingPackage")]
-        public int WeddingId { get; set; }
-        public WeddingPackage WeddingPackage{ get; set; }
+        //[ForeignKey ("WeddingPackage")]
+        //public int WeddingId { get; set; }
+        //public WeddingPackage WeddingPackage{ get; set; }
 
     }
 }

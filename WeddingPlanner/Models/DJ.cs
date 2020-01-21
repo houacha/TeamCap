@@ -30,8 +30,26 @@ namespace WeddingPlanner.Models
         [Display(Name = "DJ's Phone")]
         public string DJPhone { get; set; }
 
-        [Display(Name = "Music Genres Offered")]
-        public Dictionary<string,bool> MusicGenresOffered { get; set; }
+        [Display(Name = "Pop")]
+        public bool GenrePop { get; set; }
+        [Display(Name = "R&B")]
+        public bool GenreRB { get; set; }
+        [Display(Name = "Rap")]
+        public bool GenreRap { get; set; }
+        [Display(Name = "Rock")]
+        public bool GenreRock { get; set; }
+        [Display(Name = "Country")]
+        public bool GenreCountry { get; set; }
+        [Display(Name = "Dance")]
+        public bool GenreDance { get; set; }
+        [Display(Name = "Techno")]
+        public bool GenreTechno { get; set; }
+        [Display(Name = "Metal")]
+        public bool GenreMetal { get; set; }
+        [Display(Name = "Other")]
+        public bool GenreInternational { get; set; }
+        [Display(Name = "International")]
+        public bool GenreOther { get; set; }
 
         [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }

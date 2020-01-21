@@ -46,8 +46,24 @@ namespace WeddingPlanner.Models
         [Display(Name = "Wheelchair Accessible")]
         public bool HandicapAccessible { get; set; }
 
-        [Display(Name = "Religions served")]
-        public Dictionary<string,bool> ReligionsServed { get; set; }
+        [Display(Name = "Judaism")]
+        public bool Judaism { get; set; }
+        [Display(Name = "Sikhism")]
+        public bool Sikhism { get; set; }
+        [Display(Name = "Hinduism")]
+        public bool Hinduism { get; set; }
+        [Display(Name = "Islamic")]
+        public bool Islamic { get; set; }
+        [Display(Name = "Non-Denominational")]
+        public bool NonDenominational { get; set; }
+        [Display(Name = "Catholicism")]
+        public bool Catholicism { get; set; }
+        [Display(Name = "Lutheranism")]
+        public bool Lutheranism { get; set; }
+        [Display(Name = "Buddhism")]
+        public bool Buddhism { get; set; }
+        [Display(Name = "Other")]
+        public bool ReligionOther { get; set; }
 
         [Display(Name = "Serve Cohabitants")]
         public bool ServesCohabitants { get; set; }
@@ -72,10 +88,10 @@ namespace WeddingPlanner.Models
         [Display(Name = "Allow third-party DJ")]
         public bool ThirdPartyDJ { get; set; }
         [Display(Name = "Does Cater")]
-        public bool Caters { get; set; }
-        [ForeignKey("Caterer")]
-        public int CatererId { get; set; }
-        public Caterer Caterer { get; set; }
+        public bool Caterers { get; set; }
+        //[ForeignKey("Caterer")]
+        //public int CatererId { get; set; }
+        //public Caterer Caterer { get; set; }
 
     }
 }

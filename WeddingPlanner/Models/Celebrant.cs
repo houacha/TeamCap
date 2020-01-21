@@ -35,9 +35,25 @@ namespace WeddingPlanner.Models
         [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
 
-        [Display(Name = "Religious services offered")]
-        public Dictionary<string,bool> ReligionsServed { get; set; }
-        
+        [Display(Name = "Judaism")]
+        public bool Judaism { get; set; }
+        [Display(Name = "Sikhism")]
+        public bool Sikhism { get; set; }
+        [Display(Name = "Hinduism")]
+        public bool Hinduism { get; set; }
+        [Display(Name = "Islamic")]
+        public bool Islamic { get; set; }
+        [Display(Name = "Non-Denominational")]
+        public bool NonDenominational { get; set; }
+        [Display(Name = "Catholicism")]
+        public bool Catholicism { get; set; }
+        [Display(Name = "Lutheranism")]
+        public bool Lutheranism { get; set; }
+        [Display(Name = "Buddhism")]
+        public bool Buddhism { get; set; }
+        [Display(Name = "Other")]
+        public bool ReligionOther { get; set; }
+
         [Display(Name = "Sevices Co-habitants")]
         public bool ServicesCohabitants { get; set; }
 

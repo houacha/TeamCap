@@ -20,7 +20,7 @@ namespace WeddingPlanner.Models
         [Display(Name = "Package Price")]
         public double PackagePrice { get; set; }
 
-        [ForeignKey("VendorID")]
-        public int VendorID { get; set; }
+        //[ForeignKey("VendorID")]
+        //public int VendorID { get; set; }
     }
 }

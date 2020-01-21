@@ -1,0 +1,114 @@
+﻿@model WeddingPlanner.Models.Celebrant
+
+@{
+    ViewBag.Title = "Celebrant";
+}
+
+<h2>Celebrant</h2>
+
+<div>
+    <h4>Celebrant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CelebrantEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CelebrantEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CelebrantPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CelebrantPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoesTravel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoesTravel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServicesCohabitants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServicesCohabitants)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LGBTQFriendly)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LGBTQFriendly)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

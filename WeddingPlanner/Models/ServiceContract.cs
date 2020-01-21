@@ -20,9 +20,9 @@ namespace WeddingPlanner.Models
         public Dictionary<int,double> PricePhase { get; set; }
         public int PricePhaseKey { get; set; }
         public string ContractPrice { get; set; }
-        [ForeignKey("VendorID")]
-        public int VendorID { get; set; }
-        [ForeignKey("WeddingID")]
-        public int WeddingID { get; set; }
+        //[ForeignKey("VendorID")]
+        //public int VendorID { get; set; }
+        //[ForeignKey("WeddingID")]
+        //public int WeddingID { get; set; }
     }
 }
