@@ -13,7 +13,7 @@ namespace WeddingPlannerApp.Controllers
 {
     public class CouplesController : Controller
     {
-        private ApplicationDbContext db;
+        private ApplicationDbContext db = new ApplicationDbContext();
         private HttpClient client;
         public CouplesController()
         {

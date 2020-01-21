@@ -223,21 +223,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001201424179_initial.cs" />
-    <Compile Include="Migrations\202001201424179_initial.Designer.cs">
-      <DependentUpon>202001201424179_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001201445191_changed name of venue prop.cs" />
-    <Compile Include="Migrations\202001201445191_changed name of venue prop.Designer.cs">
-      <DependentUpon>202001201445191_changed name of venue prop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001202201571_venue.cs" />
-    <Compile Include="Migrations\202001202201571_venue.Designer.cs">
-      <DependentUpon>202001202201571_venue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001211432334_reseeding.cs" />
-    <Compile Include="Migrations\202001211432334_reseeding.Designer.cs">
-      <DependentUpon>202001211432334_reseeding.cs</DependentUpon>
+    <Compile Include="Migrations\202001212013411_Shalini.cs" />
+    <Compile Include="Migrations\202001212013411_Shalini.Designer.cs">
+      <DependentUpon>202001212013411_Shalini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -315,6 +303,7 @@
     <Content Include="Views\Caterer.cshtml" />
     <Content Include="Views\Celebrant.cshtml" />
     <Content Include="Views\Photographer.cshtml" />
+    <Content Include="Views\IndexVenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -349,17 +338,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001201424179_initial.resx">
-      <DependentUpon>202001201424179_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001201445191_changed name of venue prop.resx">
-      <DependentUpon>202001201445191_changed name of venue prop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001202201571_venue.resx">
-      <DependentUpon>202001202201571_venue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001211432334_reseeding.resx">
-      <DependentUpon>202001211432334_reseeding.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001212013411_Shalini.resx">
+      <DependentUpon>202001212013411_Shalini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

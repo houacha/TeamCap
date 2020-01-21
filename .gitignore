@@ -351,4 +351,5 @@ MigrationBackup/
 
 # Web.config
 
-# **/Migrations/*
+**/Migrations/*
+
