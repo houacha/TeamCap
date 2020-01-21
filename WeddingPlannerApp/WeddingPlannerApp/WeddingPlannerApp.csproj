@@ -178,17 +178,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001201851456_initial.cs" />
-    <Compile Include="Migrations\202001201851456_initial.Designer.cs">
-      <DependentUpon>202001201851456_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001201854243_add roles.cs" />
-    <Compile Include="Migrations\202001201854243_add roles.Designer.cs">
-      <DependentUpon>202001201854243_add roles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001201856005_add controllers.cs" />
-    <Compile Include="Migrations\202001201856005_add controllers.Designer.cs">
-      <DependentUpon>202001201856005_add controllers.cs</DependentUpon>
+    <Compile Include="Migrations\202001211514562_all models.cs" />
+    <Compile Include="Migrations\202001211514562_all models.Designer.cs">
+      <DependentUpon>202001211514562_all models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -257,11 +249,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\userscontroller\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Vendors\Index.cshtml" />
+    <Content Include="Views\Vendors\Details.cshtml" />
+    <Content Include="Views\Vendors\Create.cshtml" />
+    <Content Include="Views\Vendors\Edit.cshtml" />
+    <Content Include="Views\Vendors\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Couples\" />
-    <Folder Include="Views\Vendors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -277,14 +272,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001201851456_initial.resx">
-      <DependentUpon>202001201851456_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001201854243_add roles.resx">
-      <DependentUpon>202001201854243_add roles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001201856005_add controllers.resx">
-      <DependentUpon>202001201856005_add controllers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001211514562_all models.resx">
+      <DependentUpon>202001211514562_all models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
