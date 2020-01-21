@@ -178,18 +178,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001201851456_initial.cs" />
-    <Compile Include="Migrations\202001201851456_initial.Designer.cs">
-      <DependentUpon>202001201851456_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001201854243_add roles.cs" />
-    <Compile Include="Migrations\202001201854243_add roles.Designer.cs">
-      <DependentUpon>202001201854243_add roles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001201856005_add controllers.cs" />
-    <Compile Include="Migrations\202001201856005_add controllers.Designer.cs">
-      <DependentUpon>202001201856005_add controllers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Vendor.cs" />
@@ -275,17 +263,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001201851456_initial.resx">
-      <DependentUpon>202001201851456_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001201854243_add roles.resx">
-      <DependentUpon>202001201854243_add roles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001201856005_add controllers.resx">
-      <DependentUpon>202001201856005_add controllers.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
