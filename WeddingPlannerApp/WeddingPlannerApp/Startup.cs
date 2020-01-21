@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System;
+using System.Net.Http;
 using WeddingPlannerApp.Models;
 
 [assembly: OwinStartupAttribute(typeof(WeddingPlannerApp.Startup))]
@@ -11,6 +13,7 @@ namespace WeddingPlannerApp
     {
         public void Configuration(IAppBuilder app)
         {
+    
             ApplicationDbContext context = new ApplicationDbContext();
             ConfigureAuth(app);
             CreateRolesAndUsers(context);
