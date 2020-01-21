@@ -254,6 +254,11 @@
     <Content Include="Views\Vendors\Create.cshtml" />
     <Content Include="Views\Vendors\Edit.cshtml" />
     <Content Include="Views\Vendors\Delete.cshtml" />
+    <Content Include="Views\Couples\Index.cshtml" />
+    <Content Include="Views\Couples\Details.cshtml" />
+    <Content Include="Views\Couples\Create.cshtml" />
+    <Content Include="Views\Couples\Edit.cshtml" />
+    <Content Include="Views\Couples\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
