@@ -266,6 +266,7 @@
     <Content Include="Views\Couples\Create.cshtml" />
     <Content Include="Views\Couples\Edit.cshtml" />
     <Content Include="Views\Couples\Delete.cshtml" />
+    <Content Include="Views\Vendors\DecideVendorType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

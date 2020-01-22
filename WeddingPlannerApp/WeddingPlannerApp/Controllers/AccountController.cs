@@ -81,6 +81,17 @@ namespace WeddingPlannerApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var userId = User.Identity.GetUserId();
+                    if (User.IsInRole("Vendor") == true)
+                    {
+                        var vendor = context.Vendors.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
+                        return RedirectToAction("Details", "Vendor", new { type = vendor.VendorType });
+                    }
+                    else if (User.IsInRole("Couples") == true)
+                    {
+                        var user = context.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
+                        return RedirectToAction("Details", "Couples");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -174,7 +185,7 @@ namespace WeddingPlannerApp.Controllers
                         case "Couple":
                             return RedirectToAction("Create", "Couples");
                         case "Vendor":
-                            return RedirectToAction("Create", "Vendors");
+                            return RedirectToAction("DecideVendorType", "Vendors");
                         default:
                             break;
                     }

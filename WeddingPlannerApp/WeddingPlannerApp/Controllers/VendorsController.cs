@@ -100,10 +100,25 @@ namespace WeddingPlannerApp.Controllers
             return vendor;
         }
 
+        public ActionResult DecideVendorType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DecideVendorType(Vendor vendor)
+        {
+            var userId = User.Identity.GetUserId();
+            vendor.ApplicationId = userId;
+            db.Vendors.Add(vendor);
+            db.SaveChanges();
+            return RedirectToAction("Create", "Vendors", new { type = vendor.VendorType });
+        }
+
         // GET: Vendors
         public ActionResult Index(string type)
         {
-            type = "DJs";
             List<VendorViewModel> venueList = new List<VendorViewModel>();
             client.BaseAddress = new Uri("https://localhost:44317/api/");
             var response = client.GetAsync(type);
@@ -154,13 +169,9 @@ namespace WeddingPlannerApp.Controllers
         }
 
         // GET: Vendors/Create
-        public ActionResult Create()
+        public ActionResult Create(string type)
         {
-            //var userId = User.Identity.GetUserId();
-            //var currentUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
-            //var roleId = currentUser.Roles.Where(r => r.UserId == userId).Select(r => r.RoleId).SingleOrDefault();
-            //var type = db.Roles.Where(r => r.Id == roleId).Select(r => r).SingleOrDefault();
-            ViewBag.VenderType = "Venues";
+            ViewBag.VendorType = type + "s";
             return View();
         }
 
@@ -169,11 +180,15 @@ namespace WeddingPlannerApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VendorId")] VendorViewModel service)
+        public ActionResult Create(VendorViewModel service)
         {
             if (ModelState.IsValid)
             {
-                Vendor vendor = new Vendor();
+                var userId = User.Identity.GetUserId();
+                var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+                var type = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v.VendorType).SingleOrDefault();
+                service.VenueEmail = applicationUser.Email;
+                service.VendorType = type;
                 string json = JsonConvert.SerializeObject(service);
                 client.BaseAddress = new Uri("https://localhost:44317/api/");
                 var response = client.PostAsync(service.VendorType + "s", new StringContent(json));
@@ -181,7 +196,8 @@ namespace WeddingPlannerApp.Controllers
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    vendor.ApplicationId = User.Identity.GetUserId();
+                    var currentUser = User.Identity.GetUserId();
+                    var user = db.Vendors.Where(v => v.ApplicationId == currentUser).Select(v => v).SingleOrDefault();
                     client.BaseAddress = new Uri("https://localhost:44317/api/");
                     response = client.GetAsync(service.VendorType + "s");
                     response.Wait();
@@ -191,11 +207,10 @@ namespace WeddingPlannerApp.Controllers
                         var read = result.Content.ReadAsStringAsync();
                         read.Wait();
                         var readResult = read.Result;
-                        JArray jObject = JArray.Parse(readResult);
-                        var lastObject = jObject.Last();
-                        vendor.VendorId = (int?)lastObject["VendorId"];
-                        vendor.VendorType = service.VendorType;
-                        db.Vendors.Add(vendor);
+                        JArray jObjects = JArray.Parse(readResult);
+                        var lastObject = jObjects.Last();
+                        user.VendorId = (int?)lastObject["VendorId"];
+                        user.VendorType = service.VendorType;
                         db.SaveChanges();
                     }
                 }
