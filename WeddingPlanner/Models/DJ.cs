@@ -45,8 +45,8 @@ namespace WeddingPlanner.Models
         [Display(Name = "Metal")]
         public bool? GenreMetal { get; set; }
         [Display(Name = "Other")]
-        public bool? Genreint?ernational { get; set; }
-        [Display(Name = "int?ernational")]
+        public bool? GenreInternational { get; set; }
+        [Display(Name = "International")]
         public bool? GenreOther { get; set; }
 
         [Display(Name = "Will Travel")]
