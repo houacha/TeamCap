@@ -14,7 +14,7 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
 
-        [Display(Name = "Photographer's Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Street")]
@@ -32,11 +32,11 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Country")]
         public string Country { get; set; }
 
-        [Display(Name = "Photographer's Email")]
-        public string PhotographerEmail { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
-        [Display(Name = "Photographer's Phone")]
-        public string PhotographerPhone { get; set; }
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
 
         [Display(Name = "Does Video")]
         public bool? DoesVideo { get; set; }
@@ -49,12 +49,6 @@ namespace WeddingPlannerApp.Models
 
         [Display(Name = "Will Travel")]
         public bool? DoesTravel { get; set; }
-
-        [Display(Name = "Caterer's Email")]
-        public string CatererEmail { get; set; }
-
-        [Display(Name = "Caterer's Phone")]
-        public string CatererPhone { get; set; }
 
         [Display(Name = "Indian")]
         public bool? FoodIndian { get; set; }
@@ -92,12 +86,6 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Estimated High Per Guest")]
         public double? PerGuestEstimateHigh { get; set; }
 
-        [Display(Name = "Celebrant's Email")]
-        public string CelebrantEmail { get; set; }
-
-        [Display(Name = "Celebrant's Phone")]
-        public string CelebrantPhone { get; set; }
-
         [Display(Name = "Judaism")]
         public bool? Judaism { get; set; }
 
@@ -125,12 +113,6 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Other")]
         public bool? ReligionOther { get; set; }
 
-        [Display(Name = "DJ's Email")]
-        public string DJEmail { get; set; }
-
-        [Display(Name = "DJ's Phone")]
-        public string DJPhone { get; set; }
-
         [Display(Name = "Pop")]
         public bool? GenrePop { get; set; }
 
@@ -155,17 +137,11 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Metal")]
         public bool? GenreMetal { get; set; }
 
-        [Display(Name = "Other")]
+        [Display(Name = "International")]
         public bool? GenreInternational { get; set; }
 
-        [Display(Name = "International")]
+        [Display(Name = "Other")]
         public bool? GenreOther { get; set; } 
-
-        [Display(Name = "Venue's Email")]
-        public string VenueEmail { get; set; }
-
-        [Display(Name = "Venue's Phone")]
-        public string VenuePhone { get; set; }
 
         [Display(Name = "Kid-friendly")]
         public bool? KidFriendly { get; set; }

@@ -223,9 +223,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001221404094_shalini.cs" />
-    <Compile Include="Migrations\202001221404094_shalini.Designer.cs">
-      <DependentUpon>202001221404094_shalini.cs</DependentUpon>
+    <Compile Include="Migrations\202001222040591_models.cs" />
+    <Compile Include="Migrations\202001222040591_models.Designer.cs">
+      <DependentUpon>202001222040591_models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -334,8 +334,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001221404094_shalini.resx">
-      <DependentUpon>202001221404094_shalini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001222040591_models.resx">
+      <DependentUpon>202001222040591_models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

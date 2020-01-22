@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WeddingPlannerApp.Models;
@@ -39,14 +40,12 @@ namespace WeddingPlannerApp.Controllers
                 Zip = (string)item["Zip"],
                 State = (string)item["State"],
                 Country = (string)item["Country"],
-                PhotographerEmail = (string)item["PhotographerEmail"],
-                PhotographerPhone = (string)item["PhotographerPhone"],
+                Email = (string)item["Email"],
+                Phone = (string)item["Phone"],
                 DoesVideo = (bool?)item["DoesVideo"],
                 DoesEditing = (bool?)item["DoesEditing"],
                 LGBTQFriendly = (bool?)item["LGBTQFriendly"],
                 DoesTravel = (bool?)item["DoesTravel"],
-                CatererEmail = (string)item["CatererEmail"],
-                CatererPhone = (string)item["CatererPhone"],
                 FoodIndian = (bool?)item["FoodIndian"],
                 FoodItalian = (bool?)item["FoodItalian"],
                 FoodChinese = (bool?)item["FoodChinese"],
@@ -59,8 +58,6 @@ namespace WeddingPlannerApp.Controllers
                 FoodAllergyOptions = (bool?)item["FoodAllergyOptions"],
                 PerGuestEstimateLow = (double?)item["PerGuestEstimateLow"],
                 PerGuestEstimateHigh = (double?)item["PerGuestEstimateHigh"],
-                CelebrantEmail = (string)item["CelebrantEmail"],
-                CelebrantPhone = (string)item["CelebrantPhone"],
                 Judaism = (bool?)item["Judaism"],
                 Sikhism = (bool?)item["Sikhism"],
                 Hinduism = (bool?)item["Hinduism"],
@@ -70,8 +67,6 @@ namespace WeddingPlannerApp.Controllers
                 Lutheranism = (bool?)item["Lutheranism"],
                 Buddhism = (bool?)item["Buddhism"],
                 ReligionOther = (bool?)item["ReligionOther"],
-                DJEmail = (string)item["DJEmail"],
-                DJPhone = (string)item["DJPhone"],
                 GenrePop = (bool?)item["GenrePop"],
                 GenreRB = (bool?)item["GenreRB"],
                 GenreRap = (bool?)item["GenreRap"],
@@ -82,8 +77,6 @@ namespace WeddingPlannerApp.Controllers
                 GenreMetal = (bool?)item["GenreMetal"],
                 GenreInternational = (bool?)item["GenreInternational"],
                 GenreOther = (bool?)item["GenreOther"],
-                VenueEmail = (string)item["VenueEmail"],
-                VenuePhone = (string)item["VenuePhone"],
                 KidFriendly = (bool?)item["KidFriendly"],
                 PetFriendly = (bool?)item["PetFriendly"],
                 HandicapAccessible = (bool?)item["HandicapAccessible"],
@@ -187,11 +180,12 @@ namespace WeddingPlannerApp.Controllers
                 var userId = User.Identity.GetUserId();
                 var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
                 var type = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v.VendorType).SingleOrDefault();
-                service.VenueEmail = applicationUser.Email;
+                service.Email = applicationUser.Email;
                 service.VendorType = type;
                 string json = JsonConvert.SerializeObject(service);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
                 client.BaseAddress = new Uri("https://localhost:44317/api/");
-                var response = client.PostAsync(service.VendorType + "s", new StringContent(json));
+                var response = client.PostAsync(service.VendorType + "s", content);
                 response.Wait();
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
