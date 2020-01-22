@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202001220003072_changed prop.Designer.cs">
       <DependentUpon>202001220003072_changed prop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001221331471_Changes some models properties.cs" />
+    <Compile Include="Migrations\202001221331471_Changes some models properties.Designer.cs">
+      <DependentUpon>202001221331471_Changes some models properties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\VendorViewModel.cs" />
@@ -287,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001220003072_changed prop.resx">
       <DependentUpon>202001220003072_changed prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221331471_Changes some models properties.resx">
+      <DependentUpon>202001221331471_Changes some models properties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

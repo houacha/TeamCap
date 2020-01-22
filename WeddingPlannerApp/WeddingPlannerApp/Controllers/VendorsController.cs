@@ -169,6 +169,7 @@ namespace WeddingPlannerApp.Controllers
             {
                 Vendor vendor = new Vendor();
                 string json = JsonConvert.SerializeObject(service);
+                client.BaseAddress = new Uri("https://localhost:44317/api/");
                 var response = client.PostAsync(service.VendorType + "s", new StringContent(json));
                 response.Wait();
                 var result = response.Result;
