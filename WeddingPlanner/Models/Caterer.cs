@@ -31,7 +31,7 @@ namespace WeddingPlanner.Models
         public string CatererPhone { get; set; }
 
         [Display(Name = "LGBTQ Friendly")]
-        public bool LGBTQfriendly { get; set; }
+        public bool LGBTQFriendly { get; set; }
 
         [Display(Name = "Indian")]
         public bool FoodIndian { get; set; }

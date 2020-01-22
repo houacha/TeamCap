@@ -44,7 +44,7 @@ namespace WeddingPlanner.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != venue.VendorId)
+            if (id != venue.Id)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace WeddingPlanner.Controllers
             db.Venues.Add(venue);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = venue.VendorId }, venue);
+            return CreatedAtRoute("DefaultApi", new { id = venue.Id }, venue);
         }
 
         // DELETE: api/Venues/5
@@ -112,7 +112,7 @@ namespace WeddingPlanner.Controllers
 
         private bool VenueExists(int id)
         {
-            return db.Venues.Count(e => e.VendorId == id) > 0;
+            return db.Venues.Count(e => e.Id == id) > 0;
         }
     }
 }

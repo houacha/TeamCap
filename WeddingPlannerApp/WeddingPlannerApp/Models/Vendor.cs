@@ -11,7 +11,8 @@ namespace WeddingPlannerApp.Models
     {
         [Key]
         public int Id { get; set; }
-        public int VendorId { get; set; }
+        public int? VendorId { get; set; }
+        public string VendorType { get; set; }
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
