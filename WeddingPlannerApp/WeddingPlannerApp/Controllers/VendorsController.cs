@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using WeddingPlannerApp.Models;
@@ -17,7 +20,62 @@ namespace WeddingPlannerApp.Controllers
         // GET: Vendors
         public ActionResult Index()
         {
-            return View(db.Vendors.ToList());
+            List<VendorViewModel> venueList = new List<VendorViewModel>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44317/api/");
+                var response = client.GetAsync("Venues");
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var read = result.Content.ReadAsStringAsync();
+                    read.Wait();
+                    var venues = read.Result;
+                    JArray thing = JArray.Parse(venues);
+                    foreach (var item in thing)
+                    {
+                        VendorViewModel butter = new VendorViewModel()
+                        {
+                            VendorId = (int)item["VendorId"],
+                            VendorType = (string)item["VendorType"],
+                            Name = (string)item["Name"],
+                            Street = (string)item["Street"],
+                            City = (string)item["City"],
+                            Zip = (string)item["Zip"],
+                            State = (string)item["State"],
+                            Country = (string)item["Country"],
+                            VenueEmail = (string)item["VenueEmail"],
+                            VenuePhone = (string)item["VenuePhone"],
+                            LGBTQFriendly = (bool)item["LGBTQFriendly"],
+                            KidFriendly = (bool)item["KidFriendly"],
+                            PetFriendly = (bool)item["PetFriendly"],
+                            HandicapAccessible = (bool)item["HandicapAccessible"],
+                            Judaism = (bool)item["Judaism"],
+                            Sikhism = (bool)item["Sikhism"],
+                            Hinduism = (bool)item["Hinduism"],
+                            Islamic = (bool)item["Islamic"],
+                            NonDenominational = (bool)item["NonDenominational"],
+                            Catholicism = (bool)item["Catholicism"],
+                            Lutheranism = (bool)item["Lutheranism"],
+                            Buddhism = (bool)item["Buddhism"],
+                            ReligionOther = (bool)item["ReligionOther"],
+                            ServesCohabitants = (bool)item["ServesCohabitants"],
+                            Ceremony = (bool)item["Ceremony"],
+                            Reception = (bool)item["Reception"],
+                            ProvidesLodging = (bool)item["ProvidesLodging"],
+                            AllowsDecor = (bool)item["AllowsDecor"],
+                            ThirdPartyCelebrant = (bool)item["ThirdPartyCelebrant"],
+                            ThirdPartyCatering = (bool)item["ThirdPartyCatering"],
+                            ThirdPartyDJ = (bool)item["ThirdPartyDJ"],
+                            Caterers = (bool)item["Caterers"]
+                        };
+                        venueList.Add(butter);
+                    }
+                }
+            }
+
+            return View(venueList);
         }
 
         // GET: Vendors/Details/5
