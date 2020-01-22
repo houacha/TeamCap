@@ -10,7 +10,7 @@ namespace WeddingPlanner.Models
     public class Venue
     {
         [Key]
-        public int VendorId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
@@ -92,6 +92,5 @@ namespace WeddingPlanner.Models
         //[ForeignKey("Caterer")]
         //public int CatererId { get; set; }
         //public Caterer Caterer { get; set; }
-
     }
 }

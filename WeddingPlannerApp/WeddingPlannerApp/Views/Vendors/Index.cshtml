@@ -1,244 +1,226 @@
-﻿@*@model IEnumerable<WeddingPlannerApp.Models.Vendor>
+﻿@model IEnumerable<WeddingPlannerApp.Models.VendorViewModel>
+@switch (ViewBag.VenderType)
+{
+    case "Venues":
+        {
+            ViewBag.Title = "IndexVenue";
+        }
+        <h2>@ViewBag.VenderType</h2>
 
-    @{
-        ViewBag.Title = "Index";
-    }
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VenueEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VenuePhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KidFriendly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PetFriendly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HandicapAccessible)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Judaism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sikhism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hinduism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Islamic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NonDenominational)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Catholicism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lutheranism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Buddhism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReligionOther)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ServesCohabitants)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ceremony)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reception)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProvidesLodging)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllowsDecor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThirdPartyCelebrant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThirdPartyCatering)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThirdPartyDJ)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Caterers)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VenueEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VenuePhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LGBTQFriendly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KidFriendly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PetFriendly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HandicapAccessible)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Judaism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sikhism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hinduism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Islamic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NonDenominational)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Catholicism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lutheranism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Buddhism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReligionOther)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServesCohabitants)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ceremony)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reception)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProvidesLodging)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AllowsDecor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThirdPartyCelebrant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThirdPartyCatering)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThirdPartyDJ)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Caterers)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+        break;
+    case "DJs":
 
-    <h2>Index</h2>
+        break;
+    case "Celebrants":
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationId)
-            </th>
-            <th></th>
-        </tr>
+        break;
+    case "Photographers":
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+        break;
+    case "Caterers":
 
-    </table>*@
-
-@model IEnumerable<WeddingPlannerApp.Models.VendorViewModel>
-
-@{
-    ViewBag.Title = "IndexVenue";
+        break;
+    default:
+        break;
 }
-<h2>IndexVenue</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Street)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Zip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenuePhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LGBTQFriendly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KidFriendly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PetFriendly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HandicapAccessible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Judaism)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sikhism)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hinduism)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Islamic)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NonDenominational)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Catholicism)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lutheranism)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Buddhism)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReligionOther)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ServesCohabitants)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ceremony)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Reception)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProvidesLodging)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AllowsDecor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThirdPartyCelebrant)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThirdPartyCatering)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThirdPartyDJ)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Caterers)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VendorType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenuePhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LGBTQFriendly)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KidFriendly)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetFriendly)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HandicapAccessible)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Judaism)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sikhism)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hinduism)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Islamic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NonDenominational)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Catholicism)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lutheranism)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Buddhism)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReligionOther)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServesCohabitants)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ceremony)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reception)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProvidesLodging)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowsDecor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThirdPartyCelebrant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThirdPartyCatering)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThirdPartyDJ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Caterers)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.VendorId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.VendorId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.VendorId })
-            </td>
-        </tr>
-    }
-</table>

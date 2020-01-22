@@ -402,6 +402,12 @@ namespace WeddingPlannerApp.Controllers
             return View(model);
         }
 
+        public ActionResult LogOut()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login");
+        }
+
         //
         // POST: /Account/LogOff
         [HttpPost]

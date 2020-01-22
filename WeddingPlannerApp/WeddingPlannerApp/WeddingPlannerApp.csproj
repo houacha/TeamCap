@@ -178,9 +178,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001212017219_shalini.cs" />
-    <Compile Include="Migrations\202001212017219_shalini.Designer.cs">
-      <DependentUpon>202001212017219_shalini.cs</DependentUpon>
+    <Compile Include="Migrations\202001221409134_shalini.cs" />
+    <Compile Include="Migrations\202001221409134_shalini.Designer.cs">
+      <DependentUpon>202001221409134_shalini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Venue\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -283,8 +284,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001212017219_shalini.resx">
-      <DependentUpon>202001212017219_shalini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001221409134_shalini.resx">
+      <DependentUpon>202001221409134_shalini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

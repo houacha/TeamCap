@@ -9,7 +9,6 @@ namespace WeddingPlanner.Models
     public class Celebrant
     {
         [Key]
-
         public int Id { get; set; }
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
@@ -55,7 +54,7 @@ namespace WeddingPlanner.Models
         public bool ReligionOther { get; set; }
 
         [Display(Name = "Sevices Co-habitants")]
-        public bool ServicesCohabitants { get; set; }
+        public bool ServesCohabitants { get; set; }
 
         [Display(Name = "LGBTQ Friendly")]
         public bool LGBTQFriendly { get; set; }

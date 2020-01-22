@@ -9,9 +9,7 @@ namespace WeddingPlanner.Models
     public class DJ
     {
         [Key]
-
         public int Id { get; set; }
-
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
         [Display(Name = "Street")]
