@@ -229,25 +229,48 @@ namespace WeddingPlannerApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VendorId")] Vendor vendor)
+        public ActionResult Edit([Bind(Include = "Id,VendorId")] VendorViewModel vendor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vendor).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string json = JsonConvert.SerializeObject(vendor);
+                client.BaseAddress = new Uri("https://localhost:44317/api/" + vendor.Id);
+                var response = client.PutAsync(vendor.VendorType + "s", new StringContent(json));
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var userId = User.Identity.GetUserId();
+                    var currentUser = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v).SingleOrDefault();
+                    currentUser.VendorId = vendor.Id;
+                    currentUser.VendorType = vendor.VendorType;                   
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType + "s"});
             }
             return View(vendor);
         }
 
         // GET: Vendors/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, string type)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendor vendor = db.Vendors.Find(id);
+            VendorViewModel vendor = new VendorViewModel();
+            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
+            var response = client.GetAsync(type);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                var service = read.Result;
+                JObject jObject = JObject.Parse(service);
+                vendor = MakeModel(jObject);
+            }
             if (vendor == null)
             {
                 return HttpNotFound();
@@ -258,12 +281,22 @@ namespace WeddingPlannerApp.Controllers
         // POST: Vendors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string type)
         {
-            Vendor vendor = db.Vendors.Find(id);
-            db.Vendors.Remove(vendor);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
+            var response = client.DeleteAsync(type);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var userId = User.Identity.GetUserId();
+                var currentUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+                Vendor vendor = db.Vendors.Where(v => v.VendorId == id).Select(v => v).SingleOrDefault();
+                db.Users.Remove(currentUser);
+                db.Vendors.Remove(vendor);
+                db.SaveChanges();
+            }
+            return RedirectToAction("LogOut","Account");
         }
 
         protected override void Dispose(bool disposing)
