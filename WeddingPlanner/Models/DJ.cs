@@ -12,6 +12,8 @@ namespace WeddingPlanner.Models
         public int Id { get; set; }
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
         [Display(Name = "Street")]
         public string Street { get; set; }
         [Display(Name = "City")]
@@ -22,39 +24,39 @@ namespace WeddingPlanner.Models
         public string State { get; set; }
         [Display(Name = "Country")]
         public string Country { get; set; }
-        [Display(Name = "DJ's Email")]
-        public string DJEmail { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
-        [Display(Name = "DJ's Phone")]
-        public string DJPhone { get; set; }
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
 
         [Display(Name = "Pop")]
-        public bool? GenrePop { get; set; }
+        public bool GenrePop { get; set; }
         [Display(Name = "R&B")]
-        public bool? GenreRB { get; set; }
+        public bool GenreRB { get; set; }
         [Display(Name = "Rap")]
-        public bool? GenreRap { get; set; }
+        public bool GenreRap { get; set; }
         [Display(Name = "Rock")]
-        public bool? GenreRock { get; set; }
+        public bool GenreRock { get; set; }
         [Display(Name = "Country")]
-        public bool? GenreCountry { get; set; }
+        public bool GenreCountry { get; set; }
         [Display(Name = "Dance")]
-        public bool? GenreDance { get; set; }
+        public bool GenreDance { get; set; }
         [Display(Name = "Techno")]
-        public bool? GenreTechno { get; set; }
+        public bool GenreTechno { get; set; }
         [Display(Name = "Metal")]
-        public bool? GenreMetal { get; set; }
-        [Display(Name = "International")]
-        public bool? GenreInternational { get; set; }
+        public bool GenreMetal { get; set; }
         [Display(Name = "Other")]
-        public bool? GenreOther { get; set; }
+        public bool GenreInternational { get; set; }
+        [Display(Name = "International")]
+        public bool GenreOther { get; set; }
 
         [Display(Name = "Will Travel")]
-        public bool? DoesTravel { get; set; }
+        public bool DoesTravel { get; set; }
 
         [Display(Name = "LGBTQ Friendly")]
-        public bool? LGBTQFriendly { get; set; }
+        public bool LGBTQFriendly { get; set; }
 
-      
+
     }
 }

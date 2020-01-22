@@ -17,9 +17,11 @@ namespace WeddingPlanner.Models
         public string ContractDescription { get; set; }
         [Display(Name = "Contract Price")]
         public double Price { get; set; }
-        public Dictionary<int,double> PricePhase { get; set; }
         public int PricePhaseKey { get; set; }
         public string ContractPrice { get; set; }
+        public string CoupleName { get; set; }
+        public string CouplePhone { get; set; }
+        public string CoupleEmail { get; set; }
         //[ForeignKey("VendorID")]
         //public int VendorID { get; set; }
         //[ForeignKey("WeddingID")]

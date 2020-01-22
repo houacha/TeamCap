@@ -14,7 +14,7 @@ namespace WeddingPlanner.Models
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
 
-        [Display(Name = "Photographer's Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Street")]
@@ -28,11 +28,11 @@ namespace WeddingPlanner.Models
         [Display(Name = "Country")]
         public string Country { get; set; }
 
-        [Display(Name = "Photographer's Email")]
-        public string PhotographerEmail { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
-        [Display(Name = "Photographer's Phone")]
-        public string PhotographerPhone { get; set; }
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
 
         [Display(Name = "Does Video")]
         public bool DoesVideo { get; set; }
@@ -46,6 +46,6 @@ namespace WeddingPlanner.Models
         [Display(Name = "Will Travel")]
         public bool DoesTravel { get; set; }
 
-       
+
     }
 }

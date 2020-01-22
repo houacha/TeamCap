@@ -1,26 +1,79 @@
-﻿@model WeddingPlannerApp.Models.Couple
+﻿@model WeddingPlannerApp.Models.CoupleViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<h2>
+    @Html.DisplayFor(model => model.Partner1FirstName) @Html.DisplayFor(model => model.Partner1LastName) &
+    @Html.DisplayFor(model => model.Partner2FirstName) @Html.DisplayFor(model => model.Partner2LastName)
+</h2>
+<h3>Current Budget:<br />$@Html.DisplayFor(model => model.WeddingBudget)</h3>
 <div>
-    <h4>Couple</h4>
+    <h4>CoupleViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.ApplicationId)
+            @Html.DisplayNameFor(model => model.CoupleStreetAddress)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationId)
+            @Html.DisplayFor(model => model.CoupleStreetAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zipcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zipcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddingBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddingBudget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoupleEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoupleEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouplePhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouplePhone)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

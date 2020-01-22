@@ -34,15 +34,60 @@ namespace WeddingPlanner.Models
 
         [Display(Name = "Vegan")]
         public bool Vegan { get; set; }
-
-        [Display(Name = "Cuisine Type Requirements")]
-        public Dictionary<string,bool> CuisineTypes { get; set; }
-
-        [Display(Name = "Music Genres Requirements")]
-        public Dictionary<string,bool> MusicGenres { get; set; }
-
-        [Display(Name = "Religious service Requirement")]
-        public Dictionary<string,bool> ReligiousService { get; set; }
+        [Display(Name = "Indian")]
+        public bool FoodIndian { get; set; }
+        [Display(Name = "Italian")]
+        public bool FoodItalian { get; set; }
+        [Display(Name = "Chinese")]
+        public bool FoodChinese { get; set; }
+        [Display(Name = "Mediterranean")]
+        public bool FoodMediterranean { get; set; }
+        [Display(Name = "Mexican")]
+        public bool FoodMexican { get; set; }
+        [Display(Name = "French")]
+        public bool FoodFrench { get; set; }
+        [Display(Name = "American")]
+        public bool FoodAmerican { get; set; }
+        [Display(Name = "Other")]
+        public bool FoodOther { get; set; }
+        [Display(Name = "Pop")]
+        public bool GenrePop { get; set; }
+        [Display(Name = "R&B")]
+        public bool GenreRB { get; set; }
+        [Display(Name = "Rap")]
+        public bool GenreRap { get; set; }
+        [Display(Name = "Rock")]
+        public bool GenreRock { get; set; }
+        [Display(Name = "Country")]
+        public bool GenreCountry { get; set; }
+        [Display(Name = "Dance")]
+        public bool GenreDance { get; set; }
+        [Display(Name = "Techno")]
+        public bool GenreTechno { get; set; }
+        [Display(Name = "Metal")]
+        public bool GenreMetal { get; set; }
+        [Display(Name = "International")]
+        public bool GenreInternational { get; set; }
+        [Display(Name = "Other")]
+        public bool GenreOther { get; set; }
+        [Display(Name = "Judaism")]
+        public bool Judaism { get; set; }
+        [Display(Name = "Sikhism")]
+        public bool Sikhism { get; set; }
+        [Display(Name = "Hinduism")]
+        public bool Hinduism { get; set; }
+        [Display(Name = "Islamic")]
+        public bool Islamic { get; set; }
+        [Display(Name = "Non-Denominational")]
+        public bool NonDenominational { get; set; }
+        [Display(Name = "Catholicism")]
+        public bool Catholicism { get; set; }
+        [Display(Name = "Lutheranism")]
+        public bool Lutheranism { get; set; }
+        [Display(Name = "Buddhism")]
+        public bool Buddhism { get; set; }
+        [Display(Name = "Other")]
+        public bool ReligionOther { get; set; }
 
 
     }

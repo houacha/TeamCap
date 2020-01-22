@@ -19,8 +19,9 @@ namespace WeddingPlanner.Migrations
             new Models.DJ
             {
                 VendorType = "DJ",
-                DJEmail = "musicBear@gmail.com",
-                DJPhone = "111-333-4567",
+                Name = "Barry Burton",
+                Email = "musicBear@gmail.com",
+                Phone = "111-333-4567",
                 LGBTQFriendly = true,
                 DoesTravel = false,
                 GenrePop = true,
@@ -42,8 +43,9 @@ namespace WeddingPlanner.Migrations
             new Models.DJ
             {
                 VendorType = "DJ",
-                DJEmail = "musicBird@gmail.com",
-                DJPhone = "222-333-4567",
+                Name = "Rebecca Chambers",
+                Email = "musicBird@gmail.com",
+                Phone = "222-333-4567",
                 LGBTQFriendly = true,
                 DoesTravel = true,
                 GenrePop = true,
@@ -65,8 +67,9 @@ namespace WeddingPlanner.Migrations
             new Models.DJ
             {
                 VendorType = "DJ",
-                DJEmail = "musicBruce@gmail.com",
-                DJPhone = "333-333-4567",
+                Name = "Albert Wesker",
+                Email = "musicBruce@gmail.com",
+                Phone = "333-333-4567",
                 LGBTQFriendly = false,
                 DoesTravel = true,
                 GenrePop = false,
@@ -88,8 +91,9 @@ namespace WeddingPlanner.Migrations
             new Models.DJ
             {
                 VendorType = "DJ",
-                DJEmail = "musicSara@gmail.com",
-                DJPhone = "444-333-4567",
+                Name = "Sara Lass",
+                Email = "musicSara@gmail.com",
+                Phone = "444-333-4567",
                 LGBTQFriendly = false,
                 DoesTravel = false,
                 GenrePop = true,
@@ -111,8 +115,9 @@ namespace WeddingPlanner.Migrations
             new Models.DJ
             {
                 VendorType = "DJ",
-                DJEmail = "RadioSega@gmail.com",
-                DJPhone = "555-333-4567",
+                Name = "Yuji Naka",
+                Email = "RadioSega@gmail.com",
+                Phone = "555-333-4567",
                 LGBTQFriendly = true,
                 DoesTravel = false,
                 GenrePop = true,
@@ -134,19 +139,19 @@ namespace WeddingPlanner.Migrations
             );
             //Photographers
             context.Photographers.AddOrUpdate(
-            new Models.Photographer { VendorType = "Photographer", Name = "Burt Biggleson", PhotographerEmail = "Picman@gmail.com", PhotographerPhone = "111-444-4567", LGBTQFriendly = true, DoesTravel = true, DoesEditing = false, DoesVideo = false, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
-            new Models.Photographer { VendorType = "Photographer", Name = "Lesly Knope", PhotographerEmail = "knope@gmail.com", PhotographerPhone = "222-444-4567", LGBTQFriendly = true, DoesTravel = true, DoesEditing = true, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
-            new Models.Photographer { VendorType = "Photographer", Name = "Linda Binderson", PhotographerEmail = "LindaB@gmail.com", PhotographerPhone = "333-444-4567", LGBTQFriendly = true, DoesTravel = true, DoesEditing = false, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
-            new Models.Photographer { VendorType = "Photographer", Name = "Sam Hamson", PhotographerEmail = "bamSam@gmail.com", PhotographerPhone = "444-444-4567", LGBTQFriendly = false, DoesTravel = true, DoesEditing = false, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
-            new Models.Photographer { VendorType = "Photographer", Name = "Ham Samson", PhotographerEmail = "perfect_ham@gmail.com", PhotographerPhone = "555-444-4567", LGBTQFriendly = true, DoesTravel = false, DoesEditing = false, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" });
+            new Models.Photographer { VendorType = "Photographer", Name = "Burt Biggleson", Email = "Picman@gmail.com", Phone = "111-444-4567", LGBTQFriendly = true, DoesTravel = true, DoesEditing = false, DoesVideo = false, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
+            new Models.Photographer { VendorType = "Photographer", Name = "Lesly Knope", Email = "knope@gmail.com", Phone = "222-444-4567", LGBTQFriendly = true, DoesTravel = true, DoesEditing = true, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
+            new Models.Photographer { VendorType = "Photographer", Name = "Linda Binderson", Email = "LindaB@gmail.com", Phone = "333-444-4567", LGBTQFriendly = true, DoesTravel = true, DoesEditing = false, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
+            new Models.Photographer { VendorType = "Photographer", Name = "Sam Hamson", Email = "bamSam@gmail.com", Phone = "444-444-4567", LGBTQFriendly = false, DoesTravel = true, DoesEditing = false, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" },
+            new Models.Photographer { VendorType = "Photographer", Name = "Ham Samson", Email = "perfect_ham@gmail.com", Phone = "555-444-4567", LGBTQFriendly = true, DoesTravel = false, DoesEditing = false, DoesVideo = true, Street = "111 Weatherbeak", City = "Vernon Hills", State = "WI", Zip = "53220", Country = "United States" });
             //Caterers
             context.Caterers.AddOrUpdate(
             new Models.Caterer
             {
                 VendorType = "Caterer",
                 Name = "Best Caterer",
-                CatererEmail = "bestcaterer@gmail.com",
-                CatererPhone = "414-111-0011",
+                Email = "bestcaterer@gmail.com",
+                Phone = "414-111-0011",
                 LGBTQFriendly = true,
                 ServesVegan = true,
                 FoodAllergyOptions = true,
@@ -170,8 +175,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Caterer",
                 Name = "AllFoods Caterer",
-                CatererEmail = "allfoods@gmail.com",
-                CatererPhone = "414-111-0022",
+                Email = "allfoods@gmail.com",
+                Phone = "414-111-0022",
                 LGBTQFriendly = true,
                 ServesVegan = false,
                 FoodAllergyOptions = true,
@@ -195,8 +200,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Caterer",
                 Name = "GourmetFoods Caterer",
-                CatererEmail = "gourmetfoods@gmail.com",
-                CatererPhone = "414-111-0033",
+                Email = "gourmetfoods@gmail.com",
+                Phone = "414-111-0033",
                 LGBTQFriendly = true,
                 ServesVegan = true,
                 FoodAllergyOptions = false,
@@ -220,8 +225,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Caterer",
                 Name = "Milwaukee Caterers",
-                CatererEmail = "milwaukeecaterers@gmail.com",
-                CatererPhone = "414-111-0044",
+                Email = "milwaukeecaterers@gmail.com",
+                Phone = "414-111-0044",
                 LGBTQFriendly = false,
                 ServesVegan = false,
                 FoodAllergyOptions = true,
@@ -245,8 +250,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Caterer",
                 Name = "Your Favorite Caterer",
-                CatererEmail = "yourfavoritecaterer@gmail.com",
-                CatererPhone = "414-111-0055",
+                Email = "yourfavoritecaterer@gmail.com",
+                Phone = "414-111-0055",
                 LGBTQFriendly = true,
                 ServesVegan = true,
                 FoodAllergyOptions = false,
@@ -272,8 +277,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Celebrant",
                 Name = "Henry Zabrowski",
-                CelebrantEmail = "lastOnLeft@gmail.com",
-                CelebrantPhone = "666-111-4567",
+                Email = "lastOnLeft@gmail.com",
+                Phone = "666-111-4567",
                 ReligionOther = true,
                 Buddhism = false,
                 Lutheranism = false,
@@ -295,8 +300,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Celebrant",
                 Name = "Pope Sanchez",
-                CelebrantEmail = "lastOnLeft@gmail.com",
-                CelebrantPhone = "666-111-4567",
+                Email = "lastOnLeft@gmail.com",
+                Phone = "666-111-4567",
                 LGBTQFriendly = true,
                 ReligionOther = true,
                 Buddhism = true,
@@ -318,8 +323,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Celebrant",
                 Name = "Hope Panchez",
-                CelebrantEmail = "lastOnLeft@gmail.com",
-                CelebrantPhone = "666-111-4567",
+                Email = "lastOnLeft@gmail.com",
+                Phone = "666-111-4567",
                 ReligionOther = true,
                 Buddhism = true,
                 Lutheranism = true,
@@ -341,8 +346,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Celebrant",
                 Name = "Chope Manchez",
-                CelebrantEmail = "lastOnLeft@gmail.com",
-                CelebrantPhone = "666-111-4567",
+                Email = "lastOnLeft@gmail.com",
+                Phone = "666-111-4567",
                 ReligionOther = true,
                 Buddhism = false,
                 Lutheranism = true,
@@ -364,8 +369,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Celebrant",
                 Name = "Yuji Naka",
-                CelebrantEmail = "lastOnLeft@gmail.com",
-                CelebrantPhone = "666-111-4567",
+                Email = "lastOnLeft@gmail.com",
+                Phone = "666-111-4567",
                 ReligionOther = true,
                 Buddhism = true,
                 Lutheranism = true,
@@ -389,8 +394,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Venue",
                 Name = "Paradiso",
-                VenueEmail = "paradiso@gmail.com",
-                VenuePhone = "414 222 1111",
+                Email = "paradiso@gmail.com",
+                Phone = "414 222 1111",
                 LGBTQFriendly = true,
                 KidFriendly = true,
                 PetFriendly = false,
@@ -423,8 +428,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Venue",
                 Name = "TajMahal",
-                VenueEmail = "tajmahal@gmail.com",
-                VenuePhone = "414 222 2222",
+                Email = "tajmahal@gmail.com",
+                Phone = "414 222 2222",
                 LGBTQFriendly = true,
                 KidFriendly = true,
                 PetFriendly = true,
@@ -457,8 +462,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Venue",
                 Name = "Hyatt",
-                VenueEmail = "hyatt@gmail.com",
-                VenuePhone = "414 222 3333",
+                Email = "hyatt@gmail.com",
+                Phone = "414 222 3333",
                 LGBTQFriendly = false,
                 KidFriendly = false,
                 PetFriendly = false,
@@ -491,8 +496,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Venue",
                 Name = "Sofitel",
-                VenueEmail = "sofitel@gmail.com",
-                VenuePhone = "414 222 4444",
+                Email = "sofitel@gmail.com",
+                Phone = "414 222 4444",
                 LGBTQFriendly = true,
                 KidFriendly = true,
                 PetFriendly = false,
@@ -525,8 +530,8 @@ namespace WeddingPlanner.Migrations
             {
                 VendorType = "Venue",
                 Name = "Hilton",
-                VenueEmail = "hilton@gmail.com",
-                VenuePhone = "414 222 5555",
+                Email = "hilton@gmail.com",
+                Phone = "414 222 5555",
                 LGBTQFriendly = true,
                 KidFriendly = false,
                 PetFriendly = false,
@@ -571,7 +576,46 @@ namespace WeddingPlanner.Migrations
                 CoupleEmail = "jeffnikki@gmail.com",
                 CouplePhone = "309 111 2222"
             });
+            //wedding pkg
+            context.WeddingPackages.AddOrUpdate(
+            new Models.WeddingPackage
+            {
+                ThirdPartyVendors = true,
+                LGBTQFriendly = true,
+                ServesCohabitants = true,
+                KidFriendly = false,
+                PetFriendly = false,
+                WheelchairAccessible = true,
+                FoodAllergyOptions = true,
+                Vegan = false,
+                FoodIndian = false,
+                FoodItalian = true,
+                FoodChinese = true,
+                FoodMediterranean = true,
+                FoodMexican = true,
+                FoodFrench = true,
+                FoodAmerican = false,
+                FoodOther = false,
+                GenrePop = false,
+                GenreRB = false,
+                GenreRap = false,
+                GenreRock = false,
+                GenreCountry = false,
+                GenreDance = false,
+                GenreTechno = false,
+                GenreMetal = true,
+                GenreInternational = false,
+                GenreOther = false,
+                Judaism = false,
+                Sikhism = false,
+                Hinduism = false,
+                Islamic = false,
+                NonDenominational = false,
+                Catholicism = false,
+                Lutheranism = false,
+                Buddhism = false,
+                ReligionOther = false
+            });
         }
     }
 }
-       
