@@ -103,7 +103,7 @@ namespace WeddingPlannerApp.Controllers
         // GET: Vendors
         public ActionResult Index(string type)
         {
-            type = "Venues";
+            type = "DJs";
             List<VendorViewModel> venueList = new List<VendorViewModel>();
             client.BaseAddress = new Uri("https://localhost:44317/api/");
             var response = client.GetAsync(type);
@@ -133,8 +133,8 @@ namespace WeddingPlannerApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VendorViewModel vendor = new VendorViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
-            var response = client.GetAsync(type);
+            client.BaseAddress = new Uri("https://localhost:44317/api/");
+            var response = client.GetAsync(type + "/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -149,12 +149,18 @@ namespace WeddingPlannerApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.VendorType = type;
             return View(vendor);
         }
 
         // GET: Vendors/Create
         public ActionResult Create()
         {
+            //var userId = User.Identity.GetUserId();
+            //var currentUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+            //var roleId = currentUser.Roles.Where(r => r.UserId == userId).Select(r => r.RoleId).SingleOrDefault();
+            //var type = db.Roles.Where(r => r.Id == roleId).Select(r => r).SingleOrDefault();
+            ViewBag.VenderType = "Venues";
             return View();
         }
 
@@ -195,6 +201,7 @@ namespace WeddingPlannerApp.Controllers
                 }
                 return RedirectToAction("LogOut","Account");
             }
+            ViewBag.VenderType = service.VendorType + "s";
             return View(service);
         }
 
@@ -206,8 +213,8 @@ namespace WeddingPlannerApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VendorViewModel vendor = new VendorViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
-            var response = client.GetAsync(type);
+            client.BaseAddress = new Uri("https://localhost:44317/api/");
+            var response = client.GetAsync(type + "/" +id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -222,6 +229,7 @@ namespace WeddingPlannerApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.VenderType = type;
             return View(vendor);
         }
 
@@ -249,6 +257,7 @@ namespace WeddingPlannerApp.Controllers
                 }
                 return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType + "s"});
             }
+            ViewBag.VenderType = vendor.VendorType + "s";
             return View(vendor);
         }
 
@@ -260,8 +269,8 @@ namespace WeddingPlannerApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VendorViewModel vendor = new VendorViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
-            var response = client.GetAsync(type);
+            client.BaseAddress = new Uri("https://localhost:44317/api/");
+            var response = client.GetAsync(type + "/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -284,8 +293,8 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, string type)
         {
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
-            var response = client.DeleteAsync(type);
+            client.BaseAddress = new Uri("https://localhost:44317/api/");
+            var response = client.DeleteAsync(type + "/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -297,7 +306,7 @@ namespace WeddingPlannerApp.Controllers
                 db.Vendors.Remove(vendor);
                 db.SaveChanges();
             }
-            return RedirectToAction("LogOut","Account");
+            return RedirectToAction("Index","Home");
         }
 
         protected override void Dispose(bool disposing)

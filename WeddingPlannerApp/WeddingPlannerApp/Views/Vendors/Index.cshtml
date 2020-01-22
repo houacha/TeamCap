@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<WeddingPlannerApp.Models.VendorViewModel>
+
+<h2>@ViewBag.VenderType</h2>
+
 @switch (ViewBag.VenderType)
 {
     case "Venues":
-        {
-            ViewBag.Title = "IndexVenue";
-        }
-        <h2>@ViewBag.VenderType</h2>
-
         <table class="table">
             <tr>
                 <th>
@@ -201,25 +199,536 @@
                         @Html.DisplayFor(modelItem => item.Caterers)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id, type = ViewBag.VenderType })
                     </td>
                 </tr>
             }
         </table>
         break;
     case "DJs":
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DJEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DJPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenrePop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreRB)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreRap)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreRock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreCountry)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreDance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreTechno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreMetal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreInternational)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GenreOther)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoesTravel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </th>
+                <th></th>
+            </tr>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DJEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DJPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenrePop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreRB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreRap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreRock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreCountry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreDance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreTechno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreMetal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreInternational)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GenreOther)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoesTravel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LGBTQFriendly)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id, type = ViewBag.VenderType })
+                    </td>
+                </tr>
+            }
+
+        </table>
         break;
     case "Celebrants":
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CelebrantEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CelebrantPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoesTravel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Judaism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sikhism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hinduism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Islamic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NonDenominational)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Catholicism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lutheranism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Buddhism)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReligionOther)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ServesCohabitants)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </th>
+                <th></th>
+            </tr>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CelebrantEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CelebrantPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoesTravel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Judaism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sikhism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hinduism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Islamic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NonDenominational)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Catholicism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lutheranism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Buddhism)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReligionOther)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServesCohabitants)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LGBTQFriendly)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id, type = ViewBag.VenderType })
+                    </td>
+                </tr>
+            }
+
+        </table>
         break;
     case "Photographers":
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhotographerEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhotographerPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoesVideo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoesEditing)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoesTravel)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotographerEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotographerPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoesVideo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoesEditing)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LGBTQFriendly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoesTravel)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id, type = ViewBag.VenderType })
+                    </td>
+                </tr>
+            }
+
+        </table>
 
         break;
     case "Caterers":
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CatererEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CatererPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodIndian)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodItalian)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodChinese)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodMediterranean)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodMexican)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodFrench)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodAmerican)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodOther)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ServesVegan)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodAllergyOptions)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PerGuestEstimateLow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PerGuestEstimateHigh)
+                </th>
+                <th></th>
+            </tr>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CatererEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CatererPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LGBTQFriendly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodIndian)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodItalian)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodChinese)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodMediterranean)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodMexican)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodFrench)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodAmerican)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodOther)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServesVegan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodAllergyOptions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PerGuestEstimateLow)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PerGuestEstimateHigh)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id, type = ViewBag.VenderType })
+                    </td>
+                </tr>
+            }
+
+        </table>
         break;
     default:
         break;

@@ -1,4 +1,4 @@
-﻿@model WeddingPlannerApp.Models.Vendor
+﻿@model WeddingPlannerApp.Models.VendorViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -7,26 +7,960 @@
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Vendor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationId)
-        </dd>
+@switch (ViewBag.VendorType)
+{
+    case "Venues":
+        <div>
+            <h4>@Model.Name</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </dt>
 
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.VendorType)
+                </dd>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.VenueEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VenueEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.VenuePhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VenuePhone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LGBTQFriendly)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.KidFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.KidFriendly)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PetFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PetFriendly)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HandicapAccessible)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HandicapAccessible)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Judaism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Judaism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sikhism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Sikhism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Hinduism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hinduism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Islamic)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Islamic)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NonDenominational)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NonDenominational)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Catholicism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Catholicism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lutheranism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Lutheranism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Buddhism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Buddhism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ReligionOther)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ReligionOther)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ServesCohabitants)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ServesCohabitants)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ceremony)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ceremony)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Reception)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Reception)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProvidesLodging)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProvidesLodging)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AllowsDecor)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AllowsDecor)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThirdPartyCelebrant)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ThirdPartyCelebrant)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThirdPartyCatering)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ThirdPartyCatering)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThirdPartyDJ)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ThirdPartyDJ)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Caterers)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Caterers)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                </div>
+            }
         </div>
-    }
-</div>
+
+        break;
+    case "DJs":
+        <div>
+            <h4>@Model.Name</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VendorType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DJEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DJEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DJPhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DJPhone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenrePop)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenrePop)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreRB)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreRB)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreRap)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreRap)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreRock)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreRock)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreCountry)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreCountry)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreDance)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreDance)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreTechno)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreTechno)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreMetal)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreMetal)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreInternational)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreInternational)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GenreOther)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GenreOther)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DoesTravel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DoesTravel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LGBTQFriendly)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                </div>
+            }
+        </div>
+
+        break;
+    case "Celebrants":
+        <div>
+            <h4>@Model.Name</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VendorType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CelebrantEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CelebrantEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CelebrantPhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CelebrantPhone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DoesTravel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DoesTravel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Judaism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Judaism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sikhism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Sikhism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Hinduism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hinduism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Islamic)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Islamic)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NonDenominational)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NonDenominational)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Catholicism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Catholicism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lutheranism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Lutheranism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Buddhism)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Buddhism)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ReligionOther)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ReligionOther)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ServesCohabitants)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ServesCohabitants)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LGBTQFriendly)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                </div>
+            }
+        </div>
+
+        break;
+    case "Caterers":
+        <div>
+            <h4>@Model.Name</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VendorType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CatererEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CatererEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CatererPhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CatererPhone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LGBTQFriendly)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodIndian)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodIndian)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodItalian)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodItalian)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodChinese)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodChinese)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodMediterranean)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodMediterranean)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodMexican)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodMexican)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodFrench)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodFrench)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodAmerican)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodAmerican)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodOther)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodOther)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ServesVegan)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ServesVegan)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodAllergyOptions)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodAllergyOptions)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PerGuestEstimateLow)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PerGuestEstimateLow)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PerGuestEstimateHigh)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PerGuestEstimateHigh)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                </div>
+            }
+        </div>
+
+        break;
+    case "Photographers":
+        <div>
+            <h4>@Model.Name</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VendorType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VendorType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhotographerEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhotographerEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhotographerPhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhotographerPhone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DoesVideo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DoesVideo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DoesEditing)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DoesEditing)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LGBTQFriendly)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LGBTQFriendly)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DoesTravel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DoesTravel)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                </div>
+            }
+        </div>
+
+        break;
+    default:
+        break;
+}

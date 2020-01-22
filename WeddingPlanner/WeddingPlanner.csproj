@@ -300,9 +300,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Caterer.cshtml" />
-    <Content Include="Views\Celebrant.cshtml" />
-    <Content Include="Views\Photographer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
