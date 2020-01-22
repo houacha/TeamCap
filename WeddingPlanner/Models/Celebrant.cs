@@ -32,32 +32,32 @@ namespace WeddingPlanner.Models
         public string CelebrantPhone { get; set; }
 
         [Display(Name = "Will Travel")]
-        public bool DoesTravel { get; set; }
+        public bool? DoesTravel { get; set; }
 
         [Display(Name = "Judaism")]
-        public bool Judaism { get; set; }
+        public bool? Judaism { get; set; }
         [Display(Name = "Sikhism")]
-        public bool Sikhism { get; set; }
+        public bool? Sikhism { get; set; }
         [Display(Name = "Hinduism")]
-        public bool Hinduism { get; set; }
+        public bool? Hinduism { get; set; }
         [Display(Name = "Islamic")]
-        public bool Islamic { get; set; }
+        public bool? Islamic { get; set; }
         [Display(Name = "Non-Denominational")]
-        public bool NonDenominational { get; set; }
+        public bool? NonDenominational { get; set; }
         [Display(Name = "Catholicism")]
-        public bool Catholicism { get; set; }
+        public bool? Catholicism { get; set; }
         [Display(Name = "Lutheranism")]
-        public bool Lutheranism { get; set; }
+        public bool? Lutheranism { get; set; }
         [Display(Name = "Buddhism")]
-        public bool Buddhism { get; set; }
+        public bool? Buddhism { get; set; }
         [Display(Name = "Other")]
-        public bool ReligionOther { get; set; }
+        public bool? ReligionOther { get; set; }
 
         [Display(Name = "Sevices Co-habitants")]
-        public bool ServesCohabitants { get; set; }
+        public bool? ServesCohabitants { get; set; }
 
         [Display(Name = "LGBTQ Friendly")]
-        public bool LGBTQFriendly { get; set; }
+        public bool? LGBTQFriendly { get; set; }
 
        
     }

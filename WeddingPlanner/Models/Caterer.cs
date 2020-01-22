@@ -31,36 +31,36 @@ namespace WeddingPlanner.Models
         public string CatererPhone { get; set; }
 
         [Display(Name = "LGBTQ Friendly")]
-        public bool LGBTQFriendly { get; set; }
+        public bool? LGBTQFriendly { get; set; }
 
         [Display(Name = "Indian")]
-        public bool FoodIndian { get; set; }
+        public bool? FoodIndian { get; set; }
         [Display(Name = "Italian")]
-        public bool FoodItalian { get; set; }
+        public bool? FoodItalian { get; set; }
         [Display(Name = "Chinese")]
-        public bool FoodChinese { get; set; }
+        public bool? FoodChinese { get; set; }
         [Display(Name = "Mediterranean")]
-        public bool FoodMediterranean { get; set; }
+        public bool? FoodMediterranean { get; set; }
         [Display(Name = "Mexican")]
-        public bool FoodMexican { get; set; }
+        public bool? FoodMexican { get; set; }
         [Display(Name = "French")]
-        public bool FoodFrench { get; set; }
+        public bool? FoodFrench { get; set; }
         [Display(Name = "American")]
-        public bool FoodAmerican { get; set; }
+        public bool? FoodAmerican { get; set; }
         [Display(Name = "Other")]
-        public bool FoodOther { get; set; }
+        public bool? FoodOther { get; set; }
 
         [Display(Name = "Vegan Friendly")]
-        public bool ServesVegan { get; set; }
+        public bool? ServesVegan { get; set; }
 
         [Display(Name = "Food Allergy Options")]
-        public bool FoodAllergyOptions { get; set; }
+        public bool? FoodAllergyOptions { get; set; }
 
         [Display(Name = "Estimate Low Per Guest")]
-        public double PerGuestEstimateLow { get; set; }
+        public double? PerGuestEstimateLow { get; set; }
 
         [Display(Name = "Estimated High Per Guest")]
-        public double PerGuestEstimateHigh { get; set; }
+        public double? PerGuestEstimateHigh { get; set; }
 
     }
 }

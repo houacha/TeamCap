@@ -35,62 +35,62 @@ namespace WeddingPlanner.Models
         public string VenuePhone { get; set; }
 
         [Display(Name = "LGBTQ friendly")]
-        public bool LGBTQFriendly { get; set; }
+        public bool? LGBTQFriendly { get; set; }
 
         [Display(Name = "Kid-friendly")]
-        public bool KidFriendly { get; set; }
+        public bool? KidFriendly { get; set; }
 
         [Display(Name = "Pet-Friendly")]
-        public bool PetFriendly { get; set; }
+        public bool? PetFriendly { get; set; }
 
         [Display(Name = "Wheelchair Accessible")]
-        public bool HandicapAccessible { get; set; }
+        public bool? HandicapAccessible { get; set; }
 
         [Display(Name = "Judaism")]
-        public bool Judaism { get; set; }
+        public bool? Judaism { get; set; }
         [Display(Name = "Sikhism")]
-        public bool Sikhism { get; set; }
+        public bool? Sikhism { get; set; }
         [Display(Name = "Hinduism")]
-        public bool Hinduism { get; set; }
+        public bool? Hinduism { get; set; }
         [Display(Name = "Islamic")]
-        public bool Islamic { get; set; }
+        public bool? Islamic { get; set; }
         [Display(Name = "Non-Denominational")]
-        public bool NonDenominational { get; set; }
+        public bool? NonDenominational { get; set; }
         [Display(Name = "Catholicism")]
-        public bool Catholicism { get; set; }
+        public bool? Catholicism { get; set; }
         [Display(Name = "Lutheranism")]
-        public bool Lutheranism { get; set; }
+        public bool? Lutheranism { get; set; }
         [Display(Name = "Buddhism")]
-        public bool Buddhism { get; set; }
+        public bool? Buddhism { get; set; }
         [Display(Name = "Other")]
-        public bool ReligionOther { get; set; }
+        public bool? ReligionOther { get; set; }
 
         [Display(Name = "Serve Cohabitants")]
-        public bool ServesCohabitants { get; set; }
+        public bool? ServesCohabitants { get; set; }
 
         [Display(Name = "Does Ceremony")]
-        public bool Ceremony { get; set; }
+        public bool? Ceremony { get; set; }
         [Display(Name = "Does Reception")]
-        public bool Reception { get; set; }
+        public bool? Reception { get; set; }
 
         [Display(Name = "Provides Lodging")]
-        public bool ProvidesLodging { get; set; }
+        public bool? ProvidesLodging { get; set; }
 
         [Display(Name = "Allow third-party decor")]
-        public bool AllowsDecor { get; set; }
+        public bool? AllowsDecor { get; set; }
 
         [Display(Name = "Allow third-party Celebrant")]
-        public bool ThirdPartyCelebrant { get; set; }
+        public bool? ThirdPartyCelebrant { get; set; }
 
         [Display(Name = "Allow third-party Catering")]
-        public bool ThirdPartyCatering { get; set; }
+        public bool? ThirdPartyCatering { get; set; }
 
         [Display(Name = "Allow third-party DJ")]
-        public bool ThirdPartyDJ { get; set; }
+        public bool? ThirdPartyDJ { get; set; }
         [Display(Name = "Does Cater")]
-        public bool Caterers { get; set; }
+        public bool? Caterers { get; set; }
         //[ForeignKey("Caterer")]
-        //public int CatererId { get; set; }
+        //public int?? CatererId { get; set; }
         //public Caterer Caterer { get; set; }
     }
 }

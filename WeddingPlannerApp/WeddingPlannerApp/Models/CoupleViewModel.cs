@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace WeddingPlanner.Models
+namespace WeddingPlannerApp.Models
 {
-    public class Couple
+    public class CoupleViewModel
     {
         [Key]
         public int Id { get; set; }
@@ -31,13 +30,13 @@ namespace WeddingPlanner.Models
         public string City { get; set; }
 
         [Display(Name = "Zipcode")]
-        public int? Zipcode { get; set; }
+        public int Zipcode { get; set; }
 
         [Display(Name = "Wedding Budget")]
-        public double? WeddingBudget { get; set; }
+        public double WeddingBudget { get; set; }
 
         [Display(Name = "Estimated Total Cost")]
-        public double? EstimatedTotal { get; set; }
+        public double EstimatedTotal { get; set; }
 
         [Display(Name = "Email")]
         public string CoupleEmail { get; set; }
@@ -46,8 +45,7 @@ namespace WeddingPlanner.Models
         public string CouplePhone { get; set; }
 
         //[ForeignKey ("WeddingPackage")]
-        //public int? WeddingId { get; set; }
+        //public int WeddingId { get; set; }
         //public WeddingPackage WeddingPackage{ get; set; }
-
     }
 }
