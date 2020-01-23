@@ -31,13 +31,10 @@ namespace WeddingPlanner.Models
         public string City { get; set; }
 
         [Display(Name = "Zipcode")]
-        public int? Zipcode { get; set; }
+        public int Zipcode { get; set; }
 
         [Display(Name = "Wedding Budget")]
-        public double? WeddingBudget { get; set; }
-
-        [Display(Name = "Estimated Total Cost")]
-        public double? EstimatedTotal { get; set; }
+        public double WeddingBudget { get; set; }
 
         [Display(Name = "Email")]
         public string CoupleEmail { get; set; }
@@ -45,9 +42,9 @@ namespace WeddingPlanner.Models
         [Display(Name = "Phone")]
         public string CouplePhone { get; set; }
 
-        //[ForeignKey ("WeddingPackage")]
-        //public int? WeddingId { get; set; }
-        //public WeddingPackage WeddingPackage{ get; set; }
+        [ForeignKey("WeddingPackage")]
+        public int WeddingId { get; set; }
+        public WeddingPackage WeddingPackage { get; set; }
 
     }
 }

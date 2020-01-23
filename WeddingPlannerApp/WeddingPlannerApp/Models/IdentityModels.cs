@@ -33,5 +33,6 @@ namespace WeddingPlannerApp.Models
         public System.Data.Entity.DbSet<WeddingPlannerApp.Models.Couple> Couples { get; set; }
 
         public System.Data.Entity.DbSet<WeddingPlannerApp.Models.Vendor> Vendors { get; set; }
+
     }
 }

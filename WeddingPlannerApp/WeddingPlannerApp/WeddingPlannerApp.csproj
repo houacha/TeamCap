@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\PackageViewModel.cs" />
     <Compile Include="Models\CoupleViewModel.cs" />
     <Compile Include="Models\VendorViewModel.cs" />
     <Compile Include="Models\Vendor.cs" />
@@ -267,10 +268,14 @@
     <Content Include="Views\Couples\Edit.cshtml" />
     <Content Include="Views\Couples\Delete.cshtml" />
     <Content Include="Views\Vendors\DecideVendorType.cshtml" />
+    <Content Include="Views\Vendors\MakePackage.cshtml" />
+    <Content Include="Views\Vendors\GetOnePackage.cshtml" />
+    <Content Include="Views\Vendors\GetPackage.cshtml" />
+    <Content Include="Views\Vendors\EditPackage.cshtml" />
+    <Content Include="Views\Vendors\DeletePackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Venue\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

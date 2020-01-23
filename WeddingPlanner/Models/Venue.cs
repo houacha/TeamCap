@@ -89,8 +89,6 @@ namespace WeddingPlanner.Models
         public bool ThirdPartyDJ { get; set; }
         [Display(Name = "Does Cater")]
         public bool Caterers { get; set; }
-        //[ForeignKey("Caterer")]
-        //public int CatererId { get; set; }
-        //public Caterer Caterer { get; set; }
+        public int CatererId { get; set; }
     }
 }

@@ -572,7 +572,6 @@ namespace WeddingPlanner.Migrations
                 City = "Milwaukee",
                 Zipcode = 53202,
                 WeddingBudget = 50000,
-                EstimatedTotal = 0,
                 CoupleEmail = "jeffnikki@gmail.com",
                 CouplePhone = "309 111 2222"
             });
@@ -614,7 +613,8 @@ namespace WeddingPlanner.Migrations
                 Catholicism = false,
                 Lutheranism = false,
                 Buddhism = false,
-                ReligionOther = false
+                ReligionOther = false,
+                EstimatedTotal = 0,
             });
         }
     }

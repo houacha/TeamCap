@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -43,5 +44,7 @@ namespace WeddingPlanner.Models
         public System.Data.Entity.DbSet<WeddingPlanner.Models.Celebrant> Celebrants { get; set; }
 
         public System.Data.Entity.DbSet<WeddingPlanner.Models.Venue> Venues { get; set; }
+        public DbSet<VendorPackage> VendorPackages { get; set; }
+        public DbSet<ServiceContract> ServiceContracts { get; set; }
     }
 }

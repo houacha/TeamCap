@@ -23,11 +23,12 @@ namespace WeddingPlannerApp.Controllers
         {
             db = new ApplicationDbContext();
             client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44317/api/");
         }
 
-        //made a method just so i dont have to make one for every method
-        //it's private because nothing else but this class needs it
+        #region Vendor Methods
 
+        // Makes a model to hold API info of vendors
         private VendorViewModel MakeModel(JToken item)
         {
             VendorViewModel vendor = new VendorViewModel()
@@ -92,12 +93,50 @@ namespace WeddingPlannerApp.Controllers
             };
             return vendor;
         }
+        
+        // Makes the API request for get all vendors
+        public List<VendorViewModel> GetRequest(string type)
+        {
+            List<VendorViewModel> vendorList = new List<VendorViewModel>();
+            var response = client.GetAsync(type);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray venueArray = JArray.Parse(read.Result);
+                foreach (var item in venueArray)
+                {
+                    var vendor = MakeModel(item);
+                    vendorList.Add(vendor);
+                }
+            }
+            return vendorList;
+        }
 
+        // Makes the API request for get one vendor
+        public VendorViewModel GetOneRequest(string type, int? id)
+        {
+            VendorViewModel vendor = new VendorViewModel();
+            var response = client.GetAsync(type + "/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject jObject = JObject.Parse(read.Result);
+                vendor = MakeModel(jObject);
+            }
+            return vendor;
+        }
+
+        // Make Vendors For MVC
         public ActionResult DecideVendorType()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DecideVendorType(Vendor vendor)
@@ -109,68 +148,60 @@ namespace WeddingPlannerApp.Controllers
             return RedirectToAction("Create", "Vendors", new { type = vendor.VendorType });
         }
 
-        // GET: Vendors
+        // get info of all vendor
         public ActionResult Index(string type)
         {
-            List<VendorViewModel> venueList = new List<VendorViewModel>();
-            client.BaseAddress = new Uri("https://localhost:44317/api/");
-            var response = client.GetAsync(type);
-            response.Wait();
-            var result = response.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var read = result.Content.ReadAsStringAsync();
-                read.Wait();
-                var service = read.Result;
-                JArray venueArray = JArray.Parse(service);
-                foreach (var item in venueArray)
-                {
-                    var vendor = MakeModel(item);
-                    venueList.Add(vendor);
-                }
-            }
+            var vendorList = GetRequest(type);
             ViewBag.VenderType = type;
-            return View(venueList);
+            return View(vendorList);
         }
 
-        // GET: Vendors/Details/5
+        // Shows Details of vendor
         public ActionResult Details(int? id, string type)
         {
+            VendorViewModel vendor = null;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var userId = User.Identity.GetUserId();
+                var user = db.Vendors.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
+                vendor = Detail(user.VendorId, user.VendorType);
+                ViewBag.VendorType = user.VendorType + "s";
             }
-            VendorViewModel vendor = new VendorViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/");
-            var response = client.GetAsync(type + "/" + id);
-            response.Wait();
-            var result = response.Result;
-            if (result.IsSuccessStatusCode)
+            else
             {
-                var read = result.Content.ReadAsStringAsync();
-                read.Wait();
-                var service = read.Result;
-                JObject jObject = JObject.Parse(service);
-                vendor = MakeModel(jObject);
+                vendor = Detail(id, type);
+                ViewBag.VendorType = type + "s";
             }
             if (vendor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.VendorType = type;
             return View(vendor);
         }
 
-        // GET: Vendors/Create
+        // Gets the info of a vendor
+        public VendorViewModel Detail(int? id, string type)
+        {
+            VendorViewModel vendor = new VendorViewModel();
+            var response = client.GetAsync(type + "s" + "/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject jObject = JObject.Parse(read.Result);
+                vendor = MakeModel(jObject);
+            }
+            return vendor;
+        }
+
+        // makes vendor for the API
         public ActionResult Create(string type)
         {
             ViewBag.VendorType = type + "s";
             return View();
         }
-
-        // POST: Vendors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(VendorViewModel service)
@@ -184,7 +215,6 @@ namespace WeddingPlannerApp.Controllers
                 service.VendorType = type;
                 string json = JsonConvert.SerializeObject(service);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                client.BaseAddress = new Uri("https://localhost:44317/api/");
                 var response = client.PostAsync(service.VendorType + "s", content);
                 response.Wait();
                 var result = response.Result;
@@ -192,48 +222,25 @@ namespace WeddingPlannerApp.Controllers
                 {
                     var currentUser = User.Identity.GetUserId();
                     var user = db.Vendors.Where(v => v.ApplicationId == currentUser).Select(v => v).SingleOrDefault();
-                    client.BaseAddress = new Uri("https://localhost:44317/api/");
-                    response = client.GetAsync(service.VendorType + "s");
-                    response.Wait();
-                    result = response.Result;
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var read = result.Content.ReadAsStringAsync();
-                        read.Wait();
-                        var readResult = read.Result;
-                        JArray jObjects = JArray.Parse(readResult);
-                        var lastObject = jObjects.Last();
-                        user.VendorId = (int?)lastObject["VendorId"];
-                        user.VendorType = service.VendorType;
-                        db.SaveChanges();
-                    }
+                    var last = GetRequest(service.VendorType + "s");
+                    user.VendorId = last.Last().Id;
+                    user.VendorType = service.VendorType;
+                    db.SaveChanges();
                 }
-                return RedirectToAction("LogOut","Account");
+                return RedirectToAction("LogOut", "Account");
             }
             ViewBag.VenderType = service.VendorType + "s";
             return View(service);
         }
 
-        // GET: Vendors/Edit/5
+        // Edit a specific vendor for the API
         public ActionResult Edit(int? id, string type)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VendorViewModel vendor = new VendorViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/");
-            var response = client.GetAsync(type + "/" +id);
-            response.Wait();
-            var result = response.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var read = result.Content.ReadAsStringAsync();
-                read.Wait();
-                var service = read.Result;
-                JObject jObject = JObject.Parse(service);
-                vendor = MakeModel(jObject);
-            }
+            var vendor = GetOneRequest(type, id);
             if (vendor == null)
             {
                 return HttpNotFound();
@@ -241,19 +248,14 @@ namespace WeddingPlannerApp.Controllers
             ViewBag.VenderType = type;
             return View(vendor);
         }
-
-        // POST: Vendors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VendorId")] VendorViewModel vendor)
+        public ActionResult Edit(VendorViewModel vendor)
         {
             if (ModelState.IsValid)
             {
                 string json = JsonConvert.SerializeObject(vendor);
-                client.BaseAddress = new Uri("https://localhost:44317/api/" + vendor.Id);
-                var response = client.PutAsync(vendor.VendorType + "s", new StringContent(json));
+                var response = client.PutAsync(vendor.VendorType + "s" + "/" + vendor.Id, new StringContent(json, Encoding.UTF8, "application/json"));
                 response.Wait();
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
@@ -261,48 +263,33 @@ namespace WeddingPlannerApp.Controllers
                     var userId = User.Identity.GetUserId();
                     var currentUser = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v).SingleOrDefault();
                     currentUser.VendorId = vendor.Id;
-                    currentUser.VendorType = vendor.VendorType;                   
+                    currentUser.VendorType = vendor.VendorType;
                     db.SaveChanges();
                 }
-                return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType + "s"});
+                return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType + "s" });
             }
             ViewBag.VenderType = vendor.VendorType + "s";
             return View(vendor);
         }
 
-        // GET: Vendors/Delete/5
+        // Deletes a specific vendor for both databases
         public ActionResult Delete(int? id, string type)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VendorViewModel vendor = new VendorViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/");
-            var response = client.GetAsync(type + "/" + id);
-            response.Wait();
-            var result = response.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var read = result.Content.ReadAsStringAsync();
-                read.Wait();
-                var service = read.Result;
-                JObject jObject = JObject.Parse(service);
-                vendor = MakeModel(jObject);
-            }
+            var vendor = GetOneRequest(type, id);
             if (vendor == null)
             {
                 return HttpNotFound();
             }
             return View(vendor);
         }
-
-        // POST: Vendors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, string type)
         {
-            client.BaseAddress = new Uri("https://localhost:44317/api/");
             var response = client.DeleteAsync(type + "/" + id);
             response.Wait();
             var result = response.Result;
@@ -315,8 +302,155 @@ namespace WeddingPlannerApp.Controllers
                 db.Vendors.Remove(vendor);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+
+        #endregion
+
+        #region Package Methods
+
+        // Makes a get request for a specific package
+        public PackageViewModel RequestPackage(int? id)
+        {
+            PackageViewModel package = null;
+            var response = client.GetAsync("VendorPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double)vendorPackage["Price"]
+                };
+            }
+            return package;
+        }
+
+        // Shows the list of all packages
+        public ActionResult GetPackage(int? id, string type)
+        {
+            List<PackageViewModel> packages = new List<PackageViewModel>();
+            var response = client.GetAsync("VendorPackages");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray vendorPackages = JArray.Parse(read.Result);
+                foreach (var item in vendorPackages)
+                {
+                    PackageViewModel package = new PackageViewModel()
+                    {
+                        Id = (int)item["Id"],
+                        VendorType = (string)item["VendorType"],
+                        VendorId = (int)item["VendorId"],
+                        Description = (string)item["Description"],
+                        Price = (double)item["Price"]
+                    };
+                    if (package.VendorId == id && package.VendorType == type)
+                    {
+                        packages.Add(package);
+                    }
+                }
+            }
+            ViewBag.VendorType = type;
+            return View(packages);
+        }
+
+        // Shows a specific package
+        public ActionResult GetOnePackage(int? id)
+        {
+            var package = RequestPackage(id);
+            return View(package);
+        }
+
+        // Makes a package for the API
+        public ActionResult MakePackage()
+        {
+            var userId = User.Identity.GetUserId();
+            var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+            var vendor = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v).SingleOrDefault();
+            ViewBag.Id = vendor.VendorId;
+            ViewBag.Type = vendor.VendorType;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MakePackage(PackageViewModel package)
+        {
+            var userId = User.Identity.GetUserId();
+            var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+            var vendor = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v).SingleOrDefault();
+            package.VendorType = vendor.VendorType;
+            package.VendorId = vendor.VendorId;
+            string json = JsonConvert.SerializeObject(package);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = client.PostAsync("VendorPackages", content);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Details", new { id = vendor.VendorId, type = package.VendorType });
+            }
+            ViewBag.Id = vendor.VendorId;
+            ViewBag.Type = vendor.VendorType;
+            return View(package);
+        }
+
+        // Edits a specific package
+        public ActionResult EditPackage(int? id)
+        {
+            var package = RequestPackage(id);
+            return View(package);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPackage(PackageViewModel package)
+        {
+            if (ModelState.IsValid)
+            {
+                string json = JsonConvert.SerializeObject(package);
+                var response = client.PutAsync(package.VendorType + "s" + "/" + package.Id, new StringContent(json, Encoding.UTF8, "application/json"));
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("GetOnePackage", new { id = package.VendorId });
+                }
+            }
+            return View(package);
+        }
+
+        // Deletes a specific package from the API
+        public ActionResult DeletePackage(int? id)
+        {
+            PackageViewModel package = null;
+
+            return View(package);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePackage(int? id, PackageViewModel package)
+        {
+            var response = client.DeleteAsync("VendorPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+
+            }
+            return RedirectToAction("Details", new { id = package.VendorId, type = package.VendorType });
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

@@ -819,3 +819,8 @@
     @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType }) |
     @Html.ActionLink("Back to List", "Index", new { type = Model.VendorType })
 </p>
+<p>
+    @{
+        Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });
+    }
+</p>

@@ -218,14 +218,17 @@
     <Compile Include="Controllers\DJsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotographersController.cs" />
+    <Compile Include="Controllers\ServiceContractsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VendorPackagesController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
+    <Compile Include="Controllers\WeddingPackagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001222040591_models.cs" />
-    <Compile Include="Migrations\202001222040591_models.Designer.cs">
-      <DependentUpon>202001222040591_models.cs</DependentUpon>
+    <Compile Include="Migrations\202001231429185_models.cs" />
+    <Compile Include="Migrations\202001231429185_models.Designer.cs">
+      <DependentUpon>202001231429185_models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -334,8 +337,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001222040591_models.resx">
-      <DependentUpon>202001222040591_models.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001231429185_models.resx">
+      <DependentUpon>202001231429185_models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

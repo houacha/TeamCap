@@ -10,17 +10,15 @@ namespace WeddingPlanner.Models
     public class VendorPackage
     {
         [Key]
-        public int PackageID { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
 
         [Display(Name = "Description")]
-        public string PackageDescription { get; set; }
+        public string Description { get; set; }
 
         [Display(Name = "Package Price")]
-        public double PackagePrice { get; set; }
-
-        //[ForeignKey("VendorID")]
-        //public int VendorID { get; set; }
+        public double Price { get; set; }
+        public int VendorId { get; set; }
     }
 }

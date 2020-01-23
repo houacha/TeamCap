@@ -9,7 +9,7 @@ namespace WeddingPlanner.Models
     public class WeddingPackage
     {
         [Key]
-        public int WeddingId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Allows third party vendors?")]
         public bool ThirdPartyVendors { get; set; }
@@ -89,6 +89,8 @@ namespace WeddingPlanner.Models
         [Display(Name = "Other")]
         public bool ReligionOther { get; set; }
 
-
+        [Display(Name = "Estimated Total Cost")]
+        public double EstimatedTotal { get; set; }
+        public string ServiceContractId { get; set; }
     }
 }
