@@ -81,16 +81,20 @@ namespace WeddingPlannerApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    var userId = User.Identity.GetUserId();
-                    if (User.IsInRole("Vendor") == true)
+                    var user = context.Users.Where(u => u.UserName == model.UserName).Select(u => u).SingleOrDefault().Roles.SingleOrDefault();
+                    var role = context.Roles.Where(r => r.Id == user.RoleId).Select(r => r.Name).SingleOrDefault();
+                    switch (role)
                     {
-                        var vendor = context.Vendors.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
-                        return RedirectToAction("Details", "Vendor", new { type = vendor.VendorType });
-                    }
-                    else if (User.IsInRole("Couples") == true)
-                    {
-                        var user = context.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
-                        return RedirectToAction("Details", "Couples");
+                        case "Admin":
+                            break;
+                        case "Vendor":
+                            var vendor = context.Vendors.Where(u => u.ApplicationId == user.UserId).Select(u => u).SingleOrDefault();
+                            return RedirectToAction("Details", "Vendors", new { type = vendor.VendorType, id = vendor.VendorId });
+                        case "Couple":
+                            var couple = context.Couples.Where(c => c.ApplicationId == user.UserId).Select(c => c).SingleOrDefault();
+                            return RedirectToAction("Details", "Couples");
+                        default:
+                            break;
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:

@@ -119,7 +119,7 @@ namespace WeddingPlannerApp.Controllers
         public VendorViewModel GetOneRequest(string type, int? id)
         {
             VendorViewModel vendor = new VendorViewModel();
-            var response = client.GetAsync(type + "/" + id);
+            var response = client.GetAsync(type + "s" + "/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -240,12 +240,12 @@ namespace WeddingPlannerApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var vendor = GetOneRequest(type, id);
+            var vendor = GetOneRequest(type + "s", id);
             if (vendor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.VenderType = type;
+            ViewBag.VendorType = type + "s";
             return View(vendor);
         }
         [HttpPost]
@@ -254,19 +254,20 @@ namespace WeddingPlannerApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var id = User.Identity.GetUserId();
+                var user = db.Vendors.Where(v => v.ApplicationId == id).Select(v => v).SingleOrDefault();
+                vendor.VendorType = user.VendorType;
                 string json = JsonConvert.SerializeObject(vendor);
                 var response = client.PutAsync(vendor.VendorType + "s" + "/" + vendor.Id, new StringContent(json, Encoding.UTF8, "application/json"));
                 response.Wait();
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    var userId = User.Identity.GetUserId();
-                    var currentUser = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v).SingleOrDefault();
-                    currentUser.VendorId = vendor.Id;
-                    currentUser.VendorType = vendor.VendorType;
+                    user.VendorId = vendor.Id;
+                    user.VendorType = vendor.VendorType;
                     db.SaveChanges();
+                    return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType });
                 }
-                return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType + "s" });
             }
             ViewBag.VenderType = vendor.VendorType + "s";
             return View(vendor);
@@ -284,13 +285,14 @@ namespace WeddingPlannerApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.VendorType = vendor.VendorType + "s";
             return View(vendor);
         }
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, string type)
         {
-            var response = client.DeleteAsync(type + "/" + id);
+            var response = client.DeleteAsync(type + "s" + "/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -302,7 +304,7 @@ namespace WeddingPlannerApp.Controllers
                 db.Vendors.Remove(vendor);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogOut", "Account");
         }
 
         #endregion
