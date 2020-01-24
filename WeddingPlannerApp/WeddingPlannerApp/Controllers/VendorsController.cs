@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -93,12 +94,34 @@ namespace WeddingPlannerApp.Controllers
             };
             return vendor;
         }
-        
+
+        public VendorViewModel SetNullValues(VendorViewModel vendor)
+        {
+            Type type = typeof(VendorViewModel);
+            PropertyInfo[] properties = type.GetProperties();
+            foreach (var item in properties)
+            {
+                if (item.GetValue(vendor) == null)
+                {
+                    var x = item.PropertyType;
+                    if (item.PropertyType.Equals(typeof(bool?)) == true)
+                    {
+                        item.SetValue(vendor, false);
+                    }
+                    else if (item.GetType().Equals(typeof(double?)) == true)
+                    {
+                        item.SetValue(vendor, 0);
+                    }
+                }
+            }
+            return vendor;
+        }
+
         // Makes the API request for get all vendors
         private List<VendorViewModel> GetRequest(string type)
         {
             List<VendorViewModel> vendorList = new List<VendorViewModel>();
-            var response = client.GetAsync(type);
+            var response = client.GetAsync(type + "s");
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -164,12 +187,12 @@ namespace WeddingPlannerApp.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 var user = db.Vendors.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
-                vendor = Detail(user.VendorId, user.VendorType);
+                vendor = GetOneRequest(user.VendorType, user.VendorId);
                 ViewBag.VendorType = user.VendorType + "s";
             }
             else
             {
-                vendor = Detail(id, type);
+                vendor = GetOneRequest(type, id);
                 ViewBag.VendorType = type + "s";
             }
             if (vendor == null)
@@ -177,23 +200,6 @@ namespace WeddingPlannerApp.Controllers
                 return HttpNotFound();
             }
             return View(vendor);
-        }
-
-        // Gets the info of a vendor
-        private VendorViewModel Detail(int? id, string type)
-        {
-            VendorViewModel vendor = new VendorViewModel();
-            var response = client.GetAsync(type + "s" + "/" + id);
-            response.Wait();
-            var result = response.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var read = result.Content.ReadAsStringAsync();
-                read.Wait();
-                JObject jObject = JObject.Parse(read.Result);
-                vendor = MakeModel(jObject);
-            }
-            return vendor;
         }
 
         // makes vendor for the API
@@ -206,11 +212,12 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(VendorViewModel service)
         {
+            var userId = User.Identity.GetUserId();
+            var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+            var type = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v.VendorType).SingleOrDefault();
             if (ModelState.IsValid)
             {
-                var userId = User.Identity.GetUserId();
-                var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
-                var type = db.Vendors.Where(v => v.ApplicationId == userId).Select(v => v.VendorType).SingleOrDefault();
+                service = SetNullValues(service);
                 service.Email = applicationUser.Email;
                 service.VendorType = type;
                 string json = JsonConvert.SerializeObject(service);
@@ -222,15 +229,14 @@ namespace WeddingPlannerApp.Controllers
                 {
                     var currentUser = User.Identity.GetUserId();
                     var user = db.Vendors.Where(v => v.ApplicationId == currentUser).Select(v => v).SingleOrDefault();
-                    var last = GetRequest(service.VendorType + "s");
+                    var last = GetRequest(service.VendorType);
                     user.VendorId = last.Last().Id;
                     user.VendorType = service.VendorType;
                     db.SaveChanges();
                 }
                 return RedirectToAction("LogOut", "Account");
             }
-            ViewBag.VenderType = service.VendorType + "s";
-            return View(service);
+            return RedirectToAction("Create", new { type = type });
         }
 
         // Edit a specific vendor for the API
@@ -240,7 +246,7 @@ namespace WeddingPlannerApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var vendor = GetOneRequest(type + "s", id);
+            var vendor = GetOneRequest(type, id);
             if (vendor == null)
             {
                 return HttpNotFound();
@@ -254,6 +260,7 @@ namespace WeddingPlannerApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                vendor = SetNullValues(vendor);
                 var id = User.Identity.GetUserId();
                 var user = db.Vendors.Where(v => v.ApplicationId == id).Select(v => v).SingleOrDefault();
                 vendor.VendorType = user.VendorType;

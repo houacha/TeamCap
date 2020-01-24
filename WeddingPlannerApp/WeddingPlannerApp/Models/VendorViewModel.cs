@@ -15,27 +15,34 @@ namespace WeddingPlannerApp.Models
         public string VendorType { get; set; }
 
         [Display(Name = "Name")]
+        [Required]
         public string Name { get; set; }
 
         [Display(Name = "Street")]
+        [Required]
         public string Street { get; set; }
 
         [Display(Name = "City")]
+        [Required]
         public string City { get; set; }
 
         [Display(Name = "ZipCode")]
+        [Required]
         public string Zip { get; set; }
 
         [Display(Name = "State")]
+        [Required]
         public string State { get; set; }
 
         [Display(Name = "Country")]
+        [Required]
         public string Country { get; set; }
 
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Display(Name = "Phone")]
+        [Required]
         public string Phone { get; set; }
 
         [Display(Name = "Does Video")]

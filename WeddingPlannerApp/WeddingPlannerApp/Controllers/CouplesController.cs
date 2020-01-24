@@ -39,6 +39,29 @@ namespace WeddingPlannerApp.Controllers
 
         //}
 
+        public ActionResult ShowPackage()
+        {
+            PackageViewModel package = null;
+            var response = client.GetAsync("VendorPackages/");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double)vendorPackage["Price"]
+                };
+            }
+            return View();
+        }
+
         private CoupleViewModel MakeModel(JToken item)
         {
             CoupleViewModel couple = new CoupleViewModel()
