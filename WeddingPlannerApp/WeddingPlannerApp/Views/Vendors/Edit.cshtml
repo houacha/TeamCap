@@ -1048,7 +1048,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+    @Html.ActionLink("Back", "Details", new { type = ViewBag.VendorType, id = Model.Id })
 </div>
 
 @section Scripts {

@@ -815,9 +815,15 @@
         break;
 }
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType }) |
-    @Html.ActionLink("Back to List", "Index", new { type = Model.VendorType })
+    @if (User.IsInRole("Vendor") == true)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType })<text> |</text>
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index", new { type = Model.VendorType })
+    }
 </p>
 <p>
     @{

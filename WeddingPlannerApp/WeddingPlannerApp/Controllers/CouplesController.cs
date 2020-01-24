@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using WeddingPlannerApp.Models;
 using Microsoft.AspNet.Identity;
+using System.Text;
 
 namespace WeddingPlannerApp.Controllers
 {
@@ -22,7 +23,22 @@ namespace WeddingPlannerApp.Controllers
         {
             db = new ApplicationDbContext();
             client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44317/api/");
         }
+
+        //public ActionResult MakeWeddingPackage()
+        //{
+
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult MakeWeddingPackage(WeddingPackageViewModel weddingPackage)
+        //{
+
+
+        //}
+
         private CoupleViewModel MakeModel(JToken item)
         {
             CoupleViewModel couple = new CoupleViewModel()
@@ -35,29 +51,35 @@ namespace WeddingPlannerApp.Controllers
                 City=(string)item["City"],
                 Zipcode=(int)item["Zipcode"],
                 WeddingBudget=(double)item["WeddingBudget"],
-                EstimatedTotal=(double)item["EstimatedTotal"],
                 CoupleEmail=(string)item["CoupleEmail"],
-                CouplePhone=(string)item["CouplePhone"]
+                CouplePhone=(string)item["CouplePhone"],
+                WeddingId = (int?)item["Id"]
             };
             return couple;
         }
-
-        // GET: Couples
-        public ActionResult Index()
+        private List<CoupleViewModel> GetCouples()
         {
-            return View(db.Couples.ToList());
-        }
-
-        // GET: Couples/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            List<CoupleViewModel> couplesList = new List<CoupleViewModel>();
+            var response = client.GetAsync("Couples");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray couplesArray = JArray.Parse(read.Result);
+                foreach (var item in couplesArray)
+                {
+                    var couple = MakeModel(item);
+                    couplesList.Add(couple);
+                }
             }
+            return couplesList;
+        }
+        private CoupleViewModel GetOneCouple(int? id)
+        {
             CoupleViewModel couple = new CoupleViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
-            var response = client.GetAsync("Couples/"+id);
+            var response = client.GetAsync("Couples/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -68,11 +90,41 @@ namespace WeddingPlannerApp.Controllers
                 JObject jObject = JObject.Parse(service);
                 couple = MakeModel(jObject);
             }
+            return couple;
+        }
+
+        // GET: Couples
+        public ActionResult Index()
+        {
+            List<CoupleViewModel> couplesList = GetCouples();
+            return View(couplesList);
+        }
+
+        // GET: Couples/Details/5
+        public ActionResult Details(int? id)
+        {
+            CoupleViewModel couple = null;
+            if (id == null)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = db.Couples.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
+                couple = Detail(user.CoupleId);
+            }
+            else
+            {
+                couple = Detail(id);
+            }
             if (couple == null)
             {
                 return HttpNotFound();
             }
             return View(couple);
+        }
+
+        public CoupleViewModel Detail(int? id)
+        {
+            CoupleViewModel couple = GetOneCouple(id);
+            return couple;
         }
 
         // GET: Couples/Create
@@ -86,20 +138,21 @@ namespace WeddingPlannerApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CoupleId")] CoupleViewModel service)
+        public ActionResult Create(CoupleViewModel service)
         {
             if (ModelState.IsValid)
             {
                 Couple couple = new Couple();
+                var userId = User.Identity.GetUserId();
+                var applicationUser = db.Users.Where(u => u.Id == userId).Select(u => u).SingleOrDefault();
+                service.CoupleEmail = applicationUser.Email;
                 string json = JsonConvert.SerializeObject(service);
-                client.BaseAddress = new Uri("https://localhost:44317/api/");
-                var response = client.PostAsync("Couples", new StringContent(json));
+                var response = client.PostAsync("Couples", new StringContent(json, Encoding.UTF8, "application/json"));
                 response.Wait();
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
                 {
                     couple.ApplicationId = User.Identity.GetUserId();
-                    client.BaseAddress = new Uri("https://localhost:44317/api/");
                     response = client.GetAsync("Couples");
                     response.Wait();
                     result = response.Result;
@@ -110,8 +163,7 @@ namespace WeddingPlannerApp.Controllers
                         var readResult = read.Result;
                         JArray jObject = JArray.Parse(readResult);
                         var lastObject = jObject.Last();
-                        couple.CoupleId = (int)lastObject["CoupleId"];
-                        //couple.VendorType = service.VendorType;
+                        couple.CoupleId = (int)lastObject["Id"];
                         db.Couples.Add(couple);
                         db.SaveChanges();
                     }
@@ -128,19 +180,7 @@ namespace WeddingPlannerApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CoupleViewModel couple = new CoupleViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
-            var response = client.GetAsync("Couples/"+id);
-            response.Wait();
-            var result = response.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var read = result.Content.ReadAsStringAsync();
-                read.Wait();
-                var service = read.Result;
-                JObject jObject = JObject.Parse(service);
-                couple = MakeModel(jObject);
-            }
+            CoupleViewModel couple = GetOneCouple(id);
             if (couple == null)
             {
                 return HttpNotFound();
@@ -153,13 +193,12 @@ namespace WeddingPlannerApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CoupleId")] Couple couple)
+        public ActionResult Edit(Couple couple)
         {
             if (ModelState.IsValid)
             {
                 string json = JsonConvert.SerializeObject(couple);
-                client.BaseAddress = new Uri("https://localhost:44317/api/" + couple.Id);//possibly add "/Couple/+couple.Id
-                var response = client.PutAsync("Couples", new StringContent(json));
+                var response = client.PutAsync("Couples/" + couple.CoupleId, new StringContent(json, Encoding.UTF8, "application/json"));
                 response.Wait();
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
@@ -183,7 +222,6 @@ namespace WeddingPlannerApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CoupleViewModel couple = new CoupleViewModel();
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
             var response = client.GetAsync("Couples/"+id);
             response.Wait();
             var result = response.Result;
@@ -207,7 +245,6 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            client.BaseAddress = new Uri("https://localhost:44317/api/" + id);
             var response = client.DeleteAsync("Couples/"+id);
             response.Wait();
             var result = response.Result;

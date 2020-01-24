@@ -12,7 +12,7 @@
 {
     case "Venues":
         <div>
-            <h4>@Model.Name</h4>
+            <h3>@Model.Name</h3>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -271,7 +271,7 @@
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                    @Html.ActionLink("Back", "Details", new { type = ViewBag.VendorType, id = Model.Id })
                 </div>
             }
         </div>
@@ -279,7 +279,7 @@
         break;
     case "DJs":
         <div>
-            <h4>@Model.Name</h4>
+            <h3>@Model.Name</h3>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -450,7 +450,7 @@
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                    @Html.ActionLink("Back", "Details", new { type = ViewBag.VendorType, id = Model.Id })
                 </div>
             }
         </div>
@@ -458,7 +458,7 @@
         break;
     case "Celebrants":
         <div>
-            <h4>@Model.Name</h4>
+            <h3>@Model.Name</h3>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -637,7 +637,7 @@
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                    @Html.ActionLink("Back", "Details", new { type = ViewBag.VendorType, id = Model.Id })
                 </div>
             }
         </div>
@@ -645,7 +645,7 @@
         break;
     case "Caterers":
         <div>
-            <h4>@Model.Name</h4>
+            <h3>@Model.Name</h3>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -832,7 +832,7 @@
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                    @Html.ActionLink("Back", "Details", new { type = ViewBag.VendorType, id = Model.Id })
                 </div>
             }
         </div>
@@ -840,7 +840,7 @@
         break;
     case "Photographers":
         <div>
-            <h4>@Model.Name</h4>
+            <h3>@Model.Name</h3>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -955,7 +955,7 @@
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index", new { type = ViewBag.VendorType })
+                    @Html.ActionLink("Back", "Details", new { type = ViewBag.VendorType, id = Model.Id })
                 </div>
             }
         </div>

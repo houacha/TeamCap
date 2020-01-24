@@ -11,17 +11,12 @@ namespace WeddingPlanner.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
-        [Display(Name = "Contract Description")]
         public string Description { get; set; }
-        [Display(Name = "Contract Price")]
         public double Price { get; set; }
         public int PricePhaseKey { get; set; }
         public string ContractPrice { get; set; }
-        public string CoupleName { get; set; }
-        public string CouplePhone { get; set; }
-        public string CoupleEmail { get; set; }
+        public int CouplesId { get; set; }
         public int VendorId { get; set; }
     }
 }

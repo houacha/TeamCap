@@ -17,7 +17,7 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Partner One Last Name")]
         public string Partner1LastName { get; set; }
 
-        [Display(Name = "Partner TWo First Name")]
+        [Display(Name = "Partner Two First Name")]
         public string Partner2FirstName { get; set; }
 
         [Display(Name = "Partner Two Last Name")]
@@ -35,17 +35,11 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Wedding Budget")]
         public double WeddingBudget { get; set; }
 
-        [Display(Name = "Estimated Total Cost")]
-        public double EstimatedTotal { get; set; }
-
         [Display(Name = "Email")]
         public string CoupleEmail { get; set; }
 
         [Display(Name = "Phone")]
         public string CouplePhone { get; set; }
-
-        //[ForeignKey ("WeddingPackage")]
-        //public int WeddingId { get; set; }
-        //public WeddingPackage WeddingPackage{ get; set; }
+        public int? WeddingId { get; set; }
     }
 }

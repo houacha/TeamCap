@@ -95,7 +95,7 @@ namespace WeddingPlannerApp.Controllers
         }
         
         // Makes the API request for get all vendors
-        public List<VendorViewModel> GetRequest(string type)
+        private List<VendorViewModel> GetRequest(string type)
         {
             List<VendorViewModel> vendorList = new List<VendorViewModel>();
             var response = client.GetAsync(type);
@@ -116,7 +116,7 @@ namespace WeddingPlannerApp.Controllers
         }
 
         // Makes the API request for get one vendor
-        public VendorViewModel GetOneRequest(string type, int? id)
+        private VendorViewModel GetOneRequest(string type, int? id)
         {
             VendorViewModel vendor = new VendorViewModel();
             var response = client.GetAsync(type + "s" + "/" + id);
@@ -180,7 +180,7 @@ namespace WeddingPlannerApp.Controllers
         }
 
         // Gets the info of a vendor
-        public VendorViewModel Detail(int? id, string type)
+        private VendorViewModel Detail(int? id, string type)
         {
             VendorViewModel vendor = new VendorViewModel();
             var response = client.GetAsync(type + "s" + "/" + id);
@@ -419,6 +419,9 @@ namespace WeddingPlannerApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var id = User.Identity.GetUserId();
+                var user = db.Vendors.Where(v => v.ApplicationId == id).Select(v => v).SingleOrDefault();
+                package.VendorType = user.VendorType;
                 string json = JsonConvert.SerializeObject(package);
                 var response = client.PutAsync(package.VendorType + "s" + "/" + package.Id, new StringContent(json, Encoding.UTF8, "application/json"));
                 response.Wait();

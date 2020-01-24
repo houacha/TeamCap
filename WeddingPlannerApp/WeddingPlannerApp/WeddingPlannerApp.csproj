@@ -178,12 +178,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001222124488_changed model.cs" />
-    <Compile Include="Migrations\202001222124488_changed model.Designer.cs">
-      <DependentUpon>202001222124488_changed model.cs</DependentUpon>
+    <Compile Include="Migrations\202001241632288_models.cs" />
+    <Compile Include="Migrations\202001241632288_models.Designer.cs">
+      <DependentUpon>202001241632288_models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\WeddingPackageViewModel.cs" />
     <Compile Include="Models\PackageViewModel.cs" />
     <Compile Include="Models\CoupleViewModel.cs" />
     <Compile Include="Models\VendorViewModel.cs" />
@@ -257,11 +258,6 @@
     <Content Include="Views\Vendors\Create.cshtml" />
     <Content Include="Views\Vendors\Edit.cshtml" />
     <Content Include="Views\Vendors\Delete.cshtml" />
-    <Content Include="Views\Couple\Create.cshtml" />
-    <Content Include="Views\Couple\Edit.cshtml" />
-    <Content Include="Views\Couple\Delete.cshtml" />
-    <Content Include="Views\Couple\Details.cshtml" />
-    <Content Include="Views\Couple\Index.cshtml" />
     <Content Include="Views\Couples\Index.cshtml" />
     <Content Include="Views\Couples\Details.cshtml" />
     <Content Include="Views\Couples\Create.cshtml" />
@@ -291,8 +287,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001222124488_changed model.resx">
-      <DependentUpon>202001222124488_changed model.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001241632288_models.resx">
+      <DependentUpon>202001241632288_models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

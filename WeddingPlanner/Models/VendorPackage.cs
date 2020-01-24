@@ -11,13 +11,8 @@ namespace WeddingPlanner.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Vendor Type")]
         public string VendorType { get; set; }
-
-        [Display(Name = "Description")]
         public string Description { get; set; }
-
-        [Display(Name = "Package Price")]
         public double Price { get; set; }
         public int VendorId { get; set; }
     }
