@@ -4,48 +4,35 @@
     ViewBag.Title = "Details";
 }
 
-<h2>
-    @Html.DisplayFor(model => model.Partner1FirstName) @Html.DisplayFor(model => model.Partner1LastName) &
-    @Html.DisplayFor(model => model.Partner2FirstName) @Html.DisplayFor(model => model.Partner2LastName)
-</h2>
-<h3>Current Budget:<br />$@Html.DisplayFor(model => model.WeddingBudget)</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CoupleStreetAddress)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CoupleStreetAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Zipcode)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Zipcode)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CoupleEmail)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CoupleEmail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CouplePhone)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CouplePhone)
-        </dd>
-    </dl>
+    <div class="autoElement01" align="center">
+        <p class="headerText">Couple Info:</p>
+        <p>@Html.DisplayFor(model => model.Partner1FirstName) @Html.DisplayFor(model => model.Partner1LastName) &</p>
+        <p>@Html.DisplayFor(model => model.Partner2FirstName) @Html.DisplayFor(model => model.Partner2LastName)</p>
+        <p><br />@Html.DisplayFor(model => model.CoupleStreetAddress)</p>
+        <p>@Html.DisplayFor(model => model.City), WI</p>@*TO DO:we don't have a state property anymore?*@
+        <p><br />@Html.DisplayFor(model => model.CouplePhone)</p>
+        <p>@Html.DisplayFor(model => model.CoupleEmail)</p>
+
+    </div>
+<div class="autoElement01" align="center">
+    <p class="headerText">Current Budget:</p>
+    <p class="headerText">$@Html.DisplayFor(model => model.WeddingBudget)</p>
 </div>
-<p>
+
+<div class="selectorHorizontal" align="center">
+    <a href="@Url.Action($"Packages")">
+        <span class="possibleSelection">View Wedding Package</span>
+    </a>
+    <a href="@Url.Action($"Edit",new { id = Model.Id }))">
+        <span class="possibleSelection">Edit Couple Info</span>
+    </a>
+    <a href="@Url.Action($"Index")">
+        <span class="possibleSelection">Search Vendors</span>
+    </a>
+</div>
+
+@*<p>
     @Html.ActionLink("View Wedding Package", "Packages") |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    @Html.ActionLink("Edit Couple Info", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Search Vendors", "Index")
+</p>*@

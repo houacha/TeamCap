@@ -4,15 +4,12 @@
     ViewBag.Title = "MakePackage";
 }
 
-<h2>MakePackage</h2>
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>PackageViewModel</h4>
-        <hr />
+    <div class="autoElement01 form-group" align="center">
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
