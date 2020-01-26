@@ -7,7 +7,7 @@
 
     <div class="selectorHorizontal">
         <span class="possibleSelection">
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </span>
         <span class="possibleSelection"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></span>
     </div>
