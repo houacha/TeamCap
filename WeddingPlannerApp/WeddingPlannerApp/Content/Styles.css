@@ -1,0 +1,294 @@
+﻿body {
+    background-color: rgb(256,224,240);
+    color: white;
+}
+
+.disabled {
+    overflow-x: hidden;
+}
+
+.superHeaderText {
+    font-variant-caps: all-petite-caps;
+    font-size: 48px;
+    line-height: 0%;
+    font-style: bold;
+    /*letter-spacing:32px;*/
+}
+
+.alignLeftHeader {
+    float: left;
+    width: 46%;
+    text-align: right;
+}
+
+.alignCenterHeader {
+    float: left;
+    width: 8%;
+    text-align: center;
+}
+
+.alignRightHeader {
+    float: left;
+    width: 46%;
+    text-align: left;
+}
+
+.header {
+    text-align: center;
+    margin: 0 auto;
+    text-align: center;
+    font-variant-caps: small-caps;
+    font-family: verdana;
+    margin-left: -48px;
+    margin-right: -48px;
+    margin-top: -48px;
+    margin-bottom: 32px;
+    height: auto;
+    padding-top: 32px;
+    padding-bottom: 16px;
+    background-color: rgb(192,112,128);
+    border: 6px solid rgb(192,112,128);
+}
+
+.headerText {
+    font-variant-caps: all-petite-caps;
+    font-size: 24px;
+    line-height: 20%;
+}
+
+.bodyText {
+    font-size: 16px;
+    line-height: 120%;
+}
+
+.tinyText {
+    font-size: 12px;
+    line-height: 0%;
+}
+
+.alignLeft {
+    float: left;
+    width: 33.33333%;
+    text-align: left;
+}
+
+.alignCenter {
+    float: left;
+    width: 33.33333%;
+    text-align: center;
+}
+
+.alignRight {
+    float: left;
+    width: 33.33333%;
+    text-align: right;
+}
+
+.alignBody {
+    width: 100%;
+    text-align: left;
+}
+
+.backgroundAmbientDistant {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -8;
+}
+
+.backgroundAmbientNear {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -6;
+}
+
+.backgroundAmbientVingnette {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -4;
+}
+
+
+.apElement01 {
+    margin: auto;
+    /*width: 50%;*/
+    font-variant-caps: small-caps;
+    font-family: verdana;
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    word-wrap: break-word;
+    height: 256px;
+    width: 512px;
+    background-color: rgb(192,112,128);
+    border: 6px solid rgb(192,112,128);
+    border-radius: 32px;
+    transition: 0.3s;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.autoElement01 {
+    margin: auto;
+    /*width: 50%;*/
+    font-variant-caps: small-caps;
+    font-family: verdana;
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    word-wrap: break-word;
+    height: auto;
+    width: 512px;
+    background-color: rgb(192,112,128);
+    border: 6px solid rgb(192,112,128);
+    border-radius: 32px;
+    transition: 0.3s;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.apElement01:hover {
+    background-color: rgb(208,128,144);
+    height: 256px;
+    width: 512px;
+    border: 6px solid white;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    /* Required for text-overflow to do anything */
+}
+
+
+.centerColumn {
+    /*align-items: center;*/
+    margin-top: -96px;
+    /*width: 25%;*/
+}
+
+.selectorHorizontal {
+    /*align-items: center;
+  /*margin: auto;*/
+}
+
+.currentSelection {
+    display: inline-block;
+    width: 256px;
+    font-variant-caps: small-caps;
+    font-family: verdana;
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-align: center;
+    height: auto;
+    background-color: rgb(208,128,144);
+    border: 6px solid white;
+    border-radius: 32px;
+    transition: 0.3s;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.possibleSelection {
+    display: inline-block;
+    width: 256px;
+    font-variant-caps: small-caps;
+    font-family: verdana;
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-align: center;
+    height: auto;
+    background-color: rgb(192,112,128);
+    border: 6px solid rgb(192,112,128);
+    border-radius: 32px;
+    transition: 0.3s;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    color: white;
+}
+
+    .possibleSelection:hover {
+        background-color: rgb(208,128,144);
+        border: 6px solid white;
+        color: white;
+    }
+
+.leftOption {
+    /*position: fixed;*/
+    margin-right: 25%;
+}
+
+.rightOption {
+    margin-left: 25%;
+    /*position: fixed;*/
+}
+
+.frosting {
+    display: inline-block;
+    width: 64px;
+    height: 16px;
+    background-color: rgb(192,112,128);
+    border: 6px solid rgb(192,112,128);
+    border-top-left-radius: 32px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 32px;
+    transition: 0.3s;
+    margin-top: 8px;
+    margin-bottom: -8px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.cakeTopper {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    background-color: rgb(256,224,240);
+    border: 12px solid rgb(192,112,128);
+    border-top-left-radius: 96px;
+    border-top-right-radius: 96px;
+    border-bottom-left-radius: 96px;
+    border-bottom-right-radius: 96px;
+    transition: 0.3s;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.cakeTopperTr {
+    display: inline-block;
+    width: 80px;
+    height: 32px;
+    background-color: rgb(192,112,128);
+    border-radius: 4px;
+    transition: 0.3s;
+    margin-top: 0px;
+    margin-bottom: -32px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+input {
+    /*color: white;
+    text-decoration: none;*/
+    border-radius: 8px;
+}
+

@@ -178,9 +178,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001260131369_models.cs" />
-    <Compile Include="Migrations\202001260131369_models.Designer.cs">
-      <DependentUpon>202001260131369_models.cs</DependentUpon>
+    <Compile Include="Migrations\202001262100059_models.cs" />
+    <Compile Include="Migrations\202001262100059_models.Designer.cs">
+      <DependentUpon>202001262100059_models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -200,6 +200,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -292,8 +293,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001260131369_models.resx">
-      <DependentUpon>202001260131369_models.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001262100059_models.resx">
+      <DependentUpon>202001262100059_models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
