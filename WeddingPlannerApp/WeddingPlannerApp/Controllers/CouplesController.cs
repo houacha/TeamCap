@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using WeddingPlannerApp.Models;
 using Microsoft.AspNet.Identity;
 using System.Text;
+using System.Reflection;
 
 namespace WeddingPlannerApp.Controllers
 {
@@ -26,39 +27,186 @@ namespace WeddingPlannerApp.Controllers
             client.BaseAddress = new Uri("https://localhost:44317/api/");
         }
 
-        //public ActionResult MakeWeddingPackage()
-        //{
-
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult MakeWeddingPackage(WeddingPackageViewModel weddingPackage)
-        //{
-
-
-        //}
-
-        public ActionResult ShowPackage()
+        public WeddingPackageViewModel PackageModel(JToken token)
         {
-            PackageViewModel package = null;
-            var response = client.GetAsync("VendorPackages/");
+            WeddingPackageViewModel package = new WeddingPackageViewModel()
+            {
+                Id = (int)token["Id"],
+                ThirdPartyCatering = (bool?)token["ThidPartyCatering"],
+                ThirdPartyCelebrant = (bool?)token["ThidPartyCelebrant"],
+                ThirdPartyDJ = (bool?)token["ThidPartyDJ"],
+                LGBTQFriendly = (bool?)token["LGBTQFriendly"],
+                ServesCohabitants = (bool?)token["ServesCohabitants"],
+                KidFriendly = (bool?)token["KidFriendly"],
+                PetFriendly = (bool?)token["PetFriendly"],
+                WheelchairAccessible = (bool?)token["WheelchairAccessible"],
+                FoodAllergyOptions = (bool?)token["FoodAllergyOptions"],
+                Vegan = (bool?)token["Vegan"],
+                FoodIndian = (bool?)token["FoodIndian"],
+                FoodItalian = (bool?)token["FoodItalian"],
+                FoodChinese = (bool?)token["FoodChinese"],
+                FoodMediterranean = (bool?)token["FoodMediterranean"],
+                FoodMexican = (bool?)token["FoodMexican"],
+                FoodFrench = (bool?)token["FoodFrench"],
+                FoodAmerican = (bool?)token["FoodAmerican"],
+                FoodOther = (bool?)token["FoodOther"],
+                GenrePop = (bool?)token["GenrePop"],
+                GenreRB = (bool?)token["GenreRB"],
+                GenreRap = (bool?)token["GenreRap"],
+                GenreRock = (bool?)token["GenreRock"],
+                GenreCountry = (bool?)token["GenreCountry"],
+                GenreDance = (bool?)token["GenreDance"],
+                GenreTechno = (bool?)token["GenreTechno"],
+                GenreMetal = (bool?)token["GenreMetal"],
+                GenreInternational = (bool?)token["GenreInternational"],
+                GenreOther = (bool?)token["GenreOther"],
+                Judaism = (bool?)token["Judaism"],
+                Sikhism = (bool?)token["Sikhism"],
+                Hinduism = (bool?)token["Hinduism"],
+                Islamic = (bool?)token["Islamic"],
+                NonDenominational = (bool?)token["NonDenominational"],
+                Catholicism = (bool?)token["Catholicism"],
+                Lutheranism = (bool?)token["Lutheranism"],
+                Buddhism = (bool?)token["Buddhism"],
+                ReligionOther = (bool?)token["ReligionOther"]
+            };
+            return package;
+        }
+
+        public List<WeddingPackageViewModel> PackageList()
+        {
+            List<WeddingPackageViewModel> packageList = new List<WeddingPackageViewModel>();
+            WeddingPackageViewModel package = new WeddingPackageViewModel();
+            var response = client.GetAsync("WeddingPackages");
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
             {
                 var read = result.Content.ReadAsStringAsync();
                 read.Wait();
-                JObject vendorPackage = JObject.Parse(read.Result);
-                package = new PackageViewModel()
+                JArray jObject = JArray.Parse(read.Result);
+                foreach (var item in jObject)
                 {
-                    Id = (int)vendorPackage["Id"],
-                    VendorType = (string)vendorPackage["VendorType"],
-                    VendorId = (int)vendorPackage["VendorId"],
-                    Description = (string)vendorPackage["Description"],
-                    Price = (double)vendorPackage["Price"]
-                };
+                    package = PackageModel(item);
+                    packageList.Add(package);
+                }
             }
+            return packageList;
+        }
+
+        public WeddingPackageViewModel GetOneRequest(int? id)
+        {
+            WeddingPackageViewModel package = new WeddingPackageViewModel();
+            var response = client.GetAsync("WeddingPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject jObject = JObject.Parse(read.Result);
+                package = PackageModel(jObject);
+            }
+            return package;
+        }
+
+        public WeddingPackageViewModel SetNullValues(WeddingPackageViewModel package)
+        {
+            Type type = typeof(WeddingPackageViewModel);
+            PropertyInfo[] properties = type.GetProperties();
+            foreach (var item in properties)
+            {
+                if (item.GetValue(package) == null)
+                {
+                    if (item.PropertyType.Equals(typeof(bool)) == true)
+                    {
+                        item.SetValue(package, false);
+                    }
+                    else if (item.PropertyType.Equals(typeof(double)) == true)
+                    {
+                        item.SetValue(package, 0);
+                    }
+                }
+            }
+            return package;
+        }
+
+        public ActionResult MakePackage()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Couples.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
+            ViewBag.UserId = user.CoupleId;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MakePackage(WeddingPackageViewModel weddingPackage)
+        {
+            if (ModelState.IsValid)
+            {
+                weddingPackage = SetNullValues(weddingPackage);
+                var userId = User.Identity.GetUserId();
+                var user = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
+                weddingPackage.CouplesId = user.CoupleId;
+                string json = JsonConvert.SerializeObject(weddingPackage);
+                var response = client.PostAsync("WeddingPackages", new StringContent(json, Encoding.UTF8, "application/json"));
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Packages");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult Packages()
+        {
+            var packages = PackageList();
+            return View(packages);
+        }
+
+        public ActionResult PackageDetails(int? id)
+        {
+            var package = GetOneRequest(id);
+            Type type = typeof(WeddingPackageViewModel);
+            PropertyInfo[] properties = type.GetProperties();
+            foreach (var item in properties)
+            {
+                var x = item.GetValue(package);
+                if (item.GetValue(package) == null)
+                {
+                    var yx = item.PropertyType;
+                    if (item.PropertyType.Equals(typeof(bool?)) == true)
+                    {
+                        item.SetValue(package, false);
+                    }
+                    else if (item.PropertyType.Equals(typeof(double?)) == true)
+                    {
+                        item.SetValue(package, 0.00);
+                    }
+                }
+            }
+            return View(package);
+        }
+
+        public ActionResult EditPackage(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            WeddingPackageViewModel package = GetOneRequest(id);
+            if (package == null)
+            {
+                return HttpNotFound();
+            }
+            return View(package);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPackage(WeddingPackageViewModel weddingPackage)
+        {
             return View();
         }
 
@@ -66,16 +214,17 @@ namespace WeddingPlannerApp.Controllers
         {
             CoupleViewModel couple = new CoupleViewModel()
             {
+                Id = (int)item["Id"],
                 Partner1FirstName = (string)item["Partner1FirstName"],
                 Partner1LastName = (string)item["Partner1LastName"],
                 Partner2FirstName = (string)item["Partner2FirstName"],
-                Partner2LastName=(string)item["Partner2LastName"],
-                CoupleStreetAddress=(string)item["CoupleStreetAddress"],
-                City=(string)item["City"],
-                Zipcode=(int)item["Zipcode"],
-                WeddingBudget=(double)item["WeddingBudget"],
-                CoupleEmail=(string)item["CoupleEmail"],
-                CouplePhone=(string)item["CouplePhone"],
+                Partner2LastName = (string)item["Partner2LastName"],
+                CoupleStreetAddress = (string)item["CoupleStreetAddress"],
+                City = (string)item["City"],
+                Zipcode = (int)item["Zipcode"],
+                WeddingBudget = (double)item["WeddingBudget"],
+                CoupleEmail = (string)item["CoupleEmail"],
+                CouplePhone = (string)item["CouplePhone"],
                 WeddingId = (int?)item["Id"]
             };
             return couple;
@@ -245,7 +394,7 @@ namespace WeddingPlannerApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CoupleViewModel couple = new CoupleViewModel();
-            var response = client.GetAsync("Couples/"+id);
+            var response = client.GetAsync("Couples/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -268,7 +417,7 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var response = client.DeleteAsync("Couples/"+id);
+            var response = client.DeleteAsync("Couples/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)

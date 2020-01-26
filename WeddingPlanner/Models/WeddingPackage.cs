@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,10 @@ namespace WeddingPlanner.Models
     {
         [Key]
         public int Id { get; set; }
-        public bool ThirdPartyVendors { get; set; }
+        public bool AllowsDecor { get; set; }
+        public bool ThirdPartyCelebrant { get; set; }
+        public bool ThirdPartyCatering { get; set; }
+        public bool ThirdPartyDJ { get; set; }
         public bool LGBTQFriendly { get; set; }
         public bool ServesCohabitants { get; set; }
         public bool KidFriendly { get; set; }
@@ -46,5 +50,8 @@ namespace WeddingPlanner.Models
         public bool Buddhism { get; set; }
         public bool ReligionOther { get; set; }
         public double EstimatedTotal { get; set; }
+        [ForeignKey("Couple")]
+        public int CouplesId { get; set; }
+        public Couple Couple { get; set; }
     }
 }

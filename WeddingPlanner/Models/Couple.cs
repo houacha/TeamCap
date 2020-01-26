@@ -21,7 +21,5 @@ namespace WeddingPlanner.Models
         public double WeddingBudget { get; set; }
         public string CoupleEmail { get; set; }
         public string CouplePhone { get; set; }
-        public int WeddingId { get; set; }
-
     }
 }

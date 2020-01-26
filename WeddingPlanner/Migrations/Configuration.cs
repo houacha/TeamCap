@@ -575,47 +575,6 @@ namespace WeddingPlanner.Migrations
                 CoupleEmail = "jeffnikki@gmail.com",
                 CouplePhone = "309 111 2222"
             });
-            //wedding pkg
-            context.WeddingPackages.AddOrUpdate(
-            new Models.WeddingPackage
-            {
-                ThirdPartyVendors = true,
-                LGBTQFriendly = true,
-                ServesCohabitants = true,
-                KidFriendly = false,
-                PetFriendly = false,
-                WheelchairAccessible = true,
-                FoodAllergyOptions = true,
-                Vegan = false,
-                FoodIndian = false,
-                FoodItalian = true,
-                FoodChinese = true,
-                FoodMediterranean = true,
-                FoodMexican = true,
-                FoodFrench = true,
-                FoodAmerican = false,
-                FoodOther = false,
-                GenrePop = false,
-                GenreRB = false,
-                GenreRap = false,
-                GenreRock = false,
-                GenreCountry = false,
-                GenreDance = false,
-                GenreTechno = false,
-                GenreMetal = true,
-                GenreInternational = false,
-                GenreOther = false,
-                Judaism = false,
-                Sikhism = false,
-                Hinduism = false,
-                Islamic = false,
-                NonDenominational = false,
-                Catholicism = false,
-                Lutheranism = false,
-                Buddhism = false,
-                ReligionOther = false,
-                EstimatedTotal = 0,
-            });
         }
     }
 }

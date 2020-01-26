@@ -16,7 +16,9 @@ namespace WeddingPlanner.Models
         public double Price { get; set; }
         public int PricePhaseKey { get; set; }
         public string ContractPrice { get; set; }
-        public int CouplesId { get; set; }
         public int VendorId { get; set; }
+        [ForeignKey("Couple")]
+        public int CoupleId { get; set; }
+        public Couple Couple { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -32,5 +33,6 @@ namespace WeddingPlanner.Models
         public bool FoodAllergyOptions { get; set; }
         public double PerGuestEstimateLow { get; set; }
         public double PerGuestEstimateHigh { get; set; }
+
     }
 }

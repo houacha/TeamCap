@@ -10,85 +10,95 @@ namespace WeddingPlannerApp.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Allows third party vendors?")]
-        public bool ThirdPartyVendors { get; set; }
+        [Display(Name = "Allow third-party decor")]
+        public bool? AllowsDecor { get; set; }
+
+        [Display(Name = "Allow third-party Celebrant")]
+        public bool? ThirdPartyCelebrant { get; set; }
+
+        [Display(Name = "Allow third-party Catering")]
+        public bool? ThirdPartyCatering { get; set; }
+
+        [Display(Name = "Allow third-party DJ")]
+        public bool? ThirdPartyDJ { get; set; }
 
         [Display(Name = "LGBTQ Friendly?")]
-        public bool LGBTQFriendly { get; set; }
+        public bool? LGBTQFriendly { get; set; }
 
         [Display(Name = "Co Habitants?")]
-        public bool ServesCohabitants { get; set; }
+        public bool? ServesCohabitants { get; set; }
 
         [Display(Name = "Kid Friendly?")]
-        public bool KidFriendly { get; set; }
+        public bool? KidFriendly { get; set; }
 
         [Display(Name = "Pet Friendly?")]
-        public bool PetFriendly { get; set; }
+        public bool? PetFriendly { get; set; }
 
         [Display(Name = "Wheelchair Accessible?")]
-        public bool WheelchairAccessible { get; set; }
+        public bool? WheelchairAccessible { get; set; }
 
         [Display(Name = "Food Allergy Options")]
-        public bool FoodAllergyOptions { get; set; }
+        public bool? FoodAllergyOptions { get; set; }
 
         [Display(Name = "Vegan")]
-        public bool Vegan { get; set; }
+        public bool? Vegan { get; set; }
         [Display(Name = "Indian")]
-        public bool FoodIndian { get; set; }
+        public bool? FoodIndian { get; set; }
         [Display(Name = "Italian")]
-        public bool FoodItalian { get; set; }
+        public bool? FoodItalian { get; set; }
         [Display(Name = "Chinese")]
-        public bool FoodChinese { get; set; }
+        public bool? FoodChinese { get; set; }
         [Display(Name = "Mediterranean")]
-        public bool FoodMediterranean { get; set; }
+        public bool? FoodMediterranean { get; set; }
         [Display(Name = "Mexican")]
-        public bool FoodMexican { get; set; }
+        public bool? FoodMexican { get; set; }
         [Display(Name = "French")]
-        public bool FoodFrench { get; set; }
+        public bool? FoodFrench { get; set; }
         [Display(Name = "American")]
-        public bool FoodAmerican { get; set; }
+        public bool? FoodAmerican { get; set; }
         [Display(Name = "Other")]
-        public bool FoodOther { get; set; }
+        public bool? FoodOther { get; set; }
         [Display(Name = "Pop")]
-        public bool GenrePop { get; set; }
+        public bool? GenrePop { get; set; }
         [Display(Name = "R&B")]
-        public bool GenreRB { get; set; }
+        public bool? GenreRB { get; set; }
         [Display(Name = "Rap")]
-        public bool GenreRap { get; set; }
+        public bool? GenreRap { get; set; }
         [Display(Name = "Rock")]
-        public bool GenreRock { get; set; }
+        public bool? GenreRock { get; set; }
         [Display(Name = "Country")]
-        public bool GenreCountry { get; set; }
+        public bool? GenreCountry { get; set; }
         [Display(Name = "Dance")]
-        public bool GenreDance { get; set; }
+        public bool? GenreDance { get; set; }
         [Display(Name = "Techno")]
-        public bool GenreTechno { get; set; }
+        public bool? GenreTechno { get; set; }
         [Display(Name = "Metal")]
-        public bool GenreMetal { get; set; }
+        public bool? GenreMetal { get; set; }
         [Display(Name = "International")]
-        public bool GenreInternational { get; set; }
+        public bool? GenreInternational { get; set; }
         [Display(Name = "Other")]
-        public bool GenreOther { get; set; }
+        public bool? GenreOther { get; set; }
         [Display(Name = "Judaism")]
-        public bool Judaism { get; set; }
+        public bool? Judaism { get; set; }
         [Display(Name = "Sikhism")]
-        public bool Sikhism { get; set; }
+        public bool? Sikhism { get; set; }
         [Display(Name = "Hinduism")]
-        public bool Hinduism { get; set; }
+        public bool? Hinduism { get; set; }
         [Display(Name = "Islamic")]
-        public bool Islamic { get; set; }
+        public bool? Islamic { get; set; }
         [Display(Name = "Non-Denominational")]
-        public bool NonDenominational { get; set; }
+        public bool? NonDenominational { get; set; }
         [Display(Name = "Catholicism")]
-        public bool Catholicism { get; set; }
+        public bool? Catholicism { get; set; }
         [Display(Name = "Lutheranism")]
-        public bool Lutheranism { get; set; }
+        public bool? Lutheranism { get; set; }
         [Display(Name = "Buddhism")]
-        public bool Buddhism { get; set; }
+        public bool? Buddhism { get; set; }
         [Display(Name = "Other")]
-        public bool ReligionOther { get; set; }
+        public bool? ReligionOther { get; set; }
 
         [Display(Name = "Estimated Total Cost")]
-        public double EstimatedTotal { get; set; }
+        public double? EstimatedTotal { get; set; }
+        public int? CouplesId { get; set; }
     }
 }

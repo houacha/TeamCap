@@ -12,24 +12,31 @@ namespace WeddingPlannerApp.Models
         public int Id { get; set; }
 
         [Display(Name = "Partner One First Name")]
+        [Required]
         public string Partner1FirstName { get; set; }
 
         [Display(Name = "Partner One Last Name")]
+        [Required]
         public string Partner1LastName { get; set; }
 
         [Display(Name = "Partner Two First Name")]
+        [Required]
         public string Partner2FirstName { get; set; }
 
         [Display(Name = "Partner Two Last Name")]
+        [Required]
         public string Partner2LastName { get; set; }
 
         [Display(Name = "Street Address")]
+        [Required]
         public string CoupleStreetAddress { get; set; }
 
         [Display(Name = "City")]
+        [Required]
         public string City { get; set; }
 
         [Display(Name = "Zipcode")]
+        [Required]
         public int Zipcode { get; set; }
 
         [Display(Name = "Wedding Budget")]
@@ -39,6 +46,7 @@ namespace WeddingPlannerApp.Models
         public string CoupleEmail { get; set; }
 
         [Display(Name = "Phone")]
+        [Required]
         public string CouplePhone { get; set; }
         public int? WeddingId { get; set; }
     }

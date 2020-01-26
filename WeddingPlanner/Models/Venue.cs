@@ -43,5 +43,6 @@ namespace WeddingPlanner.Models
         public bool ThirdPartyDJ { get; set; }
         public bool Caterers { get; set; }
         public int CatererId { get; set; }
+
     }
 }

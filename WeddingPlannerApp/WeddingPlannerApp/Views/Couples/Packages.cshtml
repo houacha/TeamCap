@@ -1,0 +1,256 @@
+﻿@model IEnumerable<WeddingPlannerApp.Models.WeddingPackageViewModel>
+
+@{
+    ViewBag.Title = "Packages";
+}
+
+<h2>Packages</h2>
+
+<p>
+    @Html.ActionLink("Create A Package", "MakePackage")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ThirdPartyCatering)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThirdPartyCelebrant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThirdPartyDJ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LGBTQFriendly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServesCohabitants)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KidFriendly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PetFriendly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WheelchairAccessible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodAllergyOptions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vegan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodIndian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodItalian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodChinese)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodMediterranean)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodMexican)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodFrench)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodAmerican)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodOther)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenrePop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreRB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreRap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreRock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreCountry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreDance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreTechno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreMetal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreInternational)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreOther)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Judaism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sikhism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinduism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Islamic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NonDenominational)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Catholicism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lutheranism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Buddhism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReligionOther)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstimatedTotal)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.ThirdPartyCatering)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.ThirdPartyCelebrant)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.ThirdPartyDJ)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.LGBTQFriendly)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServesCohabitants)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KidFriendly)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetFriendly)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WheelchairAccessible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodAllergyOptions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vegan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodIndian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodItalian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodChinese)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodMediterranean)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodMexican)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodFrench)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodAmerican)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenrePop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreRB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreRap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreRock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreDance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreTechno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreMetal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreInternational)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Judaism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sikhism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinduism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Islamic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonDenominational)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catholicism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lutheranism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buddhism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReligionOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedTotal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPackage", new { id = item.Id }) |
+                @Html.ActionLink("Details", "PackageDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeletePackage", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

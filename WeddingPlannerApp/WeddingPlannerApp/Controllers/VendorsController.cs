@@ -94,6 +94,51 @@ namespace WeddingPlannerApp.Controllers
             };
             return vendor;
         }
+        public WeddingPackageViewModel PackageModel(JToken token)
+        {
+            WeddingPackageViewModel package = new WeddingPackageViewModel()
+            {
+                Id = (int)token["Id"],
+                ThirdPartyCatering = (bool?)token["ThidPartyCatering"],
+                ThirdPartyCelebrant = (bool?)token["ThidPartyCelebrant"],
+                ThirdPartyDJ = (bool?)token["ThidPartyDJ"],
+                LGBTQFriendly = (bool?)token["LGBTQFriendly"],
+                ServesCohabitants = (bool?)token["ServesCohabitants"],
+                KidFriendly = (bool?)token["KidFriendly"],
+                PetFriendly = (bool?)token["PetFriendly"],
+                WheelchairAccessible = (bool?)token["WheelchairAccessible"],
+                FoodAllergyOptions = (bool?)token["FoodAllergyOptions"],
+                Vegan = (bool?)token["Vegan"],
+                FoodIndian = (bool?)token["FoodIndian"],
+                FoodItalian = (bool?)token["FoodItalian"],
+                FoodChinese = (bool?)token["FoodChinese"],
+                FoodMediterranean = (bool?)token["FoodMediterranean"],
+                FoodMexican = (bool?)token["FoodMexican"],
+                FoodFrench = (bool?)token["FoodFrench"],
+                FoodAmerican = (bool?)token["FoodAmerican"],
+                FoodOther = (bool?)token["FoodOther"],
+                GenrePop = (bool?)token["GenrePop"],
+                GenreRB = (bool?)token["GenreRB"],
+                GenreRap = (bool?)token["GenreRap"],
+                GenreRock = (bool?)token["GenreRock"],
+                GenreCountry = (bool?)token["GenreCountry"],
+                GenreDance = (bool?)token["GenreDance"],
+                GenreTechno = (bool?)token["GenreTechno"],
+                GenreMetal = (bool?)token["GenreMetal"],
+                GenreInternational = (bool?)token["GenreInternational"],
+                GenreOther = (bool?)token["GenreOther"],
+                Judaism = (bool?)token["Judaism"],
+                Sikhism = (bool?)token["Sikhism"],
+                Hinduism = (bool?)token["Hinduism"],
+                Islamic = (bool?)token["Islamic"],
+                NonDenominational = (bool?)token["NonDenominational"],
+                Catholicism = (bool?)token["Catholicism"],
+                Lutheranism = (bool?)token["Lutheranism"],
+                Buddhism = (bool?)token["Buddhism"],
+                ReligionOther = (bool?)token["ReligionOther"]
+            };
+            return package;
+        }
 
         public VendorViewModel SetNullValues(VendorViewModel vendor)
         {
@@ -103,12 +148,11 @@ namespace WeddingPlannerApp.Controllers
             {
                 if (item.GetValue(vendor) == null)
                 {
-                    var x = item.PropertyType;
                     if (item.PropertyType.Equals(typeof(bool?)) == true)
                     {
                         item.SetValue(vendor, false);
                     }
-                    else if (item.GetType().Equals(typeof(double?)) == true)
+                    else if (item.PropertyType.Equals(typeof(double?)) == true)
                     {
                         item.SetValue(vendor, 0);
                     }
@@ -170,12 +214,97 @@ namespace WeddingPlannerApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Create", "Vendors", new { type = vendor.VendorType });
         }
+        public List<WeddingPackageViewModel> GetWedding()
+        {
+            List<WeddingPackageViewModel> packageList = new List<WeddingPackageViewModel>();
+            WeddingPackageViewModel package = new WeddingPackageViewModel();
+            var response = client.GetAsync("WeddingPackages");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray jObject = JArray.Parse(read.Result);
+                foreach (var item in jObject)
+                {
+                    package = PackageModel(item);
+                    packageList.Add(package);
+                }
+            }
+            return packageList;
+        }
 
         // get info of all vendor
         public ActionResult Index(string type)
         {
             var vendorList = GetRequest(type);
-            ViewBag.VenderType = type;
+            var weddingList = GetWedding();
+            var userId = User.Identity.GetUserId();
+            var coupleId = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c.CoupleId).SingleOrDefault();
+            var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId).Select(w => w).SingleOrDefault();
+            List<VendorViewModel> packages = new List<VendorViewModel>();
+            foreach (var item in vendorList)
+            {
+                if (item != null)
+                {
+                    if ((item.GenreTechno == couplesPackage.GenreTechno || item.GenreRock == couplesPackage.GenreRock ||
+                        item.GenreRB == couplesPackage.GenreRB || item.GenreRap == couplesPackage.GenreRap ||
+                        item.GenrePop == couplesPackage.GenrePop || item.GenreOther == couplesPackage.GenreOther ||
+                        item.GenreMetal == couplesPackage.GenreMetal || item.GenreInternational == couplesPackage.GenreInternational ||
+                        item.GenreDance == couplesPackage.GenreDance || item.GenreCountry == couplesPackage.GenreCountry) &&
+                        (item.FoodOther == couplesPackage.FoodOther || item.FoodMexican == couplesPackage.FoodMexican ||
+                        item.FoodMediterranean == couplesPackage.FoodMediterranean || item.FoodItalian == couplesPackage.FoodItalian ||
+                        item.FoodIndian == couplesPackage.FoodIndian || item.FoodFrench == couplesPackage.FoodFrench ||
+                        item.FoodChinese == couplesPackage.FoodChinese || item.FoodAmerican == couplesPackage.FoodAmerican))
+                    {
+                        switch (type)
+                        {
+                            case "Venue":
+                                if ((item.Sikhism == true && item.Sikhism == couplesPackage.Sikhism) && (item.ReligionOther == true && item.ReligionOther == couplesPackage.ReligionOther) &&
+                        (item.NonDenominational == true && item.NonDenominational == couplesPackage.NonDenominational) && (item.Lutheranism == true && item.Lutheranism == couplesPackage.Lutheranism) &&
+                        (item.Judaism == true && item.Judaism == couplesPackage.Judaism) && (item.Islamic == true && item.Islamic == couplesPackage.Islamic) &&
+                        (item.Hinduism == true && item.Hinduism == couplesPackage.Hinduism) && (item.Catholicism == true && item.Catholicism == couplesPackage.Catholicism) &&
+                        (item.Buddhism == true && item.Buddhism == couplesPackage.Buddhism) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
+                                {
+                                    packages.Add(item);
+                                }
+                                break;
+                            case "DJ":
+                                if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
+                                {
+                                    packages.Add(item);
+                                }
+                                break;
+                            case "Celebrant":
+                                if ((item.Sikhism == true && item.Sikhism == couplesPackage.Sikhism) || (item.ReligionOther == true && item.ReligionOther == couplesPackage.ReligionOther) ||
+                        (item.NonDenominational == true && item.NonDenominational == couplesPackage.NonDenominational) || (item.Lutheranism == true && item.Lutheranism == couplesPackage.Lutheranism) ||
+                        (item.Judaism == true && item.Judaism == couplesPackage.Judaism) || (item.Islamic == true && item.Islamic == couplesPackage.Islamic) ||
+                        (item.Hinduism == true && item.Hinduism == couplesPackage.Hinduism) || (item.Catholicism == true && item.Catholicism == couplesPackage.Catholicism) ||
+                        (item.Buddhism == true && item.Buddhism == couplesPackage.Buddhism) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
+                                {
+                                    packages.Add(item);
+                                }
+                                break;
+                            case "Caterer":
+                                if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
+                                {
+                                    packages.Add(item);
+                                }
+                                break;
+                            case "Photographer":
+                                if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
+                                {
+                                    packages.Add(item);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            ViewBag.VenderType = type + "s";
             return View(vendorList);
         }
 
@@ -365,6 +494,10 @@ namespace WeddingPlannerApp.Controllers
                         Price = (double)item["Price"]
                     };
                     if (package.VendorId == id && package.VendorType == type)
+                    {
+                        packages.Add(package);
+                    }
+                    else if (type == "Couples")
                     {
                         packages.Add(package);
                     }

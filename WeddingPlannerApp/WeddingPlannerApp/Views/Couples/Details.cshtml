@@ -42,12 +42,10 @@
         <dd>
             @Html.DisplayFor(model => model.CouplePhone)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.WeddingBudget)
-        </dt>
     </dl>
 </div>
 <p>
+    @Html.ActionLink("View Wedding Package", "Packages") |
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
