@@ -1,37 +1,91 @@
 ﻿@model IEnumerable<WeddingPlannerApp.Models.PackageViewModel>
-
-<p>
-    @Html.ActionLink("Add A Package", "MakePackage")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
-        </td>
-    </tr>
+@{
+    Layout = "";
 }
+<head>
+    <link type="text/css" rel="stylesheet" href="~/Content/styles.css">
+</head>
+<style>
+    .autoElement01 {
+        margin: auto;
+        /*width: 50%;*/
+        font-variant-caps: small-caps;
+        font-family: verdana;
+        font-size: 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
+        word-wrap: break-word;
+        height: auto;
+        width: 512px;
+        background-color: rgb(192,112,128);
+        border: 6px solid rgb(192,112,128);
+        border-radius: 32px;
+        transition: 0.3s;
+        margin-top: 16px;
+        margin-bottom: 16px;
+}
+    .autoElement02 {
+        margin: auto;
+        /*width: 50%;*/
+        font-variant-caps: small-caps;
+        font-family: verdana;
+        font-size: 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
+        word-wrap: break-word;
+        height: auto;
+        width: 512px;
+        background-color: rgb(192,112,128);
+        border: 6px solid rgb(192,112,128);
+        border-radius: 32px;
+        transition: 0.3s;
+        margin-top: 16px;
+        margin-bottom: 16px;
+}
+.headerText{
+  font-variant-caps: all-petite-caps;
+  font-size: 24px;
+  line-height: 20%;
+}
+.autoElement02:hover{
+    background-color: rgb(208,128,144);
+    border: 6px solid white;
+}
+    a {
+        color: white;
+        text-decoration: none;
+    }
+</style>
 
-</table>
+
+
+<body>
+    <p>
+        @Html.ActionLink("Add A Package", "MakePackage")
+    </p>
+
+        @foreach (var item in Model)
+        {
+<a  href="@Url.Action($"GetOnePackage", new { id = item.Id })">
+    <div class="autoElement02">
+        <p class="headerText">Description:</p>
+        <p>
+            @Html.DisplayFor(modelItem => item.Description)
+        </p>
+        <p class="headerText">Price:</p>
+        <p>
+            $@Html.DisplayFor(modelItem => item.Price)
+        </p>
+        @*<p>
+                @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
+            </p>*@
+    </div>
+</a>        
+    }
+
+ 
+</body>

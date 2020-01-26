@@ -232,9 +232,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001260015417_models.cs" />
-    <Compile Include="Migrations\202001260015417_models.Designer.cs">
-      <DependentUpon>202001260015417_models.cs</DependentUpon>
+    <Compile Include="Migrations\202001260442191_refactorandcss.cs" />
+    <Compile Include="Migrations\202001260442191_refactorandcss.Designer.cs">
+      <DependentUpon>202001260442191_refactorandcss.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -354,8 +354,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001260015417_models.resx">
-      <DependentUpon>202001260015417_models.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001260442191_refactorandcss.resx">
+      <DependentUpon>202001260442191_refactorandcss.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
