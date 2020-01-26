@@ -32,9 +32,10 @@ namespace WeddingPlannerApp.Controllers
             WeddingPackageViewModel package = new WeddingPackageViewModel()
             {
                 Id = (int)token["Id"],
-                ThirdPartyCatering = (bool?)token["ThidPartyCatering"],
-                ThirdPartyCelebrant = (bool?)token["ThidPartyCelebrant"],
-                ThirdPartyDJ = (bool?)token["ThidPartyDJ"],
+                AllowsDecor = (bool?)token["AllowsDecor"],
+                ThirdPartyCatering = (bool?)token["ThirdPartyCatering"],
+                ThirdPartyCelebrant = (bool?)token["ThirdPartyCelebrant"],
+                ThirdPartyDJ = (bool?)token["ThirdPartyDJ"],
                 LGBTQFriendly = (bool?)token["LGBTQFriendly"],
                 ServesCohabitants = (bool?)token["ServesCohabitants"],
                 KidFriendly = (bool?)token["KidFriendly"],
@@ -68,7 +69,9 @@ namespace WeddingPlannerApp.Controllers
                 Catholicism = (bool?)token["Catholicism"],
                 Lutheranism = (bool?)token["Lutheranism"],
                 Buddhism = (bool?)token["Buddhism"],
-                ReligionOther = (bool?)token["ReligionOther"]
+                ReligionOther = (bool?)token["ReligionOther"],
+                CouplesId = (int?)token["CouplesId"],
+                EstimatedTotal = (double?)token["EstimatedTotal"]
             };
             return package;
         }
@@ -77,6 +80,8 @@ namespace WeddingPlannerApp.Controllers
         {
             List<WeddingPackageViewModel> packageList = new List<WeddingPackageViewModel>();
             WeddingPackageViewModel package = new WeddingPackageViewModel();
+            var userId = User.Identity.GetUserId();
+            var couple = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
             var response = client.GetAsync("WeddingPackages");
             response.Wait();
             var result = response.Result;
@@ -88,7 +93,10 @@ namespace WeddingPlannerApp.Controllers
                 foreach (var item in jObject)
                 {
                     package = PackageModel(item);
-                    packageList.Add(package);
+                    if (package.CouplesId == couple.CoupleId)
+                    {
+                        packageList.Add(package);
+                    }
                 }
             }
             return packageList;
@@ -118,13 +126,13 @@ namespace WeddingPlannerApp.Controllers
             {
                 if (item.GetValue(package) == null)
                 {
-                    if (item.PropertyType.Equals(typeof(bool)) == true)
+                    if (item.PropertyType.Equals(typeof(bool?)) == true)
                     {
                         item.SetValue(package, false);
                     }
-                    else if (item.PropertyType.Equals(typeof(double)) == true)
+                    else if (item.PropertyType.Equals(typeof(double?)) == true)
                     {
-                        item.SetValue(package, 0);
+                        item.SetValue(package, 0.00);
                     }
                 }
             }
@@ -207,6 +215,45 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPackage(WeddingPackageViewModel weddingPackage)
         {
+            if (ModelState.IsValid)
+            {
+                weddingPackage = SetNullValues(weddingPackage);
+                var userId = User.Identity.GetUserId();
+                var user = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
+                weddingPackage.CouplesId = user.CoupleId;
+                string json = JsonConvert.SerializeObject(weddingPackage);
+                var response = client.PutAsync("WeddingPackages/" + weddingPackage.Id, new StringContent(json, Encoding.UTF8, "application/json"));
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    weddingPackage = GetOneRequest(weddingPackage.Id);
+                    return RedirectToAction("PackageDetails", new { id = weddingPackage.Id });
+                }
+            }
+            return View(weddingPackage);
+        }
+
+        public ActionResult SelectPackage(int? id, string type)
+        {
+            PackageViewModel package = new PackageViewModel();
+            var response = client.GetAsync("VendorPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double)vendorPackage["Price"]
+                };
+            }
             return View();
         }
 
@@ -365,12 +412,12 @@ namespace WeddingPlannerApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Couple couple)
+        public ActionResult Edit(CoupleViewModel couple)
         {
             if (ModelState.IsValid)
             {
                 string json = JsonConvert.SerializeObject(couple);
-                var response = client.PutAsync("Couples/" + couple.CoupleId, new StringContent(json, Encoding.UTF8, "application/json"));
+                var response = client.PutAsync("Couples/" + couple.Id, new StringContent(json, Encoding.UTF8, "application/json"));
                 response.Wait();
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
@@ -378,10 +425,9 @@ namespace WeddingPlannerApp.Controllers
                     var userId = User.Identity.GetUserId();
                     var currentUser = db.Couples.Where(v => v.ApplicationId == userId).Select(v => v).SingleOrDefault();
                     currentUser.CoupleId = couple.Id;
-                    //currentUser.VendorType = vendor.VendorType;
                     db.SaveChanges();
+                    return RedirectToAction("Details", new { id = couple.Id });
                 }
-                return RedirectToAction("Details", new { id = couple.Id });
             }
             return View(couple);
         }

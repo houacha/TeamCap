@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.AllowsDecor)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ThirdPartyCatering)
         </th>
         <th>
@@ -132,6 +135,9 @@
     {
         <tr>
             <th>
+                @Html.DisplayFor(modelItem => item.AllowsDecor)
+            </th>
+            <th>
                 @Html.DisplayFor(modelItem => item.ThirdPartyCatering)
             </th>
             <th>
@@ -246,7 +252,6 @@
                 @Html.DisplayFor(modelItem => item.EstimatedTotal)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditPackage", new { id = item.Id }) |
                 @Html.ActionLink("Details", "PackageDetails", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "DeletePackage", new { id = item.Id })
             </td>

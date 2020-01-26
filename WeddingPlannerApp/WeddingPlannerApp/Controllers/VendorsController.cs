@@ -99,9 +99,10 @@ namespace WeddingPlannerApp.Controllers
             WeddingPackageViewModel package = new WeddingPackageViewModel()
             {
                 Id = (int)token["Id"],
-                ThirdPartyCatering = (bool?)token["ThidPartyCatering"],
-                ThirdPartyCelebrant = (bool?)token["ThidPartyCelebrant"],
-                ThirdPartyDJ = (bool?)token["ThidPartyDJ"],
+                AllowsDecor = (bool?)token["AllowsDecor"],
+                ThirdPartyCatering = (bool?)token["ThirdPartyCatering"],
+                ThirdPartyCelebrant = (bool?)token["ThirdPartyCelebrant"],
+                ThirdPartyDJ = (bool?)token["ThirdPartyDJ"],
                 LGBTQFriendly = (bool?)token["LGBTQFriendly"],
                 ServesCohabitants = (bool?)token["ServesCohabitants"],
                 KidFriendly = (bool?)token["KidFriendly"],
@@ -135,7 +136,9 @@ namespace WeddingPlannerApp.Controllers
                 Catholicism = (bool?)token["Catholicism"],
                 Lutheranism = (bool?)token["Lutheranism"],
                 Buddhism = (bool?)token["Buddhism"],
-                ReligionOther = (bool?)token["ReligionOther"]
+                ReligionOther = (bool?)token["ReligionOther"],
+                CouplesId = (int?)token["CouplesId"],
+                EstimatedTotal = (double?)token["EstimatedTotal"]
             };
             return package;
         }
@@ -154,7 +157,7 @@ namespace WeddingPlannerApp.Controllers
                     }
                     else if (item.PropertyType.Equals(typeof(double?)) == true)
                     {
-                        item.SetValue(vendor, 0);
+                        item.SetValue(vendor, 0.0);
                     }
                 }
             }
@@ -214,7 +217,7 @@ namespace WeddingPlannerApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Create", "Vendors", new { type = vendor.VendorType });
         }
-        public List<WeddingPackageViewModel> GetWedding()
+        private List<WeddingPackageViewModel> GetWedding()
         {
             List<WeddingPackageViewModel> packageList = new List<WeddingPackageViewModel>();
             WeddingPackageViewModel package = new WeddingPackageViewModel();
@@ -235,77 +238,140 @@ namespace WeddingPlannerApp.Controllers
             return packageList;
         }
 
+        private Dictionary<string, bool?> GetListOfTrueReliForVendor(object model)
+        {
+            Dictionary<string, bool?> trueVal = new Dictionary<string, bool?>();
+            Type propType = typeof(VendorViewModel);
+            PropertyInfo[] properties = propType.GetProperties();
+            List<string> religions = new List<string>() { "Sikhism", "ReligionOther", "NonDenominational", "Lutheranism", "Buddhism", "Catholicism", "Hinduism", "Islamic", "Judaism" };
+            foreach (var prop in properties)
+            {
+                if (prop.GetValue(model) == null)
+                {
+                }
+                else
+                {
+                    if (prop.PropertyType.Equals(typeof(bool?)) == true && prop.GetValue(model).Equals(true) && religions.Contains(prop.Name))
+                    {
+                        trueVal.Add(prop.Name, Convert.ToBoolean(prop.GetValue(model)));
+                    }
+                }
+            }
+            return trueVal;
+        }
+
+        private Dictionary<string, bool?> GetListOfTrueReliForWedding(object model)
+        {
+            Dictionary<string, bool?> trueVal = new Dictionary<string, bool?>();
+            Type propType = typeof(WeddingPackageViewModel);
+            PropertyInfo[] properties = propType.GetProperties();
+            List<string> religions = new List<string>() { "Sikhism", "ReligionOther", "NonDenominational", "Lutheranism", "Buddhism", "Catholicism", "Hinduism", "Islamic", "Judaism" };
+            foreach (var prop in properties)
+            {
+                if (prop.PropertyType.Equals(typeof(bool?)) == true && prop.GetValue(model).Equals(true) && religions.Contains(prop.Name))
+                {
+                    trueVal.Add(prop.Name, Convert.ToBoolean(prop.GetValue(model)));
+                }
+            }
+            return trueVal;
+        }
+
         // get info of all vendor
-        public ActionResult Index(string type)
+        public ActionResult Index(string type, int? id)
         {
             var vendorList = GetRequest(type);
             var weddingList = GetWedding();
             var userId = User.Identity.GetUserId();
             var coupleId = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c.CoupleId).SingleOrDefault();
-            var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId).Select(w => w).SingleOrDefault();
+            var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId && w.Id == id).Select(w => w).SingleOrDefault();
+            var trueValOfCoupleRelig = GetListOfTrueReliForWedding(couplesPackage);
             List<VendorViewModel> packages = new List<VendorViewModel>();
             foreach (var item in vendorList)
             {
-                if (item != null)
+                var itemPropList = GetListOfTrueReliForVendor(item);
+
+                switch (type)
                 {
-                    if ((item.GenreTechno == couplesPackage.GenreTechno || item.GenreRock == couplesPackage.GenreRock ||
-                        item.GenreRB == couplesPackage.GenreRB || item.GenreRap == couplesPackage.GenreRap ||
-                        item.GenrePop == couplesPackage.GenrePop || item.GenreOther == couplesPackage.GenreOther ||
-                        item.GenreMetal == couplesPackage.GenreMetal || item.GenreInternational == couplesPackage.GenreInternational ||
-                        item.GenreDance == couplesPackage.GenreDance || item.GenreCountry == couplesPackage.GenreCountry) &&
-                        (item.FoodOther == couplesPackage.FoodOther || item.FoodMexican == couplesPackage.FoodMexican ||
-                        item.FoodMediterranean == couplesPackage.FoodMediterranean || item.FoodItalian == couplesPackage.FoodItalian ||
-                        item.FoodIndian == couplesPackage.FoodIndian || item.FoodFrench == couplesPackage.FoodFrench ||
-                        item.FoodChinese == couplesPackage.FoodChinese || item.FoodAmerican == couplesPackage.FoodAmerican))
-                    {
-                        switch (type)
+                    case "Venue":
+                        foreach (var property in trueValOfCoupleRelig)
                         {
-                            case "Venue":
-                                if ((item.Sikhism == true && item.Sikhism == couplesPackage.Sikhism) && (item.ReligionOther == true && item.ReligionOther == couplesPackage.ReligionOther) &&
-                        (item.NonDenominational == true && item.NonDenominational == couplesPackage.NonDenominational) && (item.Lutheranism == true && item.Lutheranism == couplesPackage.Lutheranism) &&
-                        (item.Judaism == true && item.Judaism == couplesPackage.Judaism) && (item.Islamic == true && item.Islamic == couplesPackage.Islamic) &&
-                        (item.Hinduism == true && item.Hinduism == couplesPackage.Hinduism) && (item.Catholicism == true && item.Catholicism == couplesPackage.Catholicism) &&
-                        (item.Buddhism == true && item.Buddhism == couplesPackage.Buddhism) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
+                            var count = 0;
+                            foreach (var prop in itemPropList)
+                            {
+                                if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
                                 {
-                                    packages.Add(item);
+                                    if ((couplesPackage.ThirdPartyCatering == true && couplesPackage.ThirdPartyCatering == item.ThirdPartyCatering) &&
+                                        (couplesPackage.ThirdPartyCelebrant == true && couplesPackage.ThirdPartyCelebrant == item.ThirdPartyCelebrant) &&
+                                        (couplesPackage.ThirdPartyDJ == true && couplesPackage.ThirdPartyDJ == item.ThirdPartyDJ) &&
+                                        (couplesPackage.KidFriendly == true && couplesPackage.KidFriendly == item.KidFriendly) &&
+                                        (couplesPackage.PetFriendly == true && couplesPackage.PetFriendly == item.PetFriendly) &&
+                                        (couplesPackage.ServesCohabitants == true && couplesPackage.ServesCohabitants == item.ServesCohabitants) &&
+                                        (couplesPackage.WheelchairAccessible == true && couplesPackage.WheelchairAccessible == item.HandicapAccessible))
+                                    {
+                                        count++;
+                                    }
                                 }
-                                break;
-                            case "DJ":
-                                if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
-                                {
-                                    packages.Add(item);
-                                }
-                                break;
-                            case "Celebrant":
-                                if ((item.Sikhism == true && item.Sikhism == couplesPackage.Sikhism) || (item.ReligionOther == true && item.ReligionOther == couplesPackage.ReligionOther) ||
-                        (item.NonDenominational == true && item.NonDenominational == couplesPackage.NonDenominational) || (item.Lutheranism == true && item.Lutheranism == couplesPackage.Lutheranism) ||
-                        (item.Judaism == true && item.Judaism == couplesPackage.Judaism) || (item.Islamic == true && item.Islamic == couplesPackage.Islamic) ||
-                        (item.Hinduism == true && item.Hinduism == couplesPackage.Hinduism) || (item.Catholicism == true && item.Catholicism == couplesPackage.Catholicism) ||
-                        (item.Buddhism == true && item.Buddhism == couplesPackage.Buddhism) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
-                                {
-                                    packages.Add(item);
-                                }
-                                break;
-                            case "Caterer":
-                                if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
-                                {
-                                    packages.Add(item);
-                                }
-                                break;
-                            case "Photographer":
-                                if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
-                                {
-                                    packages.Add(item);
-                                }
-                                break;
-                            default:
-                                break;
+                            }
+                            if (count == trueValOfCoupleRelig.Count)
+                            {
+                                packages.Add(item);
+                                count = 0;
+                            }
                         }
-                    }
+                        break;
+                    case "DJ":
+                        if ((item.GenreTechno == couplesPackage.GenreTechno || item.GenreRock == couplesPackage.GenreRock ||
+                item.GenreRB == couplesPackage.GenreRB || item.GenreRap == couplesPackage.GenreRap ||
+                item.GenrePop == couplesPackage.GenrePop || item.GenreOther == couplesPackage.GenreOther ||
+                item.GenreMetal == couplesPackage.GenreMetal || item.GenreInternational == couplesPackage.GenreInternational ||
+                item.GenreDance == couplesPackage.GenreDance || item.GenreCountry == couplesPackage.GenreCountry) &&
+                (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
+                        {
+                            packages.Add(item);
+                        }
+                        break;
+                    case "Celebrant":
+                        foreach (var property in trueValOfCoupleRelig)
+                        {
+                            var count = 0;
+                            foreach (var prop in itemPropList)
+                            {
+                                if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) &&
+                                    (couplesPackage.ServesCohabitants == true && couplesPackage.ServesCohabitants == item.ServesCohabitants))
+                                {
+                                    count++;
+                                }
+                            }
+                            if (count == trueValOfCoupleRelig.Count)
+                            {
+                                packages.Add(item);
+                                count = 0;
+                            }
+                        }
+                        break;
+                    case "Caterer":
+                        if ((item.FoodOther == couplesPackage.FoodOther || item.FoodMexican == couplesPackage.FoodMexican ||
+                item.FoodMediterranean == couplesPackage.FoodMediterranean || item.FoodItalian == couplesPackage.FoodItalian ||
+                item.FoodIndian == couplesPackage.FoodIndian || item.FoodFrench == couplesPackage.FoodFrench ||
+                item.FoodChinese == couplesPackage.FoodChinese || item.FoodAmerican == couplesPackage.FoodAmerican) &&
+                (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) && (couplesPackage.Vegan == true && item.ServesVegan == couplesPackage.Vegan) &&
+                (couplesPackage.FoodAllergyOptions == true && item.FoodAllergyOptions == couplesPackage.FoodAllergyOptions))
+                        {
+                            packages.Add(item);
+                        }
+                        break;
+                    case "Photographer":
+                        if (item.LGBTQFriendly == couplesPackage.LGBTQFriendly)
+                        {
+                            packages.Add(item);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
             ViewBag.VenderType = type + "s";
-            return View(vendorList);
+            return View(packages);
         }
 
         // Shows Details of vendor
@@ -317,7 +383,7 @@ namespace WeddingPlannerApp.Controllers
                 var userId = User.Identity.GetUserId();
                 var user = db.Vendors.Where(u => u.ApplicationId == userId).Select(u => u).SingleOrDefault();
                 vendor = GetOneRequest(user.VendorType, user.VendorId);
-                ViewBag.VendorType = user.VendorType + "s";
+                ViewBag.VendorType = user.VendorType;
             }
             else
             {
@@ -400,7 +466,6 @@ namespace WeddingPlannerApp.Controllers
                 if (result.IsSuccessStatusCode)
                 {
                     user.VendorId = vendor.Id;
-                    user.VendorType = vendor.VendorType;
                     db.SaveChanges();
                     return RedirectToAction("Details", new { id = vendor.Id, type = vendor.VendorType });
                 }

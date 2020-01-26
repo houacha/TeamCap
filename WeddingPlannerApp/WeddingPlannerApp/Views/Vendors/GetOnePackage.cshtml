@@ -37,7 +37,14 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "EditPackage", new { id = Model.Id }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+    @if (User.IsInRole("Vendor") == true)
+    {
+        @Html.ActionLink("Edit", "EditPackage", new { id = Model.Id }) <text> |</text>
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) <text> |</text>
+    }
+    else if (User.IsInRole("Couple") == true)
+    {
+        @Html.ActionLink("Select Package", "SelectPackage", new { id = Model.Id, type = Model.VendorType }) <text> |</text>
+    }
     @Html.ActionLink("Back", "Details", new { id = Model.VendorId, type = Model.VendorType })
 </p>

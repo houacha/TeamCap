@@ -1,5 +1,8 @@
-﻿@Html.ActionLink("Venues", "Index", "Vendors", new { type = "Venue" }, "") |
-@Html.ActionLink("DJs", "Index", "Vendors", new { type = "DJ" }, "") |
-@Html.ActionLink("Photographers", "Index", "Vendors", new { type = "Photographer" }, "") |
-@Html.ActionLink("Caterers", "Index", "Vendors", new { type = "Caterer" }, "") |
-@Html.ActionLink("Celebrants", "Index", "Vendors", new { type = "Celebrant" }, "")
+﻿@model WeddingPlannerApp.Models.WeddingPackageViewModel
+
+
+@Html.ActionLink("Venues", "Index", "Vendors", new { type = "Venue", id = Model.Id }, "") |
+@Html.ActionLink("DJs", "Index", "Vendors", new { type = "DJ", id = Model.Id }, "") |
+@Html.ActionLink("Photographers", "Index", "Vendors", new { type = "Photographer", id = Model.Id }, "") |
+@Html.ActionLink("Caterers", "Index", "Vendors", new { type = "Caterer", id = Model.Id }, "") |
+@Html.ActionLink("Celebrants", "Index", "Vendors", new { type = "Celebrant", id = Model.Id }, "")
