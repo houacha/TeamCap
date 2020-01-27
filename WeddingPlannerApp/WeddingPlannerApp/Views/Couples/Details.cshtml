@@ -23,21 +23,19 @@
     <a href="@Url.Action($"Packages")">
         <span class="possibleSelection">View Wedding Package</span>
     </a>
-    <a href="@Url.Action($"Edit",new { id = Model.Id }))">
+    <a href="@Url.Action($"Edit",new { id = Model.Id })">
         <span class="possibleSelection">Edit Couple Info</span>
     </a>
-    <a href="@Url.Action($"Index")">
+    <a href="@Url.Action($"ChooseVendors", new { id = Model.Id})">
         <span class="possibleSelection">Search Vendors</span>
     </a>
 </div>
 
 @*<p>
     @Html.ActionLink("View Wedding Package", "Packages") |
-<<<<<<< HEAD
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
 </p>
-=======
     @Html.ActionLink("Edit Couple Info", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Search Vendors", "Index")
 </p>*@
->>>>>>> 29e2a842de5ecd4528caf8f24fa1ebd36d597d9c
+

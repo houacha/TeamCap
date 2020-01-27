@@ -7,33 +7,6 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-<<<<<<< HEAD
-    <div class="form-horizontal">
-        <h4>WeddingPackageViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.AllowsDecor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.AllowsDecor)
-                    @Html.ValidationMessageFor(model => model.AllowsDecor, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ThirdPartyDJ, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.ThirdPartyDJ)
-                    @Html.ValidationMessageFor(model => model.ThirdPartyDJ, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-=======
->>>>>>> 29e2a842de5ecd4528caf8f24fa1ebd36d597d9c
-
     <div class="autoElement01 form-group" align="center">
         <p class="headerText">Any Venue or Service I Wish</p>
         <p class="headerText">to Book For My Wedding:</p>

@@ -390,7 +390,6 @@
         break;
 }
 <p>
-<<<<<<< HEAD
     @if (User.IsInRole("Vendor") == true)
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType })<text> |</text>
@@ -400,11 +399,9 @@
     {
         @Html.ActionLink("Back", "Index", new { type = Model.VendorType })
     }
-=======
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType }) |
     @Html.ActionLink("Back to List", "Index", new { type = Model.VendorType })
->>>>>>> 29e2a842de5ecd4528caf8f24fa1ebd36d597d9c
 </p>
 <p>
     @{

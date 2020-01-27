@@ -48,6 +48,5 @@ namespace WeddingPlannerApp.Models
         [Display(Name = "Phone")]
         [Required]
         public string CouplePhone { get; set; }
-        public int? WeddingId { get; set; }
     }
 }

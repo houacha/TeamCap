@@ -25,7 +25,8 @@
         transition: 0.3s;
         margin-top: 16px;
         margin-bottom: 16px;
-}
+    }
+
     .autoElement02 {
         margin: auto;
         /*width: 50%;*/
@@ -45,16 +46,19 @@
         transition: 0.3s;
         margin-top: 16px;
         margin-bottom: 16px;
-}
-.headerText{
-  font-variant-caps: all-petite-caps;
-  font-size: 24px;
-  line-height: 20%;
-}
-.autoElement02:hover{
-    background-color: rgb(208,128,144);
-    border: 6px solid white;
-}
+    }
+
+    .headerText {
+        font-variant-caps: all-petite-caps;
+        font-size: 24px;
+        line-height: 20%;
+    }
+
+    .autoElement02:hover {
+        background-color: rgb(208,128,144);
+        border: 6px solid white;
+    }
+
     a {
         color: white;
         text-decoration: none;
@@ -68,37 +72,32 @@
         @Html.ActionLink("Add A Package", "MakePackage")
     </p>
 
-        @foreach (var item in Model)
-        {
-<a  href="@Url.Action($"GetOnePackage", new { id = item.Id })">
-    <div class="autoElement02">
-        <p class="headerText">Description:</p>
-        <p>
-            @Html.DisplayFor(modelItem => item.Description)
-<<<<<<< HEAD
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
-            @Html.ActionLink("Select Package", "Index")
-        </td>
-    </tr>
-}
-=======
-        </p>
-        <p class="headerText">Price:</p>
-        <p>
-            $@Html.DisplayFor(modelItem => item.Price)
-        </p>
-        @*<p>
-                @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
-            </p>*@
-    </div>
-</a>        
-    }
->>>>>>> 29e2a842de5ecd4528caf8f24fa1ebd36d597d9c
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action($"GetOnePackage", new { id = item.Id })">
+            <div class="autoElement02">
+                <p class="headerText">Description:</p>
+                <p>
 
- 
+                    @Html.DisplayFor(modelItem => item.Description)
+
+                    @Html.DisplayFor(modelItem => item.Price)
+
+                    @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
+                    @Html.ActionLink("Select Package", "Index")
+
+                </p>
+                <p class="headerText">Price:</p>
+                <p>
+                    $@Html.DisplayFor(modelItem => item.Price)
+                </p>
+                @*<p>
+                        @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
+                    </p>*@
+            </div>
+        </a>
+    }
+
+
+
 </body>

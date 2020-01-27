@@ -76,6 +76,13 @@ namespace WeddingPlannerApp.Controllers
             return package;
         }
 
+        public ActionResult ChooseVendors(int? id)
+        {
+            var weddingPackages = PackageList();
+            var package = weddingPackages.Where(w => w.CouplesId == id).Select(w => w).SingleOrDefault();
+            return View(package);
+        }
+
         public List<WeddingPackageViewModel> PackageList()
         {
             List<WeddingPackageViewModel> packageList = new List<WeddingPackageViewModel>();
@@ -170,7 +177,11 @@ namespace WeddingPlannerApp.Controllers
 
         public ActionResult Packages()
         {
-            var packages = PackageList();
+            var userId = User.Identity.GetUserId();
+            var user = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
+            var weddingPackages = PackageList();
+            var packages = weddingPackages.Where(w => w.CouplesId == user.CoupleId).Select(w => w).ToList();
+            ViewBag.PackageAmount = packages.Count;
             return View(packages);
         }
 
@@ -234,6 +245,46 @@ namespace WeddingPlannerApp.Controllers
             return View(weddingPackage);
         }
 
+        public ActionResult DeletePackage(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            WeddingPackageViewModel package = new WeddingPackageViewModel();
+            var response = client.GetAsync("WeddingPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                var service = read.Result;
+                JObject jObject = JObject.Parse(service);
+                package = PackageModel(jObject);
+            }
+            if (package == null)
+            {
+                return HttpNotFound();
+            }
+            return View(package);
+        }
+
+        // POST: Couples/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePackage(int id)
+        {
+            var response = client.DeleteAsync("WeddingPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Details");
+            }
+            return View(id);
+        }
+
         public ActionResult SelectPackage(int? id, string type)
         {
             PackageViewModel package = new PackageViewModel();
@@ -271,8 +322,7 @@ namespace WeddingPlannerApp.Controllers
                 Zipcode = (int)item["Zipcode"],
                 WeddingBudget = (double)item["WeddingBudget"],
                 CoupleEmail = (string)item["CoupleEmail"],
-                CouplePhone = (string)item["CouplePhone"],
-                WeddingId = (int?)item["Id"]
+                CouplePhone = (string)item["CouplePhone"]
             };
             return couple;
         }

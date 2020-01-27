@@ -276,15 +276,8 @@ namespace WeddingPlannerApp.Controllers
             return trueVal;
         }
 
-        // get info of all vendor
-        public ActionResult Index(string type, int? id)
+        private List<VendorViewModel> FilterVendors(List<VendorViewModel> vendorList, string type, Dictionary<string, bool?> trueValOfCoupleRelig, WeddingPackageViewModel couplesPackage)
         {
-            var vendorList = GetRequest(type);
-            var weddingList = GetWedding();
-            var userId = User.Identity.GetUserId();
-            var coupleId = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c.CoupleId).SingleOrDefault();
-            var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId && w.Id == id).Select(w => w).SingleOrDefault();
-            var trueValOfCoupleRelig = GetListOfTrueReliForWedding(couplesPackage);
             List<VendorViewModel> packages = new List<VendorViewModel>();
             foreach (var item in vendorList)
             {
@@ -300,13 +293,13 @@ namespace WeddingPlannerApp.Controllers
                             {
                                 if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
                                 {
-                                    if ((couplesPackage.ThirdPartyCatering == true && couplesPackage.ThirdPartyCatering == item.ThirdPartyCatering) &&
-                                        (couplesPackage.ThirdPartyCelebrant == true && couplesPackage.ThirdPartyCelebrant == item.ThirdPartyCelebrant) &&
-                                        (couplesPackage.ThirdPartyDJ == true && couplesPackage.ThirdPartyDJ == item.ThirdPartyDJ) &&
-                                        (couplesPackage.KidFriendly == true && couplesPackage.KidFriendly == item.KidFriendly) &&
-                                        (couplesPackage.PetFriendly == true && couplesPackage.PetFriendly == item.PetFriendly) &&
-                                        (couplesPackage.ServesCohabitants == true && couplesPackage.ServesCohabitants == item.ServesCohabitants) &&
-                                        (couplesPackage.WheelchairAccessible == true && couplesPackage.WheelchairAccessible == item.HandicapAccessible))
+                                    if (((couplesPackage.ThirdPartyCatering == true && couplesPackage.ThirdPartyCatering == item.ThirdPartyCatering) || couplesPackage.ThirdPartyCatering == false) &&
+                                        ((couplesPackage.ThirdPartyCelebrant == true && couplesPackage.ThirdPartyCelebrant == item.ThirdPartyCelebrant) || couplesPackage.ThirdPartyCelebrant == false) &&
+                                        ((couplesPackage.ThirdPartyDJ == true && couplesPackage.ThirdPartyDJ == item.ThirdPartyDJ) || couplesPackage.ThirdPartyDJ == false) &&
+                                        ((couplesPackage.KidFriendly == true && couplesPackage.KidFriendly == item.KidFriendly) || couplesPackage.KidFriendly == false) &&
+                                        ((couplesPackage.PetFriendly == true && couplesPackage.PetFriendly == item.PetFriendly) || couplesPackage.PetFriendly == false) &&
+                                        ((couplesPackage.ServesCohabitants == true && couplesPackage.ServesCohabitants == item.ServesCohabitants) || couplesPackage.ServesCohabitants == false) &&
+                                        ((couplesPackage.WheelchairAccessible == true && couplesPackage.WheelchairAccessible == item.HandicapAccessible) || couplesPackage.WheelchairAccessible == false))
                                     {
                                         count++;
                                     }
@@ -341,6 +334,11 @@ namespace WeddingPlannerApp.Controllers
                                 {
                                     count++;
                                 }
+                                else if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) &&
+                                    (couplesPackage.ServesCohabitants == false))
+                                {
+                                    count++;
+                                }
                             }
                             if (count == trueValOfCoupleRelig.Count)
                             {
@@ -353,11 +351,18 @@ namespace WeddingPlannerApp.Controllers
                         if ((item.FoodOther == couplesPackage.FoodOther || item.FoodMexican == couplesPackage.FoodMexican ||
                 item.FoodMediterranean == couplesPackage.FoodMediterranean || item.FoodItalian == couplesPackage.FoodItalian ||
                 item.FoodIndian == couplesPackage.FoodIndian || item.FoodFrench == couplesPackage.FoodFrench ||
-                item.FoodChinese == couplesPackage.FoodChinese || item.FoodAmerican == couplesPackage.FoodAmerican) &&
-                (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) && (couplesPackage.Vegan == true && item.ServesVegan == couplesPackage.Vegan) &&
-                (couplesPackage.FoodAllergyOptions == true && item.FoodAllergyOptions == couplesPackage.FoodAllergyOptions))
+                item.FoodChinese == couplesPackage.FoodChinese || item.FoodAmerican == couplesPackage.FoodAmerican) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
                         {
-                            packages.Add(item);
+                            if ((couplesPackage.Vegan == true && item.ServesVegan == couplesPackage.Vegan) &&
+                                ((couplesPackage.FoodAllergyOptions == true && item.FoodAllergyOptions == couplesPackage.FoodAllergyOptions) || couplesPackage.FoodAllergyOptions == false))
+                            {
+                                packages.Add(item);
+                            }
+                            else if ((couplesPackage.Vegan == false) &&
+                                ((couplesPackage.FoodAllergyOptions == true && item.FoodAllergyOptions == couplesPackage.FoodAllergyOptions) || couplesPackage.FoodAllergyOptions == false))
+                            {
+                                packages.Add(item);
+                            }
                         }
                         break;
                     case "Photographer":
@@ -370,6 +375,19 @@ namespace WeddingPlannerApp.Controllers
                         break;
                 }
             }
+            return packages;
+        }
+
+        // get info of all vendor
+        public ActionResult Index(string type, int? id)
+        {
+            var vendorList = GetRequest(type);
+            var weddingList = GetWedding();
+            var userId = User.Identity.GetUserId();
+            var coupleId = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c.CoupleId).SingleOrDefault();
+            var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId && w.Id == id).Select(w => w).SingleOrDefault();
+            var trueValOfCoupleRelig = GetListOfTrueReliForWedding(couplesPackage);
+            var packages = FilterVendors(vendorList, type, trueValOfCoupleRelig, couplesPackage);
             ViewBag.VenderType = type + "s";
             return View(packages);
         }
