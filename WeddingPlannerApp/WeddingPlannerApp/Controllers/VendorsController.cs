@@ -293,19 +293,19 @@ namespace WeddingPlannerApp.Controllers
                             {
                                 if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
                                 {
-                                    if (((couplesPackage.ThirdPartyCatering == true && couplesPackage.ThirdPartyCatering == item.ThirdPartyCatering) || couplesPackage.ThirdPartyCatering == false) &&
-                                        ((couplesPackage.ThirdPartyCelebrant == true && couplesPackage.ThirdPartyCelebrant == item.ThirdPartyCelebrant) || couplesPackage.ThirdPartyCelebrant == false) &&
-                                        ((couplesPackage.ThirdPartyDJ == true && couplesPackage.ThirdPartyDJ == item.ThirdPartyDJ) || couplesPackage.ThirdPartyDJ == false) &&
-                                        ((couplesPackage.KidFriendly == true && couplesPackage.KidFriendly == item.KidFriendly) || couplesPackage.KidFriendly == false) &&
-                                        ((couplesPackage.PetFriendly == true && couplesPackage.PetFriendly == item.PetFriendly) || couplesPackage.PetFriendly == false) &&
-                                        ((couplesPackage.ServesCohabitants == true && couplesPackage.ServesCohabitants == item.ServesCohabitants) || couplesPackage.ServesCohabitants == false) &&
-                                        ((couplesPackage.WheelchairAccessible == true && couplesPackage.WheelchairAccessible == item.HandicapAccessible) || couplesPackage.WheelchairAccessible == false))
+                                    if (((couplesPackage.ThirdPartyCatering == true &&  item.ThirdPartyCatering == true) || couplesPackage.ThirdPartyCatering == false) &&
+                                        ((couplesPackage.ThirdPartyCelebrant == true && item.ThirdPartyCelebrant == true) || couplesPackage.ThirdPartyCelebrant == false) &&
+                                        ((couplesPackage.ThirdPartyDJ == true && item.ThirdPartyDJ == true) || couplesPackage.ThirdPartyDJ == false) &&
+                                        ((couplesPackage.KidFriendly == true && item.KidFriendly == true) || couplesPackage.KidFriendly == false) &&
+                                        ((couplesPackage.PetFriendly == true && item.PetFriendly == true) || couplesPackage.PetFriendly == false) &&
+                                        ((couplesPackage.ServesCohabitants == true && item.ServesCohabitants == true) || couplesPackage.ServesCohabitants == false) &&
+                                        ((couplesPackage.WheelchairAccessible == true && item.HandicapAccessible == true) || couplesPackage.WheelchairAccessible == false))
                                     {
                                         count++;
                                     }
                                 }
                             }
-                            if (count == trueValOfCoupleRelig.Count)
+                            if (count >= trueValOfCoupleRelig.Count)
                             {
                                 packages.Add(item);
                                 count = 0;
@@ -330,17 +330,12 @@ namespace WeddingPlannerApp.Controllers
                             foreach (var prop in itemPropList)
                             {
                                 if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) &&
-                                    (couplesPackage.ServesCohabitants == true && couplesPackage.ServesCohabitants == item.ServesCohabitants))
-                                {
-                                    count++;
-                                }
-                                else if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) &&
-                                    (couplesPackage.ServesCohabitants == false))
+                                    ((couplesPackage.ServesCohabitants == true &&  item.ServesCohabitants == true) || couplesPackage.ServesCohabitants == false))
                                 {
                                     count++;
                                 }
                             }
-                            if (count == trueValOfCoupleRelig.Count)
+                            if (count >= trueValOfCoupleRelig.Count)
                             {
                                 packages.Add(item);
                                 count = 0;

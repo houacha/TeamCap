@@ -397,11 +397,13 @@
         @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
     }
-    <p>
-        @{
-            Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });
-        }
-    </p>
+</p>
+<p>
+    @{
+        Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });
+    }
+</p>
+
 
 
 
