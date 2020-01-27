@@ -418,15 +418,19 @@ namespace WeddingPlannerApp.Controllers
         // get info of all vendor
         public ActionResult Index(string type, int? id)
         {
-            var vendorList = GetRequest(type);
-            var weddingList = GetWedding();
-            var userId = User.Identity.GetUserId();
-            var coupleId = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c.CoupleId).SingleOrDefault();
-            var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId && w.Id == id).Select(w => w).SingleOrDefault();
-            var trueValOfCoupleRelig = GetListOfTrueReliForWedding(couplesPackage);
-            var packages = FilterVendors(vendorList, type, trueValOfCoupleRelig, couplesPackage);
-            ViewBag.VenderType = type + "s";
-            return View(packages);
+            if (id != null)
+            {
+                var vendorList = GetRequest(type);
+                var weddingList = GetWedding();
+                var userId = User.Identity.GetUserId();
+                var coupleId = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c.CoupleId).SingleOrDefault();
+                var couplesPackage = weddingList.Where(w => w.CouplesId == coupleId && w.Id == id).Select(w => w).SingleOrDefault();
+                var trueValOfCoupleRelig = GetListOfTrueReliForWedding(couplesPackage);
+                var packages = FilterVendors(vendorList, type, trueValOfCoupleRelig, couplesPackage);
+                ViewBag.VenderType = type + "s";
+                return View(packages);
+            }
+            return RedirectToAction("Details", "Couples");
         }
 
         // Shows Details of vendor
@@ -777,6 +781,54 @@ namespace WeddingPlannerApp.Controllers
                 return RedirectToAction("Details");
             }
             return View(package);
+        }
+
+        public ActionResult DeleteContract(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PackageViewModel package = new PackageViewModel();
+            var response = client.GetAsync("ServiceContracts/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = (double?)vendorPackage["ContractPrice"],
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = (int?)vendorPackage["PricePhaseKey"]
+                };
+            }
+            if (package == null)
+            {
+                return HttpNotFound();
+            }
+            return View(package);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteContract(int? id, string nothing)
+        {
+            var response = client.DeleteAsync("ServiceContracts/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Details");
+            }
+            return View(id);
         }
 
         #endregion

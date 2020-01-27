@@ -378,7 +378,7 @@ namespace WeddingPlannerApp.Controllers
         // POST: Couples/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePackage(int id)
+        public ActionResult DeletePackage(int? id, string nothing)
         {
             var response = client.DeleteAsync("WeddingPackages/" + id);
             response.Wait();
@@ -414,6 +414,76 @@ namespace WeddingPlannerApp.Controllers
             return RedirectToAction("Details");
         }
 
+        public ActionResult DeleteContract(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PackageViewModel package = new PackageViewModel();
+            var response = client.GetAsync("ServiceContracts/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = (double?)vendorPackage["ContractPrice"],
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = (int?)vendorPackage["PricePhaseKey"]
+                };
+            }
+            if (package == null)
+            {
+                return HttpNotFound();
+            }
+            return View(package);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteContract(int? id, string nothing)
+        {
+            var contract = client.GetAsync("ServiceContracts/" + id);
+            contract.Wait();
+            var yield = contract.Result;
+            if (yield.IsSuccessStatusCode)
+            {
+                var read = yield.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                var package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = (double?)vendorPackage["ContractPrice"],
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = (int?)vendorPackage["PricePhaseKey"]
+                };
+                var response = client.DeleteAsync("ServiceContracts/" + id);
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    SubtPrice(package);
+                    return RedirectToAction("Details");
+                }
+            }
+
+            return View(id);
+        }
+
         private void AddPrice(PackageViewModel package)
         {
             var userId = User.Identity.GetUserId();
@@ -421,6 +491,22 @@ namespace WeddingPlannerApp.Controllers
             var weddingList = PackageList();
             var thisWedding = weddingList.Where(w => w.CouplesId == user.CoupleId).SingleOrDefault();
             thisWedding.EstimatedTotal += package.ContractPrice;
+            string json = JsonConvert.SerializeObject(thisWedding);
+            var response = client.PutAsync("WeddingPackages/" + thisWedding.Id, new StringContent(json, Encoding.UTF8, "application/json"));
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+            }
+        }
+
+        private void SubtPrice(PackageViewModel package)
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Couples.Where(c => c.ApplicationId == userId).Select(u => u).SingleOrDefault();
+            var weddingList = PackageList();
+            var thisWedding = weddingList.Where(w => w.CouplesId == user.CoupleId).SingleOrDefault();
+            thisWedding.EstimatedTotal -= package.ContractPrice;
             string json = JsonConvert.SerializeObject(thisWedding);
             var response = client.PutAsync("WeddingPackages/" + thisWedding.Id, new StringContent(json, Encoding.UTF8, "application/json"));
             response.Wait();
