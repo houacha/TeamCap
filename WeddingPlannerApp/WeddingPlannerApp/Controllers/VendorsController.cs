@@ -414,6 +414,38 @@ namespace WeddingPlannerApp.Controllers
             return View(packageList);
         }
 
+        public ActionResult Bookkeeping(int? id)
+        {
+            var response = client.GetAsync("ServiceContracts");
+            double? total = 0.0;
+            List<PackageViewModel> contractList = new List<PackageViewModel>();
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray vendorPackage = JArray.Parse(read.Result);
+                foreach (var item in vendorPackage)
+                {
+                    var package = new PackageViewModel()
+                    {
+                        Id = (int)item["Id"],
+                        VendorType = (string)item["VendorType"],
+                        VendorId = (int?)item["VendorId"],
+                        Description = (string)item["Description"],
+                        Price = (double?)item["Price"],
+                        ContractPrice = (double?)item["ContractPrice"],
+                        CoupleId = (int?)item["CoupleId"],
+                        PricePhaseKey = (int?)item["PricePhaseKey"]
+                    };
+                    contractList.Add(package);
+                    total += package.ContractPrice;
+                    ViewBag.Total = total;
+                }
+            }
+            return View(contractList);
+        }
 
         // get info of all vendor
         public ActionResult Index(string type, int? id)
