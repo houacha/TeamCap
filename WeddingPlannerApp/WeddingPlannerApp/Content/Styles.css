@@ -160,6 +160,32 @@
     border: 6px solid white;
 }
 
+.autoElement02 {
+    margin: auto;
+    /*width: 50%;*/
+    font-variant-caps: small-caps;
+    font-family: verdana;
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    word-wrap: break-word;
+    height: auto;
+    width: 512px;
+    background-color: rgb(192,112,128);
+    border: 6px solid rgb(192,112,128);
+    border-radius: 32px;
+    transition: 0.3s;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.autoElement02:hover {
+    background-color: rgb(208,128,144);
+    border: 6px solid white;
+}
+
 .ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;

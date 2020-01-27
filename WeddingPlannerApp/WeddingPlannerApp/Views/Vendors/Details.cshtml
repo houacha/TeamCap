@@ -1,10 +1,31 @@
 ﻿@model WeddingPlannerApp.Models.VendorViewModel
+    <p>
+        @if (User.IsInRole("Vendor") == true)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType })<text> |</text>
+            @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
 
+        }
+        else
+        {
+        <div class="selectorHorizontal" align="center">
+            <a href="@Url.Action($"Index", new { type = Model.VendorType })">
+            <span class="possibleSelection">
+               Back
+            </span>
+    @*@Html.ActionLink("Back", "Details")*@
+            </a>
+        </div>
+
+            @*@Html.ActionLink("Back", "Index", new { type = Model.VendorType })*@
+        }
+    </p>
 
 @switch (ViewBag.VendorType)
 {
     case "Venues":
-        <div class="autoElement01" align="center">
+        <div class="autoElement02" align="center">
             <p class="headerText">@Model.Name</p>
 
             <p class="tinyText">@Html.DisplayFor(model => model.VendorType)</p>
@@ -388,19 +409,7 @@
     default:
         break;
 }
-<p>
-    @if (User.IsInRole("Vendor") == true)
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType })<text> |</text>
-        @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
 
-    }
-    else
-    {
-        @Html.ActionLink("Back", "Index", new { type = Model.VendorType })
-    }
-</p>
 <p>
     @{
         Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });

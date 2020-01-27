@@ -1,12 +1,41 @@
 ﻿@model WeddingPlannerApp.Models.WeddingPackageViewModel
 
-
-@Html.ActionLink("Venues", "Index", "Vendors", new { type = "Venue", id = Model.Id }, "") |
-@Html.ActionLink("DJs", "Index", "Vendors", new { type = "DJ", id = Model.Id }, "") |
-@Html.ActionLink("Photographers", "Index", "Vendors", new { type = "Photographer", id = Model.Id }, "") |
-@Html.ActionLink("Caterers", "Index", "Vendors", new { type = "Caterer", id = Model.Id }, "") |
-@Html.ActionLink("Celebrants", "Index", "Vendors", new { type = "Celebrant", id = Model.Id }, "")
+   <div class="autoElement01"align="center">
+       <p class="superHeaderText">Search Vendor Type</p>
+   </div> 
+<div class="selectorHorizontal" align="center">
+        <a href="@Url.Action($"Index", "Vendors", new { type = "Venue", id = Model.Id }, "")">
+            <span class="possibleSelection">
+                Venues
+            </span>
+        </a>
+        <a href="@Url.Action($"Index", "Vendors", new { type = "DJ", id = Model.Id }, "")">
+            <span class="possibleSelection">
+                DJ
+            </span>
+        </a>
+        <a href="@Url.Action($"Index", "Vendors", new { type = "Photographer", id = Model.Id }, "")">
+            <span class="possibleSelection">
+                Photographer
+            </span>
+        </a>
+        <a href="@Url.Action($"Index", "Vendors", new { type = "Caterer", id = Model.Id }, "")">
+            <span class="possibleSelection">
+                Caterer
+            </span>
+        </a>
+        <a href="@Url.Action($"Index", "Vendors", new { type = "Celebrant", id = Model.Id }, "")">
+            <span class="possibleSelection">
+                Celebrant
+            </span>
+        </a>
+    </div>
 <br />
-<br />
-@Html.ActionLink("Back", "Details")
-
+<div class="selectorHorizontal" align="center">
+    <a href="@Url.Action($"Details")">
+    <span class="possibleSelection">
+        Back
+    </span>
+    @*@Html.ActionLink("Back", "Details")*@
+    </a>
+</div>

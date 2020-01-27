@@ -178,13 +178,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001270128064_models.cs" />
-    <Compile Include="Migrations\202001270128064_models.Designer.cs">
-      <DependentUpon>202001270128064_models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001270406458_change prop.cs" />
-    <Compile Include="Migrations\202001270406458_change prop.Designer.cs">
-      <DependentUpon>202001270406458_change prop.cs</DependentUpon>
+    <Compile Include="Migrations\202001270659533_finalone.cs" />
+    <Compile Include="Migrations\202001270659533_finalone.Designer.cs">
+      <DependentUpon>202001270659533_finalone.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,11 +300,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001270128064_models.resx">
-      <DependentUpon>202001270128064_models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001270406458_change prop.resx">
-      <DependentUpon>202001270406458_change prop.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001270659533_finalone.resx">
+      <DependentUpon>202001270659533_finalone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

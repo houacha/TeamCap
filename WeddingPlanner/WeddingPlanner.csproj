@@ -227,13 +227,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001270123492_models.cs" />
-    <Compile Include="Migrations\202001270123492_models.Designer.cs">
-      <DependentUpon>202001270123492_models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001270408094_change models.cs" />
-    <Compile Include="Migrations\202001270408094_change models.Designer.cs">
-      <DependentUpon>202001270408094_change models.cs</DependentUpon>
+    <Compile Include="Migrations\202001270658403_finalMigration.cs" />
+    <Compile Include="Migrations\202001270658403_finalMigration.Designer.cs">
+      <DependentUpon>202001270658403_finalMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -345,11 +341,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001270123492_models.resx">
-      <DependentUpon>202001270123492_models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001270408094_change models.resx">
-      <DependentUpon>202001270408094_change models.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001270658403_finalMigration.resx">
+      <DependentUpon>202001270658403_finalMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
