@@ -1,0 +1,79 @@
+﻿@model WeddingPlannerApp.Models.PackageViewModel
+
+@{
+    ViewBag.Title = "ConfirmContract";
+}
+
+<h2>ConfirmContract</h2>
+
+<div>
+    <h4>PackageViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PricePhaseKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PricePhaseKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoupleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoupleId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirm" class="btn btn-default" /> |
+            @Html.ActionLink("Back", "Details")
+        </div>
+    }
+</div>

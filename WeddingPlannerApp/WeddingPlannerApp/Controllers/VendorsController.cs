@@ -378,6 +378,43 @@ namespace WeddingPlannerApp.Controllers
             return packages;
         }
 
+        public ActionResult ShowPendingContracts()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Vendors.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
+            List<PackageViewModel> packageList = new List<PackageViewModel>();
+            PackageViewModel package = null;
+            var response = client.GetAsync("WeddingPackages");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray jObject = JArray.Parse(read.Result);
+                foreach (var item in jObject)
+                {
+                    package = new PackageViewModel()
+                    {
+                        Id = (int)item["Id"],
+                        CoupleId = (int?)item["CoupleId"],
+                        VendorType = (string)item["VendorType"],
+                        Description = (string)item["Description"],
+                        Price = (double?)item["Price"],
+                        PricePhaseKey = (int?)item["PricePhaseKey"],
+                        ContractPrice = (double?)item["ContractPrice"],
+                        VendorId = (int?)item["VendorId"]
+                    };
+                    if (package.VendorId == user.VendorId && package.VendorType == user.VendorType && package.PricePhaseKey == 1)
+                    {
+                        packageList.Add(package);
+                    }
+                }
+            }
+            return View(packageList);
+        }
+
+
         // get info of all vendor
         public ActionResult Index(string type, int? id)
         {
@@ -546,9 +583,9 @@ namespace WeddingPlannerApp.Controllers
                 {
                     Id = (int)vendorPackage["Id"],
                     VendorType = (string)vendorPackage["VendorType"],
-                    VendorId = (int)vendorPackage["VendorId"],
+                    VendorId = (int?)vendorPackage["VendorId"],
                     Description = (string)vendorPackage["Description"],
-                    Price = (double)vendorPackage["Price"]
+                    Price = (double?)vendorPackage["Price"]
                 };
             }
             return package;
@@ -572,15 +609,11 @@ namespace WeddingPlannerApp.Controllers
                     {
                         Id = (int)item["Id"],
                         VendorType = (string)item["VendorType"],
-                        VendorId = (int)item["VendorId"],
+                        VendorId = (int?)item["VendorId"],
                         Description = (string)item["Description"],
-                        Price = (double)item["Price"]
+                        Price = (double?)item["Price"]
                     };
                     if (package.VendorId == id && package.VendorType == type)
-                    {
-                        packages.Add(package);
-                    }
-                    else if (type == "Couples")
                     {
                         packages.Add(package);
                     }

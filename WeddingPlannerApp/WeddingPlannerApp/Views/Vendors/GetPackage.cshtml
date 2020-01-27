@@ -68,9 +68,12 @@
 
 
 <body>
-    <p>
-        @Html.ActionLink("Add A Package", "MakePackage")
-    </p>
+    @if (User.IsInRole("Vendor") == true)
+    {
+        <p>
+            @Html.ActionLink("Add A Package", "MakePackage")
+        </p>
+    }
 
     @foreach (var item in Model)
     {

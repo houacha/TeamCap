@@ -16,14 +16,10 @@ namespace WeddingPlannerApp.Models
         public string Description { get; set; }
         [Display(Name = "Price")]
         [Required]
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public int? PricePhaseKey { get; set; }
-        public string ContractPrice { get; set; }
-        public string CoupleName { get; set; }
-        public string CouplePhone { get; set; }
-        public string CoupleEmail { get; set; }
+        public double? ContractPrice { get; set; }
         public int? VendorId { get; set; }
-        public string Type { get; set; }
-        public int PackageId { get; set; }
+        public int? CoupleId { get; set; }
     }
 }
