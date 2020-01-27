@@ -286,6 +286,7 @@
     <Content Include="Views\Vendors\ConfirmContract.cshtml" />
     <Content Include="Views\Couples\DeleteContract.cshtml" />
     <Content Include="Views\Vendors\DeleteContract.cshtml" />
+    <Content Include="Views\Vendors\Bookkeeping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WeddingPlannerApp.Models.PackageViewModel>
+
+@{
+    ViewBag.Title = "Bookkeeping";
+}
+
+<h2>Bookkeeping</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PricePhaseKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PricePhaseKey)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractPrice)
+        </td>
+    </tr>
+}
+
+</table>
+
+<h4>Current Profit: $@ViewBag.Total</h4>
