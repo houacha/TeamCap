@@ -305,7 +305,7 @@ namespace WeddingPlannerApp.Controllers
                                     }
                                 }
                             }
-                            if (count == trueValOfCoupleRelig.Count)
+                            if (count >= trueValOfCoupleRelig.Count)
                             {
                                 packages.Add(item);
                                 count = 0;
@@ -340,7 +340,7 @@ namespace WeddingPlannerApp.Controllers
                                     count++;
                                 }
                             }
-                            if (count == trueValOfCoupleRelig.Count)
+                            if (count >= trueValOfCoupleRelig.Count)
                             {
                                 packages.Add(item);
                                 count = 0;
