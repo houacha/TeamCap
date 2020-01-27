@@ -417,9 +417,7 @@
         @Html.ActionLink("Book Keep", "Bookkeeping", new { id = Model.Id })<text> |</text>
         @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
-    }
-    else
-    {
+
 <p>
     @{
         Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });
