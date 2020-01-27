@@ -84,11 +84,7 @@
 
                     @Html.DisplayFor(modelItem => item.Description)
 
-                    @Html.DisplayFor(modelItem => item.Price)
-
-                    @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id })
-                    @Html.ActionLink("Select Package", "Index")
-
+                    @Html.ActionLink("Details", "GetOnePackage", new { id = item.Id }) |
                 </p>
                 <p class="headerText">Price:</p>
                 <p>

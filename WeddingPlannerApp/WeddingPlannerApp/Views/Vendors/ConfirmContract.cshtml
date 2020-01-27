@@ -35,14 +35,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ContractPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContractPrice)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.VendorId)
         </dt>
 
@@ -60,12 +52,22 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Confirm" class="btn btn-default" /> |
-            @Html.ActionLink("Back", "Details")
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContractPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ContractPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContractPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Confirm" class="btn btn-default" /> |
+                @Html.ActionLink("Back", "Details")
+            </div>
         </div>
     }
 </div>

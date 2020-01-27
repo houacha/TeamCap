@@ -283,6 +283,7 @@
     <Content Include="Views\Couples\ShowPendingContracts.cshtml" />
     <Content Include="Views\Vendors\ShowPendingContracts.cshtml" />
     <Content Include="Views\Couples\ConfirmContract.cshtml" />
+    <Content Include="Views\Vendors\ConfirmContract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

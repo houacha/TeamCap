@@ -251,7 +251,7 @@ namespace WeddingPlannerApp.Controllers
             var user = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
             List<PackageViewModel> packageList = new List<PackageViewModel>();
             PackageViewModel package = null;
-            var response = client.GetAsync("WeddingPackages");
+            var response = client.GetAsync("ServiceContracts");
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -318,17 +318,34 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmContract(PackageViewModel package)
         {
-            if (ModelState.IsValid)
+            var response = client.GetAsync("ServiceContracts/" + package.Id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
             {
-                package.PricePhaseKey = 3;
-                string json = JsonConvert.SerializeObject(package);
-                var response = client.PutAsync("ServiceContract" + "/" + package.Id, new StringContent(json, Encoding.UTF8, "application/json"));
-                response.Wait();
-                var result = response.Result;
-                if (result.IsSuccessStatusCode)
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
                 {
-                    return RedirectToAction("Details");
-                }
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = (double?)vendorPackage["ContractPrice"],
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = 3
+                };
+            }
+            string json = JsonConvert.SerializeObject(package);
+            response = client.PutAsync("ServiceContracts" + "/" + package.Id, new StringContent(json, Encoding.UTF8, "application/json"));
+            response.Wait();
+            result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                AddPrice(package);
+                return RedirectToAction("Details");
             }
             return View(package);
         }
@@ -393,7 +410,6 @@ namespace WeddingPlannerApp.Controllers
                     Price = (double?)vendorPackage["Price"]
                 };
                 ServiceContract(package);
-                AddPrice(package);
             }
             return RedirectToAction("Details");
         }
@@ -422,6 +438,7 @@ namespace WeddingPlannerApp.Controllers
                 var user = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
                 PackageViewModel contract = new PackageViewModel()
                 {
+                    ContractPrice = 0,
                     VendorType = package.VendorType,
                     VendorId = package.VendorId,
                     Description = package.Description,

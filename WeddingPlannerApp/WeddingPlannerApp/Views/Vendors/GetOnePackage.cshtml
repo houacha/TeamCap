@@ -44,7 +44,7 @@
     }
     else if (User.IsInRole("Couple") == true)
     {
-        @Html.ActionLink("Select Package", "SelectPackage", new { id = Model.Id, type = Model.VendorType }) <text> |</text>
+        @Html.ActionLink("Select Package", "SelectPackage", "Couples", new { id = Model.Id, type = Model.VendorType }, "") <text> |</text>
     }
     @Html.ActionLink("Back", "Details", new { id = Model.VendorId, type = Model.VendorType })
 </p>

@@ -384,7 +384,7 @@ namespace WeddingPlannerApp.Controllers
             var user = db.Vendors.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
             List<PackageViewModel> packageList = new List<PackageViewModel>();
             PackageViewModel package = null;
-            var response = client.GetAsync("WeddingPackages");
+            var response = client.GetAsync("ServiceContracts");
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
@@ -709,6 +709,74 @@ namespace WeddingPlannerApp.Controllers
 
             }
             return RedirectToAction("Details", new { id = package.VendorId, type = package.VendorType });
+        }
+
+        public ActionResult ConfirmContract(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PackageViewModel package = null;
+            var response = client.GetAsync("VendorPackages/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = (double?)vendorPackage["ContractPrice"],
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = (int?)vendorPackage["PricePhaseKey"]
+                };
+            }
+            if (package == null)
+            {
+                return HttpNotFound();
+            }
+            return View(package);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmContract(PackageViewModel package)
+        {
+            var response = client.GetAsync("ServiceContracts/" + package.Id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JObject vendorPackage = JObject.Parse(read.Result);
+                package = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = package.ContractPrice,
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = 2
+                };
+            }
+            string json = JsonConvert.SerializeObject(package);
+            response = client.PutAsync("ServiceContracts" + "/" + package.Id, new StringContent(json, Encoding.UTF8, "application/json"));
+            response.Wait();
+            result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Details");
+            }
+            return View(package);
         }
 
         #endregion
