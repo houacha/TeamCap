@@ -19,6 +19,12 @@
     <p class="headerText">$@Html.DisplayFor(model => model.WeddingBudget)</p>
 </div>
 
+<p>
+    @{
+        Html.RenderAction("GetVendorPackages");
+    }
+</p>
+
 <div class="selectorHorizontal" align="center">
     <a href="@Url.Action($"Packages")">
         <span class="possibleSelection">View Wedding Package</span>
@@ -33,6 +39,7 @@
         <span class="possibleSelection">Search Vendors</span>
     </a>
 </div>
+
 
 @*<p>
         @Html.ActionLink("View Wedding Package", "Packages") |

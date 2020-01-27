@@ -27,6 +27,42 @@ namespace WeddingPlannerApp.Controllers
             client.BaseAddress = new Uri("https://localhost:44317/api/");
         }
 
+        public ActionResult GetVendorPackages()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Couples.Where(c => c.ApplicationId == userId).Select(c => c).SingleOrDefault();
+            List<PackageViewModel> packageList = new List<PackageViewModel>();
+            PackageViewModel package = null;
+            var response = client.GetAsync("ServiceContracts");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                JArray jObject = JArray.Parse(read.Result);
+                foreach (var item in jObject)
+                {
+                    package = new PackageViewModel()
+                    {
+                        Id = (int)item["Id"],
+                        CoupleId = (int?)item["CoupleId"],
+                        VendorType = (string)item["VendorType"],
+                        Description = (string)item["Description"],
+                        Price = (double?)item["Price"],
+                        PricePhaseKey = (int?)item["PricePhaseKey"],
+                        ContractPrice = (double?)item["ContractPrice"],
+                        VendorId = (int?)item["VendorId"]
+                    };
+                    if (package.CoupleId == user.CoupleId)
+                    {
+                        packageList.Add(package);
+                    }
+                }
+            }
+            return View(packageList);
+        }
+
         public WeddingPackageViewModel PackageModel(JToken token)
         {
             WeddingPackageViewModel package = new WeddingPackageViewModel()

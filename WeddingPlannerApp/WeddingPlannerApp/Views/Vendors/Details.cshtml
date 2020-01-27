@@ -1,26 +1,5 @@
-﻿@model WeddingPlannerApp.Models.VendorViewModel
-    <p>
-        @if (User.IsInRole("Vendor") == true)
-        {
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType })<text> |</text>
-            @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
-
-        }
-        else
-        {
-        <div class="selectorHorizontal" align="center">
-            <a href="@Url.Action($"Index", new { type = Model.VendorType })">
-            <span class="possibleSelection">
-               Back
-            </span>
-    @*@Html.ActionLink("Back", "Details")*@
-            </a>
-        </div>
-
-            @*@Html.ActionLink("Back", "Index", new { type = Model.VendorType })*@
-        }
-    </p>
+﻿
+@model WeddingPlannerApp.Models.VendorViewModel
 
 @switch (ViewBag.VendorType)
 {
@@ -418,11 +397,13 @@
         @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
 
+</p>
 <p>
     @{
         Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });
     }
 </p>
-        }
+
+
 
 
