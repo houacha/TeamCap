@@ -1,0 +1,248 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<input type="hidden" value="0" id="myYrVar" />
+<input type="hidden" value="0" id="myMtVar" />
+
+<form id="editForm">
+</form>
+
+<table style="visibility:hidden; display:none"><tbody id="tempTbl"></tbody></table>
+
+
+@section Scripts
+{
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        function convertToMonth(monthNum) {
+            switch (monthNum) {
+                case 0:
+                    return "January";
+                case 1:
+                    return "February";
+                case 2:
+                    return "March";
+                case 3:
+                    return "April";
+                case 4:
+                    return "May";
+                case 5:
+                    return "June";
+                case 6:
+                    return "July";
+                case 7:
+                    return "August";
+                case 8:
+                    return "September";
+                case 9:
+                    return "October";
+                case 10:
+                    return "November";
+                case 11:
+                    return "December";
+                default:
+                    return monthNum;
+            }
+        }
+
+        function makeTable(string) {
+            var table = '<table id="calendar" border="1"><thead>' + string;
+            document.getElementById('editForm').innerHTML = table;
+        }
+
+        function makeCalendar(month, year) {
+            var tableString = '<text onclick="previous()">< </text><text id="month"></text><text id="day"></text><text id="year"></text><text onclick="next()"> ></text></thead><tbody id="calendarDays"></tbody></table>';
+            makeTable(tableString);
+            document.getElementById("month").innerHTML = convertToMonth(month);
+            document.getElementById("year").innerHTML = ' ' + year;
+            var firstDayOfMnth = new Date(year, month, 1).getDay();
+            var numOfDays = new Date(year, month + 1, 0).getDate();
+            var dayCounter = 1;
+            var IsFirst = true;
+            var daysOfWeek = "<tr><td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td></tr>";
+            var newWeek = "";
+            for (var i = 0; i < 5; i++) {
+                newWeek += "<tr id='week" + i + "'>";
+                for (var k = 0; k < 7; k++) {
+                    if (k == firstDayOfMnth && IsFirst == true && i == 0) {
+                        IsFirst = false;
+                        newWeek += '<td id="cell' + dayCounter + '" onclick="makeLayout(' + dayCounter + ')">' + dayCounter + '</td>';
+                        dayCounter++;
+                    }
+                    else if (IsFirst == false) {
+                        if (dayCounter > numOfDays) {
+                            IsFirst = true;
+                            dayCounter = 1;
+                            newWeek += '<td></td>';
+                        }
+                        else {
+                            newWeek += '<td id="cell' + dayCounter + '" onclick="makeLayout(' + dayCounter + ')">' + dayCounter + '</td>';
+                            dayCounter++;
+                        }
+                    }
+                    else {
+                        newWeek += '<td></td>';
+                    }
+                }
+                newWeek += '</tr>';
+            }
+            document.getElementById('tempTbl').innerHTML = daysOfWeek + newWeek;
+            document.getElementById('calendarDays').innerHTML = daysOfWeek + newWeek;
+        }
+
+        function current() {
+            var month = new Date().getMonth();
+            var year = new Date().getFullYear();
+            $("#myMtVar").val(month);
+            $("#myYrVar").val(year);
+            makeCalendar(month, year)
+        }
+
+        function previous() {
+            var currentMonth = $("#myMtVar").val();
+            var currentYear = $("#myYrVar").val();
+            if (Number(currentMonth) - 1 < 0) {
+                currentMonth = 11;
+                currentYear--;
+                $("#myYrVar").val(currentYear);
+            }
+            else {
+                currentMonth--;
+            }
+            $("#myMtVar").val(currentMonth);
+            for (var i = 0; i < 5; i++) {
+                $("#week" + i).val("");
+            }
+            makeCalendar(Number(currentMonth), currentYear)
+        }
+
+        function next() {
+            var currentMonth = $("#myMtVar").val();
+            var currentYear = $("#myYrVar").val();
+            if (Number(currentMonth) + 1 > 11) {
+                currentMonth = 0;
+                currentYear++;
+                $("#myYrVar").val(currentYear);
+            }
+            else {
+                currentMonth++;
+            }
+            $("#myMtVar").val(currentMonth);
+            for (var i = 0; i < 5; i++) {
+                $("#week" + i).val("");
+            }
+            makeCalendar(Number(currentMonth), currentYear)
+        }
+
+        function makeLayout(day) {
+            var dayLayout = "";
+            var tableString = '<text onclick="prevDay(' + day + ')"><   </text><text id="month"></text><text id="day"></text><text id="year"></text><text onclick="nextDay(' + day + ')">   ></text></thead><tbody id="calendarDays"></tbody></table>';
+            var header = "<tr><td>Time</td><td>Appointments</td></tr>";
+            var saveButton = "<br/><input type='button' onclick='setAgenda()' value='Save Agenda'/>";
+            var month = Number($("#myMtVar").val());
+            var year = $("#myYrVar").val();
+            var calendarBtn = "<input type='button' onclick='makeCalendar(" + month + "," + year + ")' value='Calendar'/>";
+            var amPm = "A.M.";
+            var time = 12;
+            var oldTime = time;
+            for (var i = 0; i < 24; i++) {
+                dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "' ></textarea></td></tr>";
+                if (time + 1 > 12) {
+                    time = 1;
+                }
+                else {
+                    time++;
+                    if (time == oldTime) {
+                        amPm = "P.M.";
+                    }
+                }
+            }
+            makeTable(tableString);
+            document.getElementById('day').innerHTML = day + ", ";
+            document.getElementById('month').innerHTML = convertToMonth(month) + " ";
+            document.getElementById('year').innerHTML = year;
+            document.getElementById('editForm').innerHTML += saveButton + calendarBtn;
+            document.getElementById('calendarDays').innerHTML = header + dayLayout;
+        }
+
+        function prevDay(day) {
+            var currentMonth = $("#myMtVar").val();
+            var year = $("#myYrVar").val();
+            var lastDay = new Date(year, Number(currentMonth) + 1, 0).getDate();
+            var id = Number(document.getElementById('cell' + day).innerHTML);
+            if (id - 1 < 1) {
+                id = Number(document.getElementById('cell' + lastDay).innerHTML);
+            }
+            else {
+                id = document.getElementById('cell' + (day - 1)).innerHTML;
+            }
+            makeLayout(id);
+        }
+
+        function nextDay(day) {
+            var currentMonth = $("#myMtVar").val();
+            var year = $("#myYrVar").val();
+            var lastDay = new Date(year, Number(currentMonth) + 1, 0).getDate();
+            var id = Number(document.getElementById('cell' + day).innerHTML);
+            if (id + 1 > lastDay) {
+                id = Number(document.getElementById('cell1').innerHTML);
+            }
+            else {
+                id = document.getElementById('cell' + (day + 1)).innerHTML;
+            }
+            makeLayout(id);
+        }
+
+        function setAgenda() {
+            var schedule = {
+                Month: document.getElementById('myMtVar').innerHTML,
+                Day: document.getElementById('day').innerHTML,
+                Time: ,
+                Content: 
+            }
+            ajax("https://localhost:44354/api/Schedule/1", "get", null,
+                function (data, textStatus, jQxhr) {
+                    if (data == null) {
+                        ajax("https://localhost:44354/api/Schedule/1", "post", JSON.stringify(movie))
+                    }
+                });
+            }
+
+        function ajax(url, type, info, htmlMethod) {
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: type,
+                contentType: 'application/json',
+                data: info,
+                beforeSend: function () {
+                    Show(); // Show loader icon
+                },
+                success: htmlMethod,
+                complete: function () {
+                    Hide(); // Hide loader icon
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#div_Loader").hide();
+        });
+
+        function Show() {
+            $('#div_Loader').show();
+        }
+
+        function Hide() {
+            $('#div_Loader').hide();
+        }
+
+        current();
+
+    </script>
+}
+

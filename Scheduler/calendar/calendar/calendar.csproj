@@ -8,17 +8,17 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B3DCAB5-ACE0-4F86-8BC5-43477159B6AB}</ProjectGuid>
+    <ProjectGuid>{CAEE34DA-6C17-497E-9D54-554321923F8B}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WeddingPlannerApp</RootNamespace>
-    <AssemblyName>WeddingPlannerApp</AssemblyName>
+    <RootNamespace>calendar</RootNamespace>
+    <AssemblyName>calendar</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44348</IISExpressSSLPort>
+    <IISExpressSSLPort>44385</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -46,10 +46,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -103,6 +99,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -113,6 +112,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -168,28 +179,35 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CouplesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\userscontrollerController.cs" />
-    <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001271706043_models.cs" />
-    <Compile Include="Migrations\202001271706043_models.Designer.cs">
-      <DependentUpon>202001271706043_models.cs</DependentUpon>
+    <Compile Include="Migrations\202001190518525_new model.cs" />
+    <Compile Include="Migrations\202001190518525_new model.Designer.cs">
+      <DependentUpon>202001190518525_new model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001190520146_schedule.cs" />
+    <Compile Include="Migrations\202001190520146_schedule.Designer.cs">
+      <DependentUpon>202001190520146_schedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001190522537_crud.cs" />
+    <Compile Include="Migrations\202001190522537_crud.Designer.cs">
+      <DependentUpon>202001190522537_crud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001200059493_new models.cs" />
+    <Compile Include="Migrations\202001200059493_new models.Designer.cs">
+      <DependentUpon>202001200059493_new models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001200126407_add models to database.cs" />
+    <Compile Include="Migrations\202001200126407_add models to database.Designer.cs">
+      <DependentUpon>202001200126407_add models to database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\WeddingPackageViewModel.cs" />
-    <Compile Include="Models\PackageViewModel.cs" />
-    <Compile Include="Models\CoupleViewModel.cs" />
-    <Compile Include="Models\VendorViewModel.cs" />
-    <Compile Include="Models\Vendor.cs" />
-    <Compile Include="Models\Couple.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -200,7 +218,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\styles.css" />
+    <Content Include="Content\Loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -252,38 +270,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\userscontroller\Index.cshtml" />
-    <Content Include="Views\Role\Index.cshtml" />
-    <Content Include="Views\Vendors\Index.cshtml" />
-    <Content Include="Views\Vendors\Details.cshtml" />
-    <Content Include="Views\Vendors\Create.cshtml" />
-    <Content Include="Views\Vendors\Edit.cshtml" />
-    <Content Include="Views\Vendors\Delete.cshtml" />
-    <Content Include="Views\Couples\Index.cshtml" />
-    <Content Include="Views\Couples\Details.cshtml" />
-    <Content Include="Views\Couples\Create.cshtml" />
-    <Content Include="Views\Couples\Edit.cshtml" />
-    <Content Include="Views\Couples\Delete.cshtml" />
-    <Content Include="Views\Vendors\DecideVendorType.cshtml" />
-    <Content Include="Views\Vendors\MakePackage.cshtml" />
-    <Content Include="Views\Vendors\GetOnePackage.cshtml" />
-    <Content Include="Views\Vendors\GetPackage.cshtml" />
-    <Content Include="Views\Vendors\EditPackage.cshtml" />
-    <Content Include="Views\Vendors\DeletePackage.cshtml" />
-    <Content Include="Views\Couples\MakePackage.cshtml" />
-    <Content Include="Views\Couples\Packages.cshtml" />
-    <Content Include="Views\Couples\ChooseVendors.cshtml" />
-    <Content Include="Views\Couples\PackageDetails.cshtml" />
-    <Content Include="Views\Couples\EditPackage.cshtml" />
-    <Content Include="Views\Couples\DeletePackage.cshtml" />
-    <Content Include="Views\Couples\ShowPendingContracts.cshtml" />
-    <Content Include="Views\Vendors\ShowPendingContracts.cshtml" />
-    <Content Include="Views\Couples\ConfirmContract.cshtml" />
-    <Content Include="Views\Vendors\ConfirmContract.cshtml" />
-    <Content Include="Views\Couples\DeleteContract.cshtml" />
-    <Content Include="Views\Vendors\DeleteContract.cshtml" />
-    <Content Include="Views\Vendors\Bookkeeping.cshtml" />
-    <Content Include="Views\Couples\GetVendorPackages.cshtml" />
+    <Content Include="Views\Schedules\Create.cshtml" />
+    <Content Include="Views\Schedules\Delete.cshtml" />
+    <Content Include="Views\Schedules\Details.cshtml" />
+    <Content Include="Views\Schedules\Edit.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Months\Create.cshtml" />
+    <Content Include="Views\Months\Delete.cshtml" />
+    <Content Include="Views\Months\Details.cshtml" />
+    <Content Include="Views\Months\Edit.cshtml" />
+    <Content Include="Views\Months\Index.cshtml" />
+    <Content Include="Views\Days\Create.cshtml" />
+    <Content Include="Views\Days\Delete.cshtml" />
+    <Content Include="Views\Days\Details.cshtml" />
+    <Content Include="Views\Days\Edit.cshtml" />
+    <Content Include="Views\Days\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -302,8 +303,20 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001271706043_models.resx">
-      <DependentUpon>202001271706043_models.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001190518525_new model.resx">
+      <DependentUpon>202001190518525_new model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001190520146_schedule.resx">
+      <DependentUpon>202001190520146_schedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001190522537_crud.resx">
+      <DependentUpon>202001190522537_crud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001200059493_new models.resx">
+      <DependentUpon>202001200059493_new models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001200126407_add models to database.resx">
+      <DependentUpon>202001200126407_add models to database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -322,9 +335,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55848</DevelopmentServerPort>
+          <DevelopmentServerPort>59479</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44348/</IISUrl>
+          <IISUrl>https://localhost:44385/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
