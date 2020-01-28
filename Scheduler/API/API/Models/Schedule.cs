@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +10,10 @@ namespace API.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Month")]
-        public int MonthId { get; set; }
-        public Month Month { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int Hour { get; set; }
+        public string Content { get; set; }
     }
 }

@@ -231,49 +231,23 @@
     <Compile Include="Controllers\SchedulesController.cs" />
     <Compile Include="Controllers\TimesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\YearsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001200457027_initial.cs" />
-    <Compile Include="Migrations\202001200457027_initial.Designer.cs">
-      <DependentUpon>202001200457027_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001200459567_new model.cs" />
-    <Compile Include="Migrations\202001200459567_new model.Designer.cs">
-      <DependentUpon>202001200459567_new model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001200506400_change name.cs" />
-    <Compile Include="Migrations\202001200506400_change name.Designer.cs">
-      <DependentUpon>202001200506400_change name.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001200515257_added properties to models.cs" />
-    <Compile Include="Migrations\202001200515257_added properties to models.Designer.cs">
-      <DependentUpon>202001200515257_added properties to models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001200611424_change properties of all models.cs" />
-    <Compile Include="Migrations\202001200611424_change properties of all models.Designer.cs">
-      <DependentUpon>202001200611424_change properties of all models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001200613015_change people property of month to schedule.cs" />
-    <Compile Include="Migrations\202001200613015_change people property of month to schedule.Designer.cs">
-      <DependentUpon>202001200613015_change people property of month to schedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001210451047_changed schedule properties.cs" />
-    <Compile Include="Migrations\202001210451047_changed schedule properties.Designer.cs">
-      <DependentUpon>202001210451047_changed schedule properties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001210505308_add new model.cs" />
-    <Compile Include="Migrations\202001210505308_add new model.Designer.cs">
-      <DependentUpon>202001210505308_add new model.cs</DependentUpon>
+    <Compile Include="Migrations\202001281919248_models.cs" />
+    <Compile Include="Migrations\202001281919248_models.Designer.cs">
+      <DependentUpon>202001281919248_models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Year.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Month.cs" />
-    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -369,29 +343,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001200457027_initial.resx">
-      <DependentUpon>202001200457027_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001200459567_new model.resx">
-      <DependentUpon>202001200459567_new model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001200506400_change name.resx">
-      <DependentUpon>202001200506400_change name.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001200515257_added properties to models.resx">
-      <DependentUpon>202001200515257_added properties to models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001200611424_change properties of all models.resx">
-      <DependentUpon>202001200611424_change properties of all models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001200613015_change people property of month to schedule.resx">
-      <DependentUpon>202001200613015_change people property of month to schedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001210451047_changed schedule properties.resx">
-      <DependentUpon>202001210451047_changed schedule properties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001210505308_add new model.resx">
-      <DependentUpon>202001210505308_add new model.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001281919248_models.resx">
+      <DependentUpon>202001281919248_models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -393,7 +393,7 @@
     @if (User.IsInRole("Vendor") == true)
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id, type = Model.VendorType })<text> |</text>
-        @Html.ActionLink("Book Keep", "Bookkeeping", new { id = Model.Id })<text> |</text>
+        @Html.ActionLink("Book Keep", "Bookkeeping", new { id = Model.Id, type = Model.VendorType })<text> |</text>
         @Html.ActionLink("Pending Contracts", "ShowPendingContracts")<text> |</text>
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id, type = Model.VendorType })
     }

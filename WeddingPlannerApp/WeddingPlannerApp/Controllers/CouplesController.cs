@@ -446,6 +446,7 @@ namespace WeddingPlannerApp.Controllers
                     Price = (double?)vendorPackage["Price"]
                 };
                 ServiceContract(package);
+                AddPrice(package);
             }
             return RedirectToAction("Details");
         }
@@ -526,7 +527,16 @@ namespace WeddingPlannerApp.Controllers
             var user = db.Couples.Where(c => c.ApplicationId == userId).Select(u => u).SingleOrDefault();
             var weddingList = PackageList();
             var thisWedding = weddingList.Where(w => w.CouplesId == user.CoupleId).SingleOrDefault();
-            thisWedding.EstimatedTotal += package.ContractPrice;
+            double? price = 0;
+            if (package.ContractPrice == null)
+            {
+                price = package.Price;
+            }
+            else
+            {
+                price = (package.ContractPrice - package.Price);
+            }
+            thisWedding.EstimatedTotal += price;
             string json = JsonConvert.SerializeObject(thisWedding);
             var response = client.PutAsync("WeddingPackages/" + thisWedding.Id, new StringContent(json, Encoding.UTF8, "application/json"));
             response.Wait();
@@ -663,6 +673,8 @@ namespace WeddingPlannerApp.Controllers
         public CoupleViewModel Detail(int? id)
         {
             CoupleViewModel couple = GetOneCouple(id);
+            var weddingList = PackageList();
+            ViewBag.Total = weddingList.Where(w => w.CouplesId == couple.Id).Select(w => w.EstimatedTotal).SingleOrDefault();
             return couple;
         }
 

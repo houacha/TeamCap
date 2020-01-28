@@ -15,6 +15,11 @@
 
         </div>
         <div class="autoElement01" align="center">
+            @if (ViewBag.Total != null)
+            {
+                <p class="headerText">Current Estimate:</p>
+                <p class="headerText">@ViewBag.Total</p>
+            }
             <p class="headerText">Current Budget:</p>
             <p class="headerText">$@Html.DisplayFor(model => model.WeddingBudget)</p>
         </div>

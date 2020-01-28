@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -32,12 +33,15 @@ namespace API.Models
 
         public System.Data.Entity.DbSet<API.Models.Day> Days { get; set; }
 
-        public System.Data.Entity.DbSet<API.Models.Schedule> Schedules { get; set; }
-
         public System.Data.Entity.DbSet<API.Models.Month> Months { get; set; }
 
         public System.Data.Entity.DbSet<API.Models.People> People { get; set; }
 
         public System.Data.Entity.DbSet<API.Models.Time> Times { get; set; }
+
+        public DbSet<Year> Year { get; set; }
+
+        public DbSet<Schedule> Schedules { get; set; }
+
     }
 }

@@ -7,13 +7,13 @@ using System.Web;
 
 namespace API.Models
 {
-    public class People
+    public class Year
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        [ForeignKey("Schedule")]
-        public int ScheduleId { get; set; }
-        public Year Schedule { get; set; }
+        public int TheYear { get; set; }
+        [ForeignKey("Month")]
+        public int MonthId { get; set; }
+        public Month Month { get; set; }
     }
 }

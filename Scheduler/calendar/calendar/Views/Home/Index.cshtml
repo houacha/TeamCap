@@ -11,7 +11,7 @@
 <table style="visibility:hidden; display:none"><tbody id="tempTbl"></tbody></table>
 
 
-@section Scripts
+@section scripts
 {
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
@@ -146,8 +146,13 @@
             var amPm = "A.M.";
             var time = 12;
             var oldTime = time;
+            var content = "";
+            ajax("https://localhost:44354/api/Schedule/1", "get", null,
+                function (data, textStatus, jQxhr) {
+                    content = data;
+                })
             for (var i = 0; i < 24; i++) {
-                dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "' ></textarea></td></tr>";
+                dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "' >" + content + "</textarea></td></tr>";
                 if (time + 1 > 12) {
                     time = 1;
                 }
@@ -194,20 +199,30 @@
             makeLayout(id);
         }
 
-        function setAgenda() {
+        function setAgenda(i) {
             var schedule = {
+                Year: document.getElementById('myYrVar').innerHTML,
                 Month: document.getElementById('myMtVar').innerHTML,
                 Day: document.getElementById('day').innerHTML,
-                Time: ,
-                Content: 
+                Time: document.getElementById('time' + i).innerHTML,
+                Content: document.getElementById('textbox' + i).innerHTML
             }
-            ajax("https://localhost:44354/api/Schedule/1", "get", null,
+            ajax("https://localhost:44354/api/Schedules/", "get", null,
                 function (data, textStatus, jQxhr) {
                     if (data == null) {
-                        ajax("https://localhost:44354/api/Schedule/1", "post", JSON.stringify(movie))
+                        ajax("https://localhost:44354/api/Schedules/", "post", JSON.stringify(schedule),
+                            function (data, textStatus, jQxhr) {
+                                makeLayout(schedule.Day)
+                            })
+                    }
+                    else {
+                        ajax("https://localhost:44354/api/Schedules/", "put", JSON.stringify(schedule),
+                            function (data, textStatus, jQxhr) {
+                                makeLayout(schedule.Day)
+                            })
                     }
                 });
-            }
+        }
 
         function ajax(url, type, info, htmlMethod) {
             $.ajax({

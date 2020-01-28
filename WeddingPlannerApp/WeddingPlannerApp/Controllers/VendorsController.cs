@@ -286,14 +286,14 @@ namespace WeddingPlannerApp.Controllers
                 switch (type)
                 {
                     case "Venue":
+                        var count = 0;
                         foreach (var property in trueValOfCoupleRelig)
                         {
-                            var count = 0;
                             foreach (var prop in itemPropList)
                             {
                                 if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly))
                                 {
-                                    if (((couplesPackage.ThirdPartyCatering == true &&  item.ThirdPartyCatering == true) || couplesPackage.ThirdPartyCatering == false) &&
+                                    if (((couplesPackage.ThirdPartyCatering == true && item.ThirdPartyCatering == true) || couplesPackage.ThirdPartyCatering == false) &&
                                         ((couplesPackage.ThirdPartyCelebrant == true && item.ThirdPartyCelebrant == true) || couplesPackage.ThirdPartyCelebrant == false) &&
                                         ((couplesPackage.ThirdPartyDJ == true && item.ThirdPartyDJ == true) || couplesPackage.ThirdPartyDJ == false) &&
                                         ((couplesPackage.KidFriendly == true && item.KidFriendly == true) || couplesPackage.KidFriendly == false) &&
@@ -302,6 +302,7 @@ namespace WeddingPlannerApp.Controllers
                                         ((couplesPackage.WheelchairAccessible == true && item.HandicapAccessible == true) || couplesPackage.WheelchairAccessible == false))
                                     {
                                         count++;
+                                        break;
                                     }
                                 }
                             }
@@ -324,18 +325,19 @@ namespace WeddingPlannerApp.Controllers
                         }
                         break;
                     case "Celebrant":
+                        var count2 = 0;
                         foreach (var property in trueValOfCoupleRelig)
                         {
-                            var count = 0;
                             foreach (var prop in itemPropList)
                             {
                                 if ((prop.Key == property.Key && prop.Value == property.Value) && (item.LGBTQFriendly == couplesPackage.LGBTQFriendly) &&
-                                    ((couplesPackage.ServesCohabitants == true &&  item.ServesCohabitants == true) || couplesPackage.ServesCohabitants == false))
+                                    ((couplesPackage.ServesCohabitants == true && item.ServesCohabitants == true) || couplesPackage.ServesCohabitants == false))
                                 {
-                                    count++;
+                                    count2++;
+                                    break;
                                 }
                             }
-                            if (count >= trueValOfCoupleRelig.Count)
+                            if (count2 >= trueValOfCoupleRelig.Count)
                             {
                                 packages.Add(item);
                                 count = 0;
@@ -409,7 +411,7 @@ namespace WeddingPlannerApp.Controllers
             return View(packageList);
         }
 
-        public ActionResult Bookkeeping(int? id)
+        public ActionResult Bookkeeping(int? id, string type)
         {
             var response = client.GetAsync("ServiceContracts");
             double? total = 0.0;
@@ -434,9 +436,12 @@ namespace WeddingPlannerApp.Controllers
                         CoupleId = (int?)item["CoupleId"],
                         PricePhaseKey = (int?)item["PricePhaseKey"]
                     };
-                    contractList.Add(package);
-                    total += package.ContractPrice;
-                    ViewBag.Total = total;
+                    if (package.VendorId == id && package.VendorType == type)
+                    {
+                        contractList.Add(package);
+                        total += package.ContractPrice;
+                        ViewBag.Total = total;
+                    }
                 }
             }
             return View(contractList);
