@@ -12,8 +12,7 @@ namespace WeddingPlannerApp
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
-        {
-    
+        {    
             ApplicationDbContext context = new ApplicationDbContext();
             ConfigureAuth(app);
             CreateRolesAndUsers(context);

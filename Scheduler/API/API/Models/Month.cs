@@ -12,8 +12,8 @@ namespace API.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        [ForeignKey("Day")]
-        public int DayId { get; set; }
-        public Day Day { get; set; }
+        [ForeignKey("Year")]
+        public int YearId { get; set; }
+        public Year Year { get; set; }
     }
 }

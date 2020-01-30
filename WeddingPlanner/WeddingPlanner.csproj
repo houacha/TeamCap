@@ -213,6 +213,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CancelTokensController.cs" />
     <Compile Include="Controllers\CaterersController.cs" />
     <Compile Include="Controllers\CelebrantsController.cs" />
     <Compile Include="Controllers\CouplesController.cs" />
@@ -231,11 +232,32 @@
     <Compile Include="Migrations\202001271706420_models.Designer.cs">
       <DependentUpon>202001271706420_models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001290413103_new prop.cs" />
+    <Compile Include="Migrations\202001290413103_new prop.Designer.cs">
+      <DependentUpon>202001290413103_new prop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290418307_removed prop.cs" />
+    <Compile Include="Migrations\202001290418307_removed prop.Designer.cs">
+      <DependentUpon>202001290418307_removed prop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290428301_cancel.cs" />
+    <Compile Include="Migrations\202001290428301_cancel.Designer.cs">
+      <DependentUpon>202001290428301_cancel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290430136_add prop.cs" />
+    <Compile Include="Migrations\202001290430136_add prop.Designer.cs">
+      <DependentUpon>202001290430136_add prop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290604174_price.cs" />
+    <Compile Include="Migrations\202001290604174_price.Designer.cs">
+      <DependentUpon>202001290604174_price.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Caterer.cs" />
     <Compile Include="Models\Celebrant.cs" />
+    <Compile Include="Models\CancelToken.cs" />
     <Compile Include="Models\Couple.cs" />
     <Compile Include="Models\DJ.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -343,6 +365,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001271706420_models.resx">
       <DependentUpon>202001271706420_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290413103_new prop.resx">
+      <DependentUpon>202001290413103_new prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290418307_removed prop.resx">
+      <DependentUpon>202001290418307_removed prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290428301_cancel.resx">
+      <DependentUpon>202001290428301_cancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290430136_add prop.resx">
+      <DependentUpon>202001290430136_add prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290604174_price.resx">
+      <DependentUpon>202001290604174_price.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

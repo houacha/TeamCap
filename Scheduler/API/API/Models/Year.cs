@@ -11,9 +11,6 @@ namespace API.Models
     {
         [Key]
         public int Id { get; set; }
-        public int TheYear { get; set; }
-        [ForeignKey("Month")]
-        public int MonthId { get; set; }
-        public Month Month { get; set; }
+        public string TheYear { get; set; }
     }
 }

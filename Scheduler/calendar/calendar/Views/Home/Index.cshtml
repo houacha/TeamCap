@@ -147,12 +147,12 @@
             var time = 12;
             var oldTime = time;
             var content = "";
-            ajax("https://localhost:44354/api/Schedule/1", "get", null,
+            ajax("https://localhost:44354/api/Times", "get", null,
                 function (data, textStatus, jQxhr) {
                     content = data;
                 })
             for (var i = 0; i < 24; i++) {
-                dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "' >" + content + "</textarea></td></tr>";
+                dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "' >" + content.Content + "</textarea></td></tr>";
                 if (time + 1 > 12) {
                     time = 1;
                 }
@@ -164,9 +164,9 @@
                 }
             }
             makeTable(tableString);
-            document.getElementById('day').innerHTML = day + ", ";
+            document.getElementById('day').innerHTML = day;
             document.getElementById('month').innerHTML = convertToMonth(month) + " ";
-            document.getElementById('year').innerHTML = year;
+            document.getElementById('year').innerHTML = ", " + year;
             document.getElementById('editForm').innerHTML += saveButton + calendarBtn;
             document.getElementById('calendarDays').innerHTML = header + dayLayout;
         }
@@ -199,29 +199,86 @@
             makeLayout(id);
         }
 
-        function setAgenda(i) {
-            var schedule = {
-                Year: document.getElementById('myYrVar').innerHTML,
-                Month: document.getElementById('myMtVar').innerHTML,
-                Day: document.getElementById('day').innerHTML,
-                Time: document.getElementById('time' + i).innerHTML,
-                Content: document.getElementById('textbox' + i).innerHTML
+        function setAgenda() {
+            var list = [];
+            var response;
+            for (var i = 0; i < 24; i++) {
+                var schedule = {
+                    Year: $("#myYrVar").val(),
+                    Month: convertToMonth(Number($("#myMtVar").val())),
+                    Day: document.getElementById('day').innerHTML,
+                    Hour: document.getElementById('time' + i).innerHTML,
+                    Content: $("#textbox" + i).val()
+                }
+                list.push(schedule);
             }
-            ajax("https://localhost:44354/api/Schedules/", "get", null,
-                function (data, textStatus, jQxhr) {
-                    if (data == null) {
-                        ajax("https://localhost:44354/api/Schedules/", "post", JSON.stringify(schedule),
-                            function (data, textStatus, jQxhr) {
-                                makeLayout(schedule.Day)
-                            })
+            ajax("https://localhost:44354/api/Years/", "get", null, function (data, textStatus, jQxhr) {
+                if (!$.trim(data)) {
+                    var year = {
+                        TheYear: $("#myYrVar").val()
                     }
-                    else {
-                        ajax("https://localhost:44354/api/Schedules/", "put", JSON.stringify(schedule),
-                            function (data, textStatus, jQxhr) {
-                                makeLayout(schedule.Day)
+                    ajax("https://localhost:44354/api/Years/", "post", JSON.stringify(year), function (data, textStatus, jQxhr) {
+                        ajax("https://localhost:44354/api/Years/", "get", null, function (data, textStatus, jQxhr) {
+                            $.each(data, function (i, val) {
+                                if (val.TheYear == $("#myYrVar").val()) {
+                                    ajax("https://localhost:44354/api/Months/", "get", null, function (data, textStatus, jQxhr) {
+                                        if (!$.trim(data)) {
+                                            response = val.Id;
+                                            var month = {
+                                                Name: convertToMonth(Number($("#myMtVar").val())),
+                                                YearId: val.Id
+                                            }
+                                            ajax("https://localhost:44354/api/Months/", "post", JSON.stringify(month), function (data, textStatus, jQxhr) {
+                                                ajax("https://localhost:44354/api/Months/", "get", null, function (data, textStatus, jQxhr) {
+                                                    $.each(data, function (i, val) {
+                                                        if (val.Name == convertToMonth(Number($("#myMtVar").val())) && val.YearId == response) {
+                                                            ajax("https://localhost:44354/api/Days/", "get", null, function (data, textStatus, jQxhr) {
+                                                                if (!$.trim(data)) {
+                                                                    response = val.Id;
+                                                                    var day = {
+                                                                        Date: document.getElementById('day').innerHTML,
+                                                                        MonthId: val.Id
+                                                                    }
+                                                                    ajax("https://localhost:44354/api/Days/", "post", JSON.stringify(day), function (data, textStatus, jQxhr) {
+                                                                        ajax("https://localhost:44354/api/Days/", "get", null, function (data, textStatus, jQxhr) {
+                                                                            $.each(data, function (i, val) {
+                                                                                if (val.Date == document.getElementById('day').innerHTML && val.MonthId == response) {
+                                                                                    ajax("https://localhost:44354/api/Times/", "get", null, function (data, textStatus, jQxhr) {
+                                                                                        if (!$.trim(data)) {
+                                                                                            response = val.Id;
+                                                                                            for (var i = 0; i < 24; i++) {
+                                                                                                var contents = {
+                                                                                                    Hour: document.getElementById('time' + i).innerHTML,
+                                                                                                    Content: $("#textbox" + i).val(),
+                                                                                                    DayId: val.Id
+                                                                                                }
+                                                                                                if (contents.Content != null) {
+                                                                                                    ajax("https://localhost:44354/api/Times/", "post", JSON.stringify(contents), function (data, textStatus, jQxhr) { })
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    })
+                                                                                }
+                                                                            })
+                                                                        })
+                                                                    })
+                                                                }
+                                                            })
+                                                        }
+                                                    })
+                                                })
+                                            })
+                                        }
+                                    })
+                                }
                             })
-                    }
-                });
+                        })
+                    })
+                }
+                else {
+                 
+                }
+            })
         }
 
         function ajax(url, type, info, htmlMethod) {

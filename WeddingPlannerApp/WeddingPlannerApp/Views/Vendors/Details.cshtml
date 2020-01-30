@@ -1,6 +1,12 @@
 ﻿
 @model WeddingPlannerApp.Models.VendorViewModel
 
+<p>
+    @{
+        Html.RenderAction("GetCancelTokens");
+    }
+</p>
+
 @switch (ViewBag.VendorType)
 {
     case "Venues":
@@ -106,13 +112,6 @@
                 <p class="headerText">Venue Allows 3rd Party DJs</p>
             }
 
-            @*<dt>
-                    @Html.DisplayNameFor(model => model.Caterers)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Caterers)
-                </dd>
-                </dl>*@
         </div>
 
         break;
@@ -403,7 +402,4 @@
         Html.RenderAction("GetPackage", new { id = Model.Id, type = Model.VendorType });
     }
 </p>
-
-
-
 

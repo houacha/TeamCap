@@ -29,7 +29,7 @@ namespace API.Controllers
             Schedule schedule = db.Schedules.Find(id);
             if (schedule == null)
             {
-                return NotFound();
+                return null;
             }
 
             return Ok(schedule);

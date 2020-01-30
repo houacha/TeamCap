@@ -815,6 +815,54 @@ namespace WeddingPlannerApp.Controllers
             return View(package);
         }
 
+        public ActionResult GetCancelTokens()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Vendors.Where(c => c.ApplicationId == userId).SingleOrDefault();
+            List<CancelViewModel> tokens = new List<CancelViewModel>();
+            var response = client.GetAsync("CancelTokens/");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                var service = read.Result;
+                JArray jObject = JArray.Parse(service);
+                foreach (var item in jObject)
+                {
+                    var token = new CancelViewModel()
+                    {
+                        Id = (int)item["Id"],
+                        VendorType = (string)item["VendorType"],
+                        Price = (double?)item["Price"],
+                        VendorId = (int?)item["VendorId"],
+                        CancelPerson = (string)item["CancelPerson"],
+                        CoupleId = (int?)item["CoupleId"]
+                    };
+                    if (token.VendorId == user.VendorId && token.VendorType == user.VendorType)
+                    {
+                        tokens.Add(token);
+                    }
+                }
+            }
+            ViewBag.Count = tokens.Count;
+            return View(tokens);
+        }
+
+        [HttpPost, ActionName("GetCancelToken")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteToken(int? id)
+        {
+            var response = client.DeleteAsync("CancelTokens" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            { 
+            }
+            return RedirectToAction("Details");
+        }
+
         public ActionResult DeleteContract(int? id)
         {
             if (id == null)
@@ -853,12 +901,54 @@ namespace WeddingPlannerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteContract(int? id, string nothing)
         {
+            PackageViewModel serviceContract = null;
+            var contract = client.GetAsync("ServiceContracts/" + id);
+            contract.Wait();
+            var yield = contract.Result;
+            if (yield.IsSuccessStatusCode)
+            {
+                var content = yield.Content.ReadAsStringAsync();
+                content.Wait();
+                JObject vendorPackage = JObject.Parse(content.Result);
+                serviceContract = new PackageViewModel()
+                {
+                    Id = (int)vendorPackage["Id"],
+                    VendorType = (string)vendorPackage["VendorType"],
+                    VendorId = (int?)vendorPackage["VendorId"],
+                    Description = (string)vendorPackage["Description"],
+                    Price = (double?)vendorPackage["Price"],
+                    ContractPrice = (double?)vendorPackage["ContractPrice"],
+                    CoupleId = (int?)vendorPackage["CoupleId"],
+                    PricePhaseKey = (int?)vendorPackage["PricePhaseKey"]
+                };
+            }
             var response = client.DeleteAsync("ServiceContracts/" + id);
             response.Wait();
             var result = response.Result;
             if (result.IsSuccessStatusCode)
             {
-                return RedirectToAction("Details");
+                var vendor = GetOneRequest(serviceContract.VendorType, serviceContract.VendorId);
+                var token = new CancelViewModel()
+                {
+                    VendorType = serviceContract.VendorType,
+                    Price = serviceContract.Price,
+                    VendorId = serviceContract.VendorId,
+                    CancelPerson = vendor.Name,
+                    CoupleId = serviceContract.CoupleId
+                };
+                if (serviceContract.PricePhaseKey == 3)
+                {
+                    token.Price = serviceContract.ContractPrice;
+                }
+                string json = JsonConvert.SerializeObject(token);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                response = client.PostAsync("CancelTokens", content);
+                response.Wait();
+                result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Details");
+                }
             }
             return View(id);
         }

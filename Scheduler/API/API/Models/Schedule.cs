@@ -10,10 +10,10 @@ namespace API.Models
     {
         [Key]
         public int Id { get; set; }
-        public int Year { get; set; }
-        public int Month { get; set; }
-        public int Day { get; set; }
-        public int Hour { get; set; }
+        public string Year { get; set; }
+        public string Month { get; set; }
+        public string Day { get; set; }
+        public string Hour { get; set; }
         public string Content { get; set; }
     }
 }

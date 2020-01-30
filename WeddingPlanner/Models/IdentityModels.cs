@@ -46,5 +46,7 @@ namespace WeddingPlanner.Models
         public System.Data.Entity.DbSet<WeddingPlanner.Models.Venue> Venues { get; set; }
         public DbSet<VendorPackage> VendorPackages { get; set; }
         public DbSet<ServiceContract> ServiceContracts { get; set; }
+
+        public System.Data.Entity.DbSet<WeddingPlanner.Models.CancelToken> CancelTokens { get; set; }
     }
 }

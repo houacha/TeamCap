@@ -513,11 +513,31 @@ namespace WeddingPlannerApp.Controllers
                 var result = response.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    SubtPrice(package);
-                    return RedirectToAction("Details");
+                    var couple = GetOneCouple(package.CoupleId);
+                    var token = new CancelViewModel()
+                    {
+                        VendorType = package.VendorType,
+                        VendorId = package.VendorId,
+                        Price = package.Price,
+                        CancelPerson = couple.Partner1FirstName +" " + couple.Partner1LastName + " " + couple.Partner2FirstName + " " + couple.Partner2LastName,
+                        CoupleId = package.CoupleId
+                    };
+                    if (package.PricePhaseKey == 3)
+                    {
+                        token.Price = package.ContractPrice;
+                    }
+                    string json = JsonConvert.SerializeObject(token);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    response = client.PostAsync("CancelTokens", content);
+                    response.Wait();
+                    result = response.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        SubtPrice(package);
+                        return RedirectToAction("Details");
+                    }
                 }
             }
-
             return View(id);
         }
 
@@ -640,6 +660,55 @@ namespace WeddingPlannerApp.Controllers
                 couple = MakeModel(jObject);
             }
             return couple;
+        }
+
+        public ActionResult GetCancelTokens()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Couples.Where(c => c.ApplicationId == userId).SingleOrDefault();
+            List<CancelViewModel> tokens = new List<CancelViewModel>();
+            var response = client.GetAsync("CancelTokens/");
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var read = result.Content.ReadAsStringAsync();
+                read.Wait();
+                var service = read.Result;
+                JArray jObject = JArray.Parse(service);
+                foreach (var item in jObject)
+                {
+                    var token = new CancelViewModel()
+                    {
+                        Id = (int)item["Id"],
+                        VendorType = (string)item["VendorType"],
+                        VendorId = (int?)item["VendorId"],
+                        Price = (double?)item["Price"],
+                        CancelPerson = (string)item["CancelPerson"],
+                        CoupleId = (int?)item["CoupleId"]
+                    };
+                    if (token.CoupleId == user.CoupleId)
+                    {
+                        tokens.Add(token);
+                    }
+                }
+            }
+            ViewBag.Count = tokens.Count;
+            return View(tokens);
+        }
+
+        [HttpPost, ActionName("GetCancelToken")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteToken(int? id)
+        {
+            var response = client.DeleteAsync("CancelTokens" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var wedding = GetOneRequest(id);
+            }
+            return RedirectToAction("Details");
         }
 
         // GET: Couples

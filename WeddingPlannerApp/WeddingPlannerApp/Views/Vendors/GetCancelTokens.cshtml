@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WeddingPlannerApp.Models.CancelViewModel>
+@{
+    Layout = "";
+}
+
+@if (ViewBag.Count > 0)
+{
+    <div>
+        @foreach (var item in Model)
+        {
+            <p>@Html.DisplayFor(modelItem => item.CancelPerson) cancel your service.</p>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="OK" class="btn btn-default" />
+            </div>
+        }
+    </div>
+}
+

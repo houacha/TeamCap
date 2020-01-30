@@ -182,8 +182,13 @@
     <Compile Include="Migrations\202001271706043_models.Designer.cs">
       <DependentUpon>202001271706043_models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001290538191_new model.cs" />
+    <Compile Include="Migrations\202001290538191_new model.Designer.cs">
+      <DependentUpon>202001290538191_new model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CancelViewModel.cs" />
     <Compile Include="Models\WeddingPackageViewModel.cs" />
     <Compile Include="Models\PackageViewModel.cs" />
     <Compile Include="Models\CoupleViewModel.cs" />
@@ -284,6 +289,8 @@
     <Content Include="Views\Vendors\DeleteContract.cshtml" />
     <Content Include="Views\Vendors\Bookkeeping.cshtml" />
     <Content Include="Views\Couples\GetVendorPackages.cshtml" />
+    <Content Include="Views\Vendors\GetCancelTokens.cshtml" />
+    <Content Include="Views\Couples\GetCancelTokens.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,6 +311,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001271706043_models.resx">
       <DependentUpon>202001271706043_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290538191_new model.resx">
+      <DependentUpon>202001290538191_new model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

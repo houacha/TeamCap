@@ -11,8 +11,9 @@ namespace API.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Time")]
-        public int TimeId { get; set; }
-        public Time Time { get; set; }
+        public string Date { get; set; }
+        [ForeignKey("Month")]
+        public int MonthId { get; set; }
+        public Month Month { get; set; }
     }
 }
