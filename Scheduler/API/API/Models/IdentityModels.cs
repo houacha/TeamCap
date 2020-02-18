@@ -31,15 +31,9 @@ namespace API.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<API.Models.Day> Days { get; set; }
-
-        public System.Data.Entity.DbSet<API.Models.Month> Months { get; set; }
-
         public System.Data.Entity.DbSet<API.Models.People> People { get; set; }
 
         public System.Data.Entity.DbSet<API.Models.Time> Times { get; set; }
-
-        public DbSet<Year> Year { get; set; }
 
         public DbSet<Schedule> Schedules { get; set; }
 

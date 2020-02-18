@@ -14,6 +14,6 @@ namespace API.Models
         public string Name { get; set; }
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }
-        public Year Schedule { get; set; }
+        public Schedule Schedule { get; set; }
     }
 }

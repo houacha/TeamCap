@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,7 +14,5 @@ namespace API.Models
         public string Year { get; set; }
         public string Month { get; set; }
         public string Day { get; set; }
-        public string Hour { get; set; }
-        public string Content { get; set; }
     }
 }

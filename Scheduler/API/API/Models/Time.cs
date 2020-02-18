@@ -13,8 +13,8 @@ namespace API.Models
         public int Id { get; set; }
         public string Hour { get; set; }
         public string Content { get; set; }
-        [ForeignKey("Day")]
-        public int DayId { get; set; }
-        public Day Day { get; set; }
+        [ForeignKey("Schedule")]
+        public int ScheduleId { get; set; }
+        public Schedule Schedule { get; set; }
     }
 }
