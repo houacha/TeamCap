@@ -10,7 +10,6 @@
 
 <table style="visibility:hidden; display:none"><tbody id="tempTbl"></tbody></table>
 
-
 <p id="css"></p>
 
 
@@ -19,72 +18,72 @@
     function convertToMonth(monthNum) {
         switch (monthNum) {
             case 0:
-                return "January";
+                return 'January';
             case 1:
-                return "February";
+                return 'February';
             case 2:
-                return "March";
+                return 'March';
             case 3:
-                return "April";
+                return 'April';
             case 4:
-                return "May";
+                return 'May';
             case 5:
-                return "June";
+                return 'June';
             case 6:
-                return "July";
+                return 'July';
             case 7:
-                return "August";
+                return 'August';
             case 8:
-                return "September";
+                return 'September';
             case 9:
-                return "October";
+                return 'October';
             case 10:
-                return "November";
+                return 'November';
             case 11:
-                return "December";
+                return 'December';
             default:
                 return monthNum;
         }
     }
 
     function makeTable(string) {
-        var table = '<table id="calendar" border="2">' + string;
+        var table = "<table id='calendar' class='calender' border='2'>" + string;
         document.getElementById('editForm').innerHTML = table;
-        document.getElementById("css").innerHTML = "<style>td {width: 50px; padding-bottom: 30px;} .content:hover {background-color:lightgreen; opacity:.8; cursor:pointer;} .pointer:hover {cursor:pointer; background-color:lightblue; opacity:.75;}</style>";
+        document.getElementById('css').innerHTML = '<style>.box {width: 50px; padding-bottom: 30px;} .content:hover {background-color:lightgreen; opacity:.8; cursor:pointer;} .pointer:hover {cursor:pointer; background-color:lightblue; opacity:.75;} .dropdown-content {display: none; position: absolute; max-width: 40px; overflow: auto; z-index: 1; left: 50%; max-height: 17px} .dropdown-day {display: none; position: absolute; max-width: 25px; overflow: auto; z-index: 1; left: 45%; max-height: 17px} .calender {position: relative}</style>';
     }
 
     function makeCalendar(month, year) {
-        var tableString = '<thead colspan="7"><tr colspan="7"><th colspan="7"><div align="center"><text onclick="previous()" class="pointer"> < </text><text id="month" class="pointer" onclick="chooseMonth()"></text><text id="year" class="pointer" onclick="chooseYear()"></text><text onclick="next()" class="pointer"> > </text></div></th></tr></thead><tbody id="calendarDays"></tbody></table>';
+        var tableString = "<thead colspan='7'><tr colspan='7'><th colspan='7'><div align='center'><text id='month' class='pointer' onclick='chooseMonth()'></text><text id='year' class='pointer' onclick='chooseYear()'></text><input type='text' id='yrChoice' class='dropdown-content'></input><div><text onclick='previous()' class='pointer'> < </text><text onclick='next()' class='pointer'> > </text></div></div></th></tr></thead><tbody id='calendarDays'></tbody></table>";
         makeTable(tableString);
-        document.getElementById("month").innerHTML = convertToMonth(month);
-        document.getElementById("year").innerHTML = ' ' + year;
+        document.getElementById('month').innerHTML = convertToMonth(month);
+        document.getElementById('year').innerHTML = ' ' + year;
         var firstDayOfMnth = new Date(year, month, 1).getDay();
         var numOfDays = new Date(year, month + 1, 0).getDate();
         var dayCounter = 1;
         var IsFirst = true;
-        var daysOfWeek = "<tr><td>Sun</td><td>Mon</td><td>Tues</td><td>Wed</td><td>Thurs</td><td>Fri</td><td>Sat</td></tr>";
-        var newWeek = "";
+        var daysOfWeek = "<tr><td class='box'>Sun</td><td class='box'>Mon</td><td class='box'>Tues</td><td class='box'>Wed</td><td class='box'>Thurs</td><td class='box'>Fri</td><td class='box'>Sat</td></tr>";
+        var newWeek = '';
         for (var i = 0; i < 6; i++) {
             newWeek += "<tr id='week" + i + "'>";
             for (var k = 0; k < 7; k++) {
                 if (k == firstDayOfMnth && IsFirst == true && i == 0) {
                     IsFirst = false;
-                    newWeek += '<td class="content" id="cell' + dayCounter + '" onclick="makeLayout(' + dayCounter + ')">' + dayCounter + '</td>';
+                    newWeek += '<td class="content box" id="cell' + dayCounter + '" onclick="makeLayout(' + dayCounter + ')">' + dayCounter + '</td>';
                     dayCounter++;
                 }
                 else if (IsFirst == false) {
                     if (dayCounter > numOfDays) {
                         IsFirst = true;
                         dayCounter = 1;
-                        newWeek += '<td style="background-color:gray; opacity:.4"></td>';
+                        newWeek += '<td class="box" style="background-color:gray; opacity:.4"></td>';
                     }
                     else {
-                        newWeek += '<td class="content" id="cell' + dayCounter + '" onclick="makeLayout(' + dayCounter + ')">' + dayCounter + '</td>';
+                        newWeek += '<td class="content box" id="cell' + dayCounter + '" onclick="makeLayout(' + dayCounter + ')">' + dayCounter + '</td>';
                         dayCounter++;
                     }
                 }
                 else {
-                    newWeek += '<td style="background-color:gray; opacity:.4"></td>';
+                    newWeek += '<td class="box" style="background-color:gray; opacity:.4"></td>';
                 }
             }
             newWeek += '</tr>';
@@ -105,12 +104,12 @@
 
     }
 
-    function chosseYear() {
-
+    function chooseYear() {
+        document.getElementById('yrChoice').classList.toggle('show');
     }
 
     function chooseDay() {
-
+        document.getElementById('dayChoice').classList.toggle('show');
     }
 
     function previous() {
@@ -151,7 +150,7 @@
 
     function makeLayout(day) {
         var dayLayout = "";
-        var tableString = '<thead colspan="2"><tr colspan="2"><th colspan="2"><div align="center"><text onclick="prevDay(' + day + ')" class="pointer"> < </text><text id="month" class="pointer" onclick="chooseMonth()"></text><text id="day" class="pointer" onclick="chooseDay()"></text><text id="year" class="pointer" onclick="chooseYear()"></text><text onclick="nextDay(' + day + ')" class="pointer"> > </text></div></th></tr></thead><tbody id="calendarDays"></tbody></table>';
+        var tableString = '<thead colspan="2"><tr colspan="2"><th colspan="2"><div align="center"><text onclick="prevDay(' + day + ')" class="pointer"> < </text><text id="month" class="pointer" onclick="chooseMonth()"></text><text id="day" class="pointer" onclick="chooseDay()"></text><input type="text" id="dayChoice" class="dropdown-day"></input><text id="year" class="pointer" onclick="chooseYear()"></text><input type="text" id="yrChoice" class="dropdown-content"></input><text onclick="nextDay(' + day + ')" class="pointer"> > </text></div></th></tr></thead><tbody id="calendarDays"></tbody></table>';
         var header = "<tr><td>Time</td><td>Appointments</td></tr>";
         var saveButton = "<br/><input type='button' onclick='setAgenda()' value='Save Agenda'/>";
         var month = Number($("#myMtVar").val());
@@ -162,7 +161,7 @@
         var oldTime = time;
         var notFound = true;
         for (var i = 0; i < 24; i++) {
-            dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "'></textarea></td></tr>";
+            dayLayout += "<tr><td id='time" + i + "'>" + time + ":00 " + amPm + "</td><td><textarea rows='4' cols='50' id='textbox" + i + "' style='resize:none; border: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;'></textarea><div><input type='checkbox'> Important</input></div></td></tr>";
             if (time + 1 > 12) {
                 time = 1;
             }
@@ -194,9 +193,9 @@
                             $.each(data, function (i, val) {
                                 if (scheduleId == val.ScheduleId) {
                                     for (var j = 0; j < 24; j++) {
-                                        if (val.Hour == document.getElementById('time' + j).innerHTML) {
+                                        if (val.Hour == document.getElementById('time' + j).innerHTML && (val.Content !== null && val.Content !== "" && val.Content !== undefined)) {
                                             document.getElementById('textbox' + j).innerHTML = val.Content;
-                                            document.getElementById('time' + j).style.backgroundColor = "lightgreen";
+                                            document.getElementById('time' + j).style.backgroundColor = 'lightgreen';
                                         }
                                     }
                                 }
@@ -252,7 +251,7 @@
                     Year: $("#myYrVar").val(),
                     Month: convertToMonth(Number($("#myMtVar").val())),
                     Day: document.getElementById('day').innerHTML
-                }
+                };
                 ajax("https://localhost:44354/api/Schedules/", "post", JSON.stringify(schedule), function (data) {
                     ajax("https://localhost:44354/api/Schedules/", "get", null, function (data, textStatus, jQxhr) {
                         $.each(data, function (i, val) {
@@ -278,29 +277,43 @@
                     if (val.Month == convertToMonth(Number($("#myMtVar").val())) && val.Year == $("#myYrVar").val() && val.Day == document.getElementById('day').innerHTML) {
                         id = val.Id;
                         ajax("https://localhost:44354/api/Times/", "get", null, function (data, textStatus, jQxhr) {
-                            $.each(data, function (i, val) {
-                                if (val.ScheduleId == id) {
-                                    for (var j = 0; j < 24; j++) {
-                                        if (val.Hour != document.getElementById('time' + j).innerHTML && $("#textbox" + j).val() != "") {
-                                            var time = {
-                                                Hour: document.getElementById('time' + j).innerHTML,
-                                                Content: $("#textbox" + j).val(),
-                                                ScheduleId: id
-                                            };
-                                            ajax("https://localhost:44354/api/Times/", "post", JSON.stringify(time), function (data, textStatus, jQxhr) { });
-                                        }
-                                        else {
-                                            var time = {
-                                                Id: val.Id,
-                                                Hour: val.Hour,
-                                                Content: $("#textbox" + i).val(),
-                                                ScheduleId: id
-                                            };
-                                            ajax("https://localhost:44354/api/Times/" + val.Id, "put", JSON.stringify(time), function (data) { });
-                                        }
+                            if (!$.trim(data)) {
+                                for (var j = 0; j < 24; j++) {
+                                    if (val.Hour != document.getElementById('time' + j).innerHTML && $("#textbox" + j).val() != "") {
+                                        var time = {
+                                            Hour: document.getElementById('time' + j).innerHTML,
+                                            Content: $("#textbox" + j).val(),
+                                            ScheduleId: id
+                                        };
+                                        ajax("https://localhost:44354/api/Times/", "post", JSON.stringify(time), function (data, textStatus, jQxhr) { });
                                     }
                                 }
-                            });
+                            }
+                            else {
+                                $.each(data, function (i, val) {
+                                    if (val.ScheduleId == id) {
+                                        for (var j = 0; j < 24; j++) {
+                                            if (val.Hour != document.getElementById('time' + j).innerHTML && $("#textbox" + j).val() != "") {
+                                                var time = {
+                                                    Hour: document.getElementById('time' + j).innerHTML,
+                                                    Content: $("#textbox" + j).val(),
+                                                    ScheduleId: id
+                                                };
+                                                ajax("https://localhost:44354/api/Times/", "post", JSON.stringify(time), function (data, textStatus, jQxhr) { });
+                                            }
+                                            else {
+                                                var time = {
+                                                    Id: val.Id,
+                                                    Hour: val.Hour,
+                                                    Content: $("#textbox" + i).val(),
+                                                    ScheduleId: id
+                                                };
+                                                ajax("https://localhost:44354/api/Times/" + val.Id, "put", JSON.stringify(time), function (data) { });
+                                            }
+                                        }
+                                    }
+                                });
+                            }
                         });
                         isFound = true;
                         return false;
